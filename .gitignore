@@ -19,7 +19,7 @@ yarn-debug.log*
 /config/secrets.yml
 
 .env
-Gemfile.lock
+*.lock
 .ruby-version
 /spec/tmp
 /coverage/
@@ -31,3 +31,10 @@ Gemfile.lock
 /public/assets
 
 /storage/*
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
