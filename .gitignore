@@ -17,6 +17,7 @@ yarn-debug.log*
 /config/master.key
 /config/initializers/secret_token.rb
 /config/secrets.yml
+.idea/workspace.xml
 
 .env
 *.lock
