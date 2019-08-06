@@ -1,0 +1,42 @@
+jobs:
+  build:
+   docker:
+      - image: circleci/ruby:2.6.3
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+      - image: circleci/postgres:latest
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: Proconf_test
+   working_directory: ~/Proconf
+   steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler:2.0.0.pre.1 && bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run: |
+          sudo apt install -y postgresql-client || true
+      - run:
+          name: run rubocop 
+          command: bundle exec rubocop
+      - run:
+          name: run rspec
+          command: |
+            export TEST_DATABASE=Proconf_test
+            bundle exec rake db:create
+            bundle exec rake db:migrate
+            bundle exec rspec
