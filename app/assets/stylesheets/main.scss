@@ -1,7 +1,7 @@
 $white-color: #fff;
 $space-gray-color: #59698d;
 
-body.container {
+.body-container {
   padding-top: 60px;
 }
 
@@ -9,22 +9,13 @@ footer {
   padding-top: 60px;
 }
 
-.d-flex {
-  display: -ms-flexbox !important;
-  display: flex !important;
-}
-
-.justify-content-center {
-  justify-content: center !important;
-}
-
 .btn-mdb-color {
-  background-color: $space-gray-color !important;
+  background-color: $space-gray-color;
   color: $white-color;
 }
 
 .float-left {
-  float: left !important;
+  float: left;
 }
 
 .btn-rounded {
@@ -32,18 +23,6 @@ footer {
 }
 
 .file-field input[type=file] {
-<<<<<<< HEAD
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  opacity: 0;
-=======
   bottom: 0;
   cursor: pointer;
   left: 0;
@@ -54,5 +33,4 @@ footer {
   right: 0;
   top: 0;
   width: 100%;
->>>>>>> Fill app layout page and admin index page, create partials, add some style to main.scss
 }
