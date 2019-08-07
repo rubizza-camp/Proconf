@@ -1,3 +1,6 @@
+exclude_paths:
+  - 'db/migrate'
+
 detectors:
   IrresponsibleModule:
     enabled: false
@@ -7,6 +10,3 @@ detectors:
 
   UtilityFunction:
     public_methods_only: true
-
-exclude_paths:
-  - 'db/migrate'
