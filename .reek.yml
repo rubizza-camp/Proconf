@@ -9,4 +9,4 @@ detectors:
     public_methods_only: true
 
 exclude_paths:
-  - 'db/migrate'
+  - db/migrate
