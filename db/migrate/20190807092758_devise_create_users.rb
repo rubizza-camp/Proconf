@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# :reek:all
 
 class DeviseCreateUsers < ActiveRecord::Migration[5.2]
   def change

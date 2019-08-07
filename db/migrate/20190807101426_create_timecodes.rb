@@ -1,3 +1,4 @@
+# :reek:all
 class CreateTimecodes < ActiveRecord::Migration[5.2]
   def change
     create_table :timecodes do |t|

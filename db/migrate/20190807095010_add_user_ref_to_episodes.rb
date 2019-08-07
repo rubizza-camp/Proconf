@@ -1,3 +1,4 @@
+# :reek:all
 class AddUserRefToEpisodes < ActiveRecord::Migration[5.2]
   def change
     add_column :episodes, :created_by, :bigint

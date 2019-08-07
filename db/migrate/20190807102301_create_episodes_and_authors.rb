@@ -1,3 +1,4 @@
+# :reek:all
 class CreateEpisodesAndAuthors < ActiveRecord::Migration[5.2]
   def change
     create_table :authors_episodes, id: false do |t|
