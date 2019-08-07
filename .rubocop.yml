@@ -4,12 +4,14 @@ Style/FrozenStringLiteralComment:
 Style/Documentation:
   Enabled: false
 
-
 Metrics/LineLength:
   Max: 120
   
 AllCops:
   Exclude:
-    - bin/*
-
-
+    - 'bin/*'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/*.rb'
+    - 'config/initializers/*'
