@@ -9,7 +9,11 @@
     <%#= javascript_include_tag 'application' %>
   </head>
 
-  <body>
+  <body class="container">    
+
+    <%= render 'partials/navbar' %>
     <%= yield %>
+    <%= render 'partials/footer' %> 
+
   </body>
 </html>
