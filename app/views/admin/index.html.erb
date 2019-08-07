@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="py-3 text-center">
+    <img class="d-block mx-auto mb-4" src="https://i1.sndcdn.com/avatars-000591178137-3dyxzr-t200x200.jpg" alt="proConf logo" width="72" height="72">
+    <h2>Let's create new podcast</h2>
+    <p class="lead">Below fill form fields to ...</p>
+  </div>
+</div>
+
+<div class="col-md-12 order-md-1">
+  <h4 class="mb-3">Announcement data</h4>
+  <form class="needs-validation" novalidate>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="lastName">Start datetime</label>
+        <input type="datetime-local" class="form-control" required>
+        <div class="invalid-feedback">
+          Valid date is required.
+        </div>
+      </div>
+
+      <div class="col-md-8 mb-3">
+        <label for="firstName">Youtube stream/video url</label>
+        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+        <div class="invalid-feedback">
+          Valid url is required.
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4 mb-3 center-block">
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" class="custom-control-input" id="defaultInline1">
+          <label class="custom-control-label" for="defaultInline1">Telegram
+            <span><img src="https://image.flaticon.com/icons/svg/408/408788.svg" class="img-fluid" alt="example placeholder" height="30" width="30"></span>
+          </label>
+        </div>
+
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" class="custom-control-input" id="defaultInline2">
+          <label class="custom-control-label" for="defaultInline2 ">Twitter
+            <span><img src="https://upload.wikimedia.org/wikipedia/ru/thumb/9/9f/Twitter_bird_logo_2012.svg/946px-Twitter_bird_logo_2012.svg.png" class="img-fluid" alt="example placeholder" height="30" width="30"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-8 mb-3">
+        <button class="btn btn-light btn-block" type="submit">Create announcement</button>
+      </div>
+    </div>
+
+    <h4 class="mb-3">Podcast data</h4>
+    
+    <div class="py-3">
+      <label for="exampleFormControlTextarea6"><h6>Participants: </h6>Valentin Zavadskiy
+        <button class="btn" type="addParticipant">
+          <img src="https://cdn2.iconfinder.com/data/icons/social-media-2/512/User_-_add-512.png" alt="example placeholder" height="16" width="16">
+        </button>
+      </label>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-8 mb-3">
+        <div class="form-group shadow-textarea">
+          <label for="exampleFormControlTextarea6">Title</label>
+          <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="10" placeholder="Write something here..."></textarea>
+        </div>
+      </div>
+      
+      <div class="col-md-4 mb-3">
+        <form class="md-form">
+          <label for="example">Choose conf label image</label>
+          <div class="file-field">
+            <div class="mb-4">
+              <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+                class="avatar-pic" alt="example placeholder avatar" width="300">
+            </div>
+            <div class="d-flex justify-content-center">
+              <div class="btn btn-mdb-color float-left">
+                <span>Add photo</span>
+                <input class="input-file" type="file">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea6">Description</label>
+      <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="7" placeholder="Write something here..."></textarea>
+      <div class="invalid-feedback">
+        Error text
+      </div>
+    </div>
+
+    <hr class="mb-3">
+    <button class="btn btn-light btn-lg btn-block" type="submit">Post proConf podcast</button>
+  </form>
+</div>

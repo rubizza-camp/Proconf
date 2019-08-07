@@ -1,0 +1,36 @@
+$white-color: #fff;
+$space-gray-color: #59698d;
+
+.body-container {
+  padding-top: 60px;
+}
+
+footer {
+  padding-top: 60px;
+}
+
+.btn-mdb-color {
+  background-color: $space-gray-color;
+  color: $white-color;
+}
+
+.float-left {
+  float: left;
+}
+
+.btn-rounded {
+  border-radius: 10em;
+}
+
+.input-file {
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
