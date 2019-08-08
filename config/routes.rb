@@ -2,11 +2,9 @@
 
 Rails.application.routes.draw do
   scope :admin do
-    resources :dashboard, only: [:index]
+    root to: 'dashboard#index'
   end
 
   devise_for :users
   root 'episodes#index'
 end
-
-
