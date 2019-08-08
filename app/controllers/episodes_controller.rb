@@ -1,6 +1,9 @@
 class EpisodesController < ApplicationController
+  EPISODES_SIZE = 5
   def index
-    @episodes = Episode.all
+    @page = (params[:page] || 0).to_i
+    @last_page = Episode.count/EPISODES_SIZE.ceil
+    @episodes = Episode.offset(EPISODES_SIZE * @page).limit(EPISODES_SIZE)
   end
 
   def show

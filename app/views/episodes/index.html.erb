@@ -5,3 +5,15 @@
 <p><%= link_to "More...", episode_path(episode) %></p>
 <br>
 <%end%>
+
+<div>
+   <ul class="pager">
+      <li class="previous <%= @page == 0 ? 'disabled' : '' %>">
+          <%= link_to_if @page > 0, "<< Previous", "/?page=#{@page - 1}" %>
+      </li>
+ 
+      <li class="next">
+          <%= link_to_if @page < @last_page - 1, "Next >>", "/?page=#{@page + 1}" %>
+      </li>
+   </ul>
+</div>
