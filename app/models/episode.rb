@@ -1,5 +1,4 @@
 class Episode < ApplicationRecord
-  paginates_per 3
   validates :title, :date, presence: true
 
   has_many :timecodes

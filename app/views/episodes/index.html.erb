@@ -1,9 +1,0 @@
-<% @episodes.each do |episode|%>
-<h1><%= episode.title%></h1>
-<img src="//img.youtube.com/vi/<%= episode.video%>/sddefault.jpg">
-<p><%= episode.date%></p>
-<p><%= link_to "More...", episode_path(episode) %></p>
-<br>
-<%end%>
-
-<%= paginate @episodes %>
