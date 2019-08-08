@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
-Episode.create(title: '#23 PerfMatters: Web Performance Conference 2019',
-               date: '2018-01-08',
-               video: 'U13VUb60eD0',
-               draft: false,
-               description: 'About something...'
-)
+require 'csv'
+
+TITLE = 0
+DATE = 1
+VIDEO = 2
+DESCRIPTION = 3
+
+CSV.foreach(File.realpath('db/data/episodes.csv')) do |row|
+  Episode.find_or_create_by(title: row[TITLE],
+                            date: row[DATE],
+                            video: row[VIDEO],
+                            description: row[DESCRIPTION])
+end

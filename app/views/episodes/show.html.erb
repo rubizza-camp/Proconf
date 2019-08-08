@@ -1,3 +1,5 @@
 <h1><%= @episode.title%></h1>
 <br><br><br>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @episode.video %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><%= link_to "Next", episode_path(@episode.id+1) %></p>
+<p><%= link_to "Prev", episode_path(@episode.id-1) %></p>
