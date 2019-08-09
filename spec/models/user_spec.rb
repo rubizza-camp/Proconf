@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { described_class.new }
+
+  it 'is not valid without role id' do
+    expect(subject).to_not be_valid
+  end
 end

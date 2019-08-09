@@ -6,6 +6,7 @@ default: &default
 development:
   <<: *default
   database: <%= ENV['DEVELOPMENT_DATABASE'] %>
+  # database: p
 
 test:
   <<: *default
