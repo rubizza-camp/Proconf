@@ -5,5 +5,8 @@
   p = link_to "More...", episode_path(episode)
   - if can? :manage, Episode
     = link_to 'Edit', edit_episode_path(episode)
+  - if can? :manage, Announcement
+    p = link_to 'Announcements', episode_announcements_path(episode)
+  br
 
 = paginate @episodes

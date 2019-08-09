@@ -1,6 +1,8 @@
 class AnnouncementsController < ApplicationController
   before_action :set_announcement, only: %i[edit update show]
 
+  load_and_authorize_resource
+
   def index
     @episode = Episode.find(params['episode_id'])
     @announcements = Announcement.where('episode_id = ?', params['episode_id'])
@@ -29,8 +31,11 @@ class AnnouncementsController < ApplicationController
   end
 
   def update
-    puts announcement_params
-    puts @announcement.update(announcement_params)
+    if @announcement.update(announcement_params)
+      redirect_to episode_announcement_path
+    else
+      redirect_to :edit
+    end
   end
 
   private
