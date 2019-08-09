@@ -1,28 +1,23 @@
-version: 2
 jobs:
   build:
-    working_directory: ~
-    docker:
+   docker:
       - image: circleci/ruby:2.6.3
         environment:
-          PGHOST: localhost
-          PGUSER: Proconf
-          RAILS_ENV: development
-      - image: postgres:11.4
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+      - image: circleci/postgres:latest
         environment:
-          POSTGRES_USER: Proconf
-          POSTGRES_DB: Proconf_development
-          POSTGRES_PASSWORD: ""
-    steps:
-        - checkout
-
-      # Setup the environment
-      - run: bundle install
-
-      # Setup the database
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:migrate
-      - run: bundle exec rake db:seed
-
-      # Run the tests
-      - run: bundle exec rubocop
+          POSTGRES_USER: root
+          POSTGRES_DB: Proconf_test
+   working_directory: ~/Proconf
+   steps:
+      - checkout
+      - run: |
+          bundle install
+      - run: |
+          sudo apt install -y postgresql-client || true
+      - run: |
+          bundle exec rake db:create
+          bundle exec rake db:migrate
+          bundle exec rspec
