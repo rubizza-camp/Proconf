@@ -1,0 +1,10 @@
+<h1>Announcement#index</h1>
+<ul>
+  <% @announcements.each do |announcement| %>
+    <li>
+        <%= link_to announcement.title, announcement_path(announcement) %>
+        <%= "#{announcement.episode_id} - #{announcement.date} - #{announcement.target_resource}" %>
+        <%# <%= "Go to #{link_to 'episode', episode_path(Episode.find(announcement.episode_id))}" %>
+    </li>
+  <% end %>
+</ul>
