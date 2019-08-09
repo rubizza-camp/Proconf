@@ -15,6 +15,18 @@ ActiveRecord::Schema.define(version: 2019_08_07_102301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "announcements", force: :cascade do |t|
+    t.bigint "episode_id"
+    t.string "title"
+    t.datetime "date"
+    t.string "image"
+    t.string "video"
+    t.string "target_resource"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["episode_id"], name: "index_announcements_on_episode_id"
+  end
+
   create_table "authors", force: :cascade do |t|
     t.string "name", null: false
     t.string "surname", null: false
@@ -74,6 +86,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_102301) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "announcements", "episodes"
   add_foreign_key "authors_episodes", "authors"
   add_foreign_key "authors_episodes", "episodes"
   add_foreign_key "episodes", "users", column: "created_by"
