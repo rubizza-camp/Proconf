@@ -13,3 +13,11 @@ CSV.foreach(File.realpath('db/data/episodes.csv')) do |row|
                             video: row[VIDEO],
                             description: row[DESCRIPTION])
 end
+
+Role.create(name: 'admin')
+
+User.create(
+  email: 'superadmin@gmail.com',
+  role: Role.first,
+  password: '123456'
+)
