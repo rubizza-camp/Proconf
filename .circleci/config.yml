@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/Proconf
+    working_directory: ~
     docker:
       - image: circleci/ruby:2.6.3
         environment:
