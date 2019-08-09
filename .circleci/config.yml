@@ -30,8 +30,13 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run: |
           sudo apt install -y postgresql-client || true
-      - run: |
-          export TEST_DATABASE=Proconf_test
-          bundle exec rake db:create
-          bundle exec rake db:migrate
-          bundle exec rspec
+      - run:
+          name: run rubocop 
+          command: bundle exec rubocop
+      - run:
+          name: run rspec
+          command: |
+            export TEST_DATABASE=Proconf_test
+            bundle exec rake db:create
+            bundle exec rake db:migrate
+            bundle exec rspec
