@@ -18,7 +18,6 @@ yarn-debug.log*
 /config/secrets.yml
 
 .env
-*.lock
 .ruby-version
 /spec/tmp
 /coverage/
