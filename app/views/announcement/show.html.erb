@@ -1,2 +1,13 @@
-<h1>Announcement#show</h1>
-<p>Find me in app/views/announcement/show.html.erb</p>
+<h1>Announcement</h1>
+<h4>Podcast: <%= Episode.find(@announcement.episode_id).title %></h4>
+<h4>Title: <%= @announcement.title %></h1>
+<h4>Date: <%= @announcement.date %></h4>
+<h4>Social: <%= @announcement.target_resource %></h4>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-light">
+    <%= link_to 'Back', announcement_index_path %>
+  </button>
+  <button type="button" class="btn btn-light">
+    <%= link_to 'Edit', edit_announcement_path %>
+  </button>
+</div>

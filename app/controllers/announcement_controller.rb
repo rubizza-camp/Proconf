@@ -8,8 +8,14 @@ class AnnouncementController < ApplicationController
   end
 
   def new
+    # create method
   end
 
   def edit
+    @announcement = Announcement.find(params[:id])
+  end
+
+  def update
+    # update method
   end
 end
