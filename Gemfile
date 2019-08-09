@@ -9,6 +9,7 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise', '~> 4.6', '>= 4.6.2'
 gem 'jbuilder', '~> 2.5'
+gem 'kaminari'
 gem 'mini_racer', platforms: :ruby
 gem 'pg'
 gem 'puma', '~> 3.11'
@@ -33,6 +34,8 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
+  gem 'factory_bot', '~> 5.0'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.4'
   gem 'selenium-webdriver'
 end
 
