@@ -1,0 +1,24 @@
+<h1>Edit announcement</h1>
+<%= form_for :announcement, url: episode_announcements_path do |form| %>
+  <%= form.text_field :title, placeholder: "title" %>
+  <%= form.datetime_field :date, placeholder: "date" %>
+  <%= form.text_field :target_resource, placeholder: "target_resource" %>
+  
+  <%= form.submit %>
+<% end %>
+
+<%# 
+<%= form_for :announcement, url: episode_announcement_path do %>
+  <label>Title:</label><br>
+  <%= text_field_tag :title %><br>
+
+  <label>Date:</label><br>
+  <% puts @announcement.date %>
+  <%= datetime_field_tag(:date, @announcement.date)%><br>
+
+  <label>Social:</label><br>
+  <%= select_tag "target_resource", raw("<option>tg</option><option>fb</option><option>vk</option><option>twitter</option>") %><br>
+
+  <%= submit_tag "Submit Article" %>
+<% end %>
+ %>

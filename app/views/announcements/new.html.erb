@@ -1,0 +1,8 @@
+<h1>New announcement</h1>
+<%= form_for :announcement, url: episode_announcements_path do |form| %>
+  <%= form.text_field :title, placeholder: "title" %>
+  <%= form.datetime_field :date, placeholder: "date" %>
+  <%= form.text_field :target_resource, placeholder: "target_resource" %>
+  
+  <%= form.submit %>
+<% end %>

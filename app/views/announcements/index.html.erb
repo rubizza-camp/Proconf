@@ -1,0 +1,17 @@
+<h1>Announcement</h1>
+
+<button type="button" class="btn btn-light">
+  <%= link_to 'New', new_episode_announcement_path %>
+</button>
+
+<ul>
+  <% @announcements.each do |announcement| %>
+    <li>
+      <%= announcement.id %>
+      <%= link_to announcement.title, episode_announcement_path(@episode, announcement) %>
+      <%= "#{announcement.episode_id} - #{announcement.date} - #{announcement.target_resource}" %>
+    </li>
+  <% end %>
+</ul>
+
+  
