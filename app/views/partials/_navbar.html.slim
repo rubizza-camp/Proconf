@@ -1,13 +1,13 @@
 header
   nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
     img[src="https://i1.sndcdn.com/avatars-000591178137-3dyxzr-t200x200.jpg" alt="proConf logo" height="30" width="30"]
-      = link_to 'proConf', user_signed_in? ? root_path : podcasts_path, class: 'navbar-brand'
+      = link_to 'proConf', user_signed_in? ? root_path : episodes_path, class: 'navbar-brand'
     button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"]
       span.navbar-toggler-icon
     #navbarCollapse.collapse.navbar-collapse
       ul.navbar-nav.mr-auto
         li.nav-item
-          = link_to 'Podcasts', podcasts_path, class: 'nav-link'
+          = link_to 'Podcasts', episodes_path, class: 'nav-link'
         li.nav-item
           a.nav-link[href="#"]
             | About us
@@ -19,9 +19,5 @@ header
             | FAQ
       form.form-inline.mt-2.mt-md-0
         - if user_signed_in?
-          = link_to 'Logout', destroy_user_session_path, method: :delete
-        - else
-          = link_to 'Log In', new_user_session_path
-        input.form-control.mr-sm-2[type="text" placeholder="Search" aria-label="Search"]
-        button.btn.btn-outline-success.my-2.my-sm-0[type="submit"]
-          | Search
+          button.btn.btn-outline-success.my-2.my-sm-0[type="submit"]
+            = link_to 'Logout', destroy_user_session_path, method: :delete

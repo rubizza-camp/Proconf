@@ -1,5 +1,5 @@
 class EpisodesController < ApplicationController
-  EPISODES_SIZE = 5
+  load_and_authorize_resource
 
   def index
     @episodes = Episode.order(created_at: :desc).page params[:page]
