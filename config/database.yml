@@ -10,7 +10,7 @@ development:
 
 test:
   <<: *default
-  database: Proconf_test
+  database: <%= ENV['TEST_DATABASE'] %>
 
 production:
   <<: *default
