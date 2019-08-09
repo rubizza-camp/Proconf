@@ -9,6 +9,10 @@ class EpisodesController < ApplicationController
     @episode = Episode.find(params[:id])
   end
 
+  def edit
+    @episode = Episode.find(params[:id])
+  end
+
   def create
     @episode = Episode.new(episode_params.merge(created_by: current_user))
 
@@ -16,6 +20,14 @@ class EpisodesController < ApplicationController
       redirect_to episodes_url, notice: 'Successfully created'
     else
       render :new, notice: 'Something wrong'
+    end
+  end
+
+  def update
+    if Episode.find(params[:id]).update(episode_params)
+      redirect_to episode_path
+    else
+      redirect_to edit_episode_path
     end
   end
 

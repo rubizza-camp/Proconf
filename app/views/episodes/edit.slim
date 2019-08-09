@@ -1,0 +1,73 @@
+.container
+  .py-3.text-center
+    img.d-block.mx-auto.mb-4[src="https://i1.sndcdn.com/avatars-000591178137-3dyxzr-t200x200.jpg" alt="proConf logo" width="72" height="72"]
+    h2
+      | Let's update podcast
+    p.lead
+      | Below fill form fields to ...
+.col-md-12.order-md-1
+  h4.mb-3
+    | Announcement data
+  form.needs-validation[method='post' action="/episodes/#{@episode.id}" novalidate]
+    .row
+      .col-md-4.mb-3
+        label[for="lastName"]
+          | Start datetime
+        input.form-control[name='date' type="date" value="#{@episode.date.time.to_s.split(' ').first}" required]
+        .invalid-feedback
+          |  Valid date is required.
+      .col-md-4.mb-3
+        label[for="secondName"]
+          | Start datetime
+        input.form-control[name='time' type="time" value="#{@episode.date.time.to_s.split(' ').second}" required]
+        .invalid-feedback
+          |  Valid time is required.
+      .col-md-4.mb-3
+        label[for="firstName"]
+          | Youtube stream/video url
+        input#firstName.form-control[name='video' type="text" placeholder="" value="https://www.youtube.com/watch?v=#{@episode.video}" required]
+        .invalid-feedback
+          |  Valid url is required.
+    .row
+      .col-md-4.mb-3.center-block
+        .custom-control.custom-checkbox.custom-control-inline
+          input#defaultInline1.custom-control-input[type="checkbox"]
+          label.custom-control-label[for="defaultInline1"]
+            | Telegram
+            span
+              img.img-fluid[src="https://image.flaticon.com/icons/svg/408/408788.svg" alt="example placeholder" height="30" width="30"]
+        .custom-control.custom-checkbox.custom-control-inline
+          input#defaultInline2.custom-control-input[type="checkbox"]
+          label.custom-control-label[for="defaultInline2 "]
+            | Twitter
+            span
+              img.img-fluid[src="https://upload.wikimedia.org/wikipedia/ru/thumb/9/9f/Twitter_bird_logo_2012.svg/946px-Twitter_bird_logo_2012.svg.png" alt="example placeholder" height="30" width="30"]
+      .col-md-8.mb-3
+        button.btn.btn-light.btn-block[type="submit"]
+          | Create announcement
+    h4.mb-3
+      | Podcast data
+    .py-3
+      label[for="exampleFormControlTextarea6"]
+      h6
+        | Participants:
+      | Valentin Zavadskiy
+      button.btn[type="addParticipant"]
+        img[src="https://cdn2.iconfinder.com/data/icons/social-media-2/512/User_-_add-512.png" alt="example placeholder" height="16" width="16"]
+    .row
+      .col-md-8.mb-3
+        .form-group.shadow-textarea
+          label[for="exampleFormControlTextarea6"]
+            | Title
+          textarea#exampleFormControlTextarea6.form-control.z-depth-1[name='title' rows="1" placeholder="Write something here..."] = @episode.title
+      .col-md-4.mb-3
+    label[for="exampleFormControlTextarea6"]
+      | Description
+    textarea#exampleFormControlTextarea6.form-control.z-depth-1[name='description' rows="5" placeholder="Write something here..."] = @episode.description
+    .invalid-feedback
+      |  Error text
+    hr.mb-3
+    button.btn.btn-light.btn-lg.btn-block[type="submit"]
+      | Update proConf podcast
+    = hidden_field_tag :authenticity_token, form_authenticity_token
+    input[type="hidden" name="_method" value="patch"]
