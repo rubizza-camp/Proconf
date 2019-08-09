@@ -4,10 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'episodes#index'
 
-  resources :episodes, only: %i[index show]
+  resources :episodes
 
-  scope :admin do
-    root to: 'dashboard#index'
-    resources :episodes
-  end
+  get '/admin', to: 'dashboard#index'
 end
