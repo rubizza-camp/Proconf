@@ -1,8 +1,14 @@
-h1 = @episode.title
-br
-iframe src = \youtube_video_link(@episode.video) width = '560' height = '315' frameborder = '0' allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen
-br
-- if can? :manage, Episode
-    = link_to 'Edit', edit_episode_path(@episode)
-- if can? :manage, Announcement
-  p = link_to 'Announcements', episode_announcements_path(@episode)\
+.container
+  h1.my-4 = @episode.title
+  .row
+      .col-md-7
+        a
+          iframe src = youtube_video_link(@episode.video) width = '560' height = '315' frameborder = '0' allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen
+      .col-md-5
+        p = @episode.description
+        p = @episode.date
+        - if can? :manage, Episode
+          a.btn.btn-warning href = edit_episode_path(@episode) Edit
+          a.col-2
+        - if can? :manage, Announcement
+          a.btn.btn-warning href = episode_announcements_path(@episode) Announcements
