@@ -14,10 +14,15 @@ CSV.foreach(File.realpath('db/data/episodes.csv')) do |row|
                             description: row[DESCRIPTION])
 end
 
-Role.create(name: 'admin')
+Role.find_or_create_by(name: 'admin')
 
 User.create(
   email: 'superadmin@gmail.com',
-  role: Role.first,
+  role: Role.find_by(name: 'admin'),
   password: '123456'
 )
+
+Status.find_or_create_by(name: 'draft')
+Status.find_or_create_by(name: 'announcement')
+Status.find_or_create_by(name: 'online')
+Status.find_or_create_by(name: 'finished')
