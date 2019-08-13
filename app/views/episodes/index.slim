@@ -1,0 +1,8 @@
+- @episodes.each do |episode|
+  h1 = episode.title
+  img src = youtube_image_link(episode.video)
+  p = episode.date
+  p = link_to "More...", episode_path(episode)
+  br
+
+= paginate @episodes

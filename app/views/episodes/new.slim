@@ -1,0 +1,65 @@
+.container
+  .py-3.text-center
+    img.d-block.mx-auto.mb-4[src= "/proconf_logo.jpg" alt="proConf logo" width="72" height="72"]
+    h2
+      | Let's create new podcast
+    p.lead
+      | Below fill form fields to ...
+.col-md-12.order-md-1
+  h4.mb-3
+    | Announcement data
+  form.needs-validation[novalidate]
+    .row
+      .col-md-4.mb-3
+        label[for="lastName"]
+          | Start datetime
+        input.form-control[type="datetime-local" required]
+        .invalid-feedback
+          |  Valid date is required.
+      .col-md-8.mb-3
+        label[for="firstName"]
+          | Youtube stream/video url
+        input#firstName.form-control[type="text" placeholder="" value="" required]
+        .invalid-feedback
+          |  Valid url is required.
+    .row
+      .col-md-4.mb-3.center-block
+        .custom-control.custom-checkbox.custom-control-inline
+          input#defaultInline1.custom-control-input[type="checkbox"]
+          label.custom-control-label[for="defaultInline1"]
+            | Telegram
+            span
+              img.img-fluid[src="/telegram_logo.svg" alt="example placeholder" height="30" width="30"]
+        .custom-control.custom-checkbox.custom-control-inline
+          input#defaultInline2.custom-control-input[type="checkbox"]
+          label.custom-control-label[for="defaultInline2 "]
+            | Twitter
+            span
+              img.img-fluid[src= "/twitter_logo.png" alt="example placeholder" height="30" width="30"]
+      .col-md-8.mb-3
+        button.btn.btn-light.btn-block[type="submit"]
+          | Create announcement
+    h4.mb-3
+      | Podcast data
+    .py-3
+      label[for="exampleFormControlTextarea6"]
+      h6
+        | Participants:
+      | Valentin Zavadskiy
+      button.btn[type="addParticipant"]
+        img[src="/add_speaker_icon.png" alt="example placeholder" height="16" width="16"]
+    .row
+      .col-md-8.mb-3
+        .form-group.shadow-textarea
+          label[for="exampleFormControlTextarea6"]
+            | Title
+          textarea#exampleFormControlTextarea6.form-control.z-depth-1[rows="10" placeholder="Write something here..."]
+      .col-md-4.mb-3
+  label[for="exampleFormControlTextarea6"]
+    | Description
+  textarea#exampleFormControlTextarea6.form-control.z-depth-1[rows="7" placeholder="Write something here..."]
+  .invalid-feedback
+    |  Error text
+hr.mb-3
+button.btn.btn-light.btn-lg.btn-block[type="submit"]
+  | Post proConf podcast
