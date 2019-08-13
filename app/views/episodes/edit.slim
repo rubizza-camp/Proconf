@@ -1,6 +1,6 @@
 .container
   .py-3.text-center
-    img.d-block.mx-auto.mb-4[src="https://i1.sndcdn.com/avatars-000591178137-3dyxzr-t200x200.jpg" alt="proConf logo" width="72" height="72"]
+    img.d-block.mx-auto.mb-4[src="/proconf_logo.jpg" alt="proConf logo" width="72" height="72"]
     h2
       | Let's update podcast
     p.lead
@@ -25,7 +25,7 @@
       .col-md-4.mb-3
         label[for="firstName"]
           | Youtube stream/video url
-        input#firstName.form-control[name='video' type="text" placeholder="" value="https://www.youtube.com/watch?v=#{@episode.video}" required]
+        input#firstName.form-control[name='video' type="text" placeholder="" value=yotube_watch_link(@episode.video) required]
         .invalid-feedback
           |  Valid url is required.
     .row
@@ -35,13 +35,13 @@
           label.custom-control-label[for="defaultInline1"]
             | Telegram
             span
-              img.img-fluid[src="https://image.flaticon.com/icons/svg/408/408788.svg" alt="example placeholder" height="30" width="30"]
+              img.img-fluid[src="/telegram_logo.svg" alt="example placeholder" height="30" width="30"]
         .custom-control.custom-checkbox.custom-control-inline
           input#defaultInline2.custom-control-input[type="checkbox"]
           label.custom-control-label[for="defaultInline2 "]
             | Twitter
             span
-              img.img-fluid[src="https://upload.wikimedia.org/wikipedia/ru/thumb/9/9f/Twitter_bird_logo_2012.svg/946px-Twitter_bird_logo_2012.svg.png" alt="example placeholder" height="30" width="30"]
+              img.img-fluid[src="/twitter_logo.png" alt="example placeholder" height="30" width="30"]
       .col-md-8.mb-3
         button.btn.btn-light.btn-block[type="submit"]
           | Create announcement
@@ -53,7 +53,7 @@
         | Participants:
       | Valentin Zavadskiy
       button.btn[type="addParticipant"]
-        img[src="https://cdn2.iconfinder.com/data/icons/social-media-2/512/User_-_add-512.png" alt="example placeholder" height="16" width="16"]
+        img[src="/add_speaker_icon.png" alt="example placeholder" height="16" width="16"]
     .row
       .col-md-8.mb-3
         .form-group.shadow-textarea

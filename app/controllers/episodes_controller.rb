@@ -1,17 +1,14 @@
 class EpisodesController < ApplicationController
   load_and_authorize_resource
+  before_action :set_episode, only: %i[edit show]
 
   def index
     @episodes = Episode.order(created_at: :desc).page params[:page]
   end
 
-  def show
-    @episode = Episode.find(params[:id])
-  end
+  def show; end
 
-  def edit
-    @episode = Episode.find(params[:id])
-  end
+  def edit; end
 
   def create
     @episode = Episode.new(episode_params.merge(created_by: current_user))
@@ -32,6 +29,10 @@ class EpisodesController < ApplicationController
   end
 
   private
+
+  def set_episode
+    @episode = Episode.find(params[:id])
+  end
 
   def episode_params
     params[:video] = params[:video].split('=').last
