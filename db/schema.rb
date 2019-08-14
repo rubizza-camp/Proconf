@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_102301) do
+ActiveRecord::Schema.define(version: 2019_08_14_095458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2019_08_07_102301) do
     t.index ["episode_id"], name: "index_authors_episodes_on_episode_id"
   end
 
+  create_table "credentials", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "service"
+    t.json "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credentials_on_user_id"
+  end
+
   create_table "episodes", force: :cascade do |t|
     t.string "title", null: false
     t.string "video"
@@ -50,7 +59,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_102301) do
     t.datetime "date"
     t.string "soundcloud"
     t.text "description"
-    t.boolean "draft", default: true, null: false
+    t.string "status", default: "draft", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "created_by"
@@ -89,6 +98,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_102301) do
   add_foreign_key "announcements", "episodes"
   add_foreign_key "authors_episodes", "authors"
   add_foreign_key "authors_episodes", "episodes"
+  add_foreign_key "credentials", "users"
   add_foreign_key "episodes", "users", column: "created_by"
   add_foreign_key "timecodes", "episodes"
   add_foreign_key "users", "roles"
