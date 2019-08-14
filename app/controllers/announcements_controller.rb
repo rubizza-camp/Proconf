@@ -5,13 +5,9 @@ class AnnouncementsController < ApplicationController
 
   def index
     @episode = Episode.find(params['episode_id'])
-    # @announcements = @episode.announcements
-    # @announcements = Announcement.where('episode_id = ?', params['episode_id'])
   end
 
-  def show
-    # @announcement = Announcement.find(params[:id])
-  end
+  def show; end
 
   def new
     @announcement = Announcement.new
@@ -23,13 +19,10 @@ class AnnouncementsController < ApplicationController
       redirect_to episode_announcements_path
     else
       redirect_to new_episode_announcement_path
-      # add notification
     end
   end
 
-  def edit
-    # @announcement = Announcement.find(params[:id])
-  end
+  def edit; end
 
   def update
     if @announcement.update(announcement_params)
