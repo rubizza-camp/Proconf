@@ -5,7 +5,8 @@ class AnnouncementsController < ApplicationController
 
   def index
     @episode = Episode.find(params['episode_id'])
-    @announcements = Announcement.where('episode_id = ?', params['episode_id'])
+    # @announcements = @episode.announcements
+    # @announcements = Announcement.where('episode_id = ?', params['episode_id'])
   end
 
   def show
