@@ -21,8 +21,3 @@ User.create(
   role: Role.find_by(name: 'admin'),
   password: '123456'
 )
-
-Status.find_or_create_by(name: 'draft')
-Status.find_or_create_by(name: 'announcement')
-Status.find_or_create_by(name: 'online')
-Status.find_or_create_by(name: 'finished')

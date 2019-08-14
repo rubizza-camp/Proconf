@@ -63,19 +63,11 @@ ActiveRecord::Schema.define(version: 2019_08_14_095458) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "created_by"
-    t.bigint "status_id"
     t.index ["created_by"], name: "index_episodes_on_created_by"
-    t.index ["status_id"], name: "index_episodes_on_status_id"
   end
 
   create_table "roles", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "statuses", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
