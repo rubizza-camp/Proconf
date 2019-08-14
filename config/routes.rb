@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   end
 
   get '/admin', to: 'dashboard#index'
-
+  post '/admin/telegram', to: 'dashboard#telegram'
   get '*path', to: redirect('/')
 end

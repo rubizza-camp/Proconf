@@ -1,7 +1,5 @@
 class Credential < ApplicationRecord
   validates :service, presence: true
-  
-  belongs_to :user
 
-  serialize :data, JSON
+  belongs_to :user
 end
