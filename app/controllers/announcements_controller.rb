@@ -1,5 +1,5 @@
 class AnnouncementsController < ApplicationController
-  before_action :set_announcement, only: %i[edit update show]
+  before_action :set_announcement, only: %i[edit update show destroy]
 
   load_and_authorize_resource
 
@@ -34,16 +34,24 @@ class AnnouncementsController < ApplicationController
     if @announcement.update(announcement_params)
       redirect_to episode_announcement_path
     else
-      redirect_to :edit
+      redirect_to edit_episode_announcement_path
     end
+  end
+
+  def destroy
+    @announcement.destroy
+
+    redirect_to episode_announcements_path
   end
 
   private
 
+  def announcement_param_names
+    %i[title date target_resource image video]
+  end
+
   def announcement_params
-    p = params.require(:announcement).permit(:episode_id, :title, :date, :target_resource, :image, :video)
-    p['episode_id'] = params['episode_id']
-    p
+    params.require(:announcement).permit(announcement_param_names).merge(episode_id: params['episode_id'])
   end
 
   def set_announcement
