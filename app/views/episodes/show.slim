@@ -4,3 +4,5 @@ iframe src = youtube_video_link(@episode.video) width = '560' height = '315' fra
 br
 - if can? :manage, Episode
     = link_to 'Edit', edit_episode_path(@episode)
+- if can? :manage, Announcement
+  p = link_to 'Announcements', episode_announcements_path(@episode)

@@ -6,6 +6,7 @@ class Ability
   def initialize(user)
     if user&.role&.name == 'admin'
       can :manage, Episode
+      can :manage, Announcement
     else
       can :read, Episode
     end

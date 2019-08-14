@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'episodes#index'
 
-  resources :episodes
+  resources :episodes do
+    resources :announcements
+  end
 
   get '/admin', to: 'dashboard#index'
 

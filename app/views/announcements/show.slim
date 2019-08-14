@@ -1,0 +1,32 @@
+.container
+  .py-3.text-center
+    h1
+      | Announcement
+    h4
+      | Podcast: 
+      = Episode.find(@announcement.episode_id).title
+    h4
+      | Title: 
+      = @announcement.title
+    h4
+      | Date: 
+      = @announcement.date
+    h4
+      | Social: 
+      = @announcement.target_resource
+    h4
+      | Image: 
+      = @announcement.image
+    h4
+      | Stream url: 
+      = @announcement.video
+    .btn-group[role="group" aria-label="Basic example"]
+      = link_to episode_announcements_path
+        .btn.btn-light.my-2.my-sm-0
+          | Back
+      = link_to edit_episode_announcement_path
+        .btn.btn-light.my-2.my-sm-0
+          | Edit
+      = link_to episode_announcement_path(@announcement.episode, @announcement), method: :delete, data: { confirm: 'Are you sure?' }
+        .btn.btn-light.my-2.my-sm-0
+          | Delete
