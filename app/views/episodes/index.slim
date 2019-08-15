@@ -15,8 +15,8 @@
         - if can? :manage, Episode
           a.btn.btn-warning href = edit_episode_path(episode) Edit
           a.col-2
-        - if can? :manage, Announcement
-          a.btn.btn-warning href = episode_announcements_path(episode) Announcements
+        / - if can? :manage, Announcement
+        /   a.btn.btn-warning href = episode_announcements_path(episode) Announcements
     hr
 
   = paginate @episodes
