@@ -4,7 +4,7 @@
       | Announcement
     h4
       | Podcast: 
-      = Episode.find(@announcement.episode_id).title
+      = @announcement.episode.title
     h4
       | Title: 
       = @announcement.title

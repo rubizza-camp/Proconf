@@ -15,6 +15,8 @@ class AnnouncementsController < ApplicationController
 
   def create
     announcement = Announcement.new(announcement_params)
+    announcement.episode_id = params[:episode_id]
+
     if announcement.save
       redirect_to episode_announcements_path
     else
@@ -45,7 +47,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def announcement_params
-    params.require(:announcement).permit(announcement_param_names).merge(episode_id: params['episode_id'])
+    params.require(:announcement).permit(announcement_param_names)
   end
 
   def set_announcement
