@@ -3,12 +3,10 @@
   .row
       .col-md-7
         a
-          iframe src = youtube_video_link(@episode.video) width = '560' height = '315' frameborder = '0' allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen
+          iframe.youtube_video src = youtube_video_link(@episode.video) 
       .col-md-5
         p = @episode.description
         p = @episode.date
         - if can? :manage, Episode
           a.btn.btn-warning href = edit_episode_path(@episode) Edit
           a.col-2
-        - if can? :manage, Announcement
-          a.btn.btn-warning href = episode_announcements_path(@episode) Announcements

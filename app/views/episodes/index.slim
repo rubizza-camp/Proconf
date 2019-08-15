@@ -4,7 +4,7 @@
     .row
       .col-md-7
         a
-          img.img-fluid.rounded.mb-3.mb-md-0 [src = youtube_image_link(episode.video) height = '100%' width = '100%' ]
+          img.img-fluid.rounded.mb-3.mb-md-0 src = youtube_image_link(episode.video)
       .col-md-5
         h3 = episode.title
         p
@@ -15,8 +15,6 @@
         - if can? :manage, Episode
           a.btn.btn-warning href = edit_episode_path(episode) Edit
           a.col-2
-        / - if can? :manage, Announcement
-        /   a.btn.btn-warning href = episode_announcements_path(episode) Announcements
     hr
 
   = paginate @episodes
