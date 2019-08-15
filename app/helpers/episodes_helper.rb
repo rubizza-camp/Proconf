@@ -1,6 +1,6 @@
 module EpisodesHelper
   def youtube_image_link(src)
-    "//img.youtube.com/vi/#{src}/sddefault.jpg"
+    "//img.youtube.com/vi/#{src}/maxresdefault.jpg"
   end
 
   def youtube_video_link(src)
