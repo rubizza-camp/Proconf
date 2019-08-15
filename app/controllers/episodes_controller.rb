@@ -3,7 +3,9 @@ class EpisodesController < ApplicationController
   before_action :set_episode, except: %i[index create new]
 
   def index
-    @episodes = Episode.order(created_at: :desc).page params[:page]
+    @announcement_episodes = Episode.where(status: 'announcement').order(created_at: :desc).last(2)
+    @online_episodes = Episode.where(status: 'online').order(created_at: :desc)
+    @finished_episodes = Episode.where(status: 'finished').order(created_at: :desc).page params[:page]
   end
 
   def show; end
@@ -43,6 +45,14 @@ class EpisodesController < ApplicationController
   def update_youtube_data
     @episode.update_youtube_info
     redirect_to episode_path(@episode.id)
+  end
+
+  def to_announcement
+    if @episode.announcement!
+      redirect_to episode_path(@episode)
+    else
+      redirect_to episode_path(@episode)
+    end
   end
 
   private

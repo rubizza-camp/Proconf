@@ -44,4 +44,31 @@ class Episode < ApplicationRecord
   def check_youtube_status(video)
     video.live_broadcast_content == 'none' ? 'over' : video.live_broadcast_content
   end
+
+  include AASM
+
+  aasm column: 'status', whiny_transitions: false do
+    state :draft, initial: true
+    state :announcement, :online, :processing, :finished
+
+    event :announcement do
+      transitions from: :draft, to: :announcement, guard: :valid_for_announcement?
+    end
+
+    event :online do
+      transitions from: :announcement, to: :online
+    end
+
+    event :processing do
+      transitions from: :online, to: :processing
+    end
+
+    event :finished do
+      transitions from: :processing, to: :finished
+    end
+  end
+
+  def valid_for_announcement?
+    title && date && video && !description.empty?
+  end
 end

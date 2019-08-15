@@ -1,18 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe Episode, type: :model do
-  context 'with valid params' do
-    let(:valid_episode) { described_class.new(title: 'Name', date: Time.now) }
+  subject { described_class.new }
 
-    it { expect(valid_episode).to be_valid }
+  it 'is valid with valid attributes' do
+    subject.title = 'Title'
+    subject.date = Time.now
+    expect(subject).to be_valid
   end
 
-  context 'with invalid params' do
-    let(:episode_withoul_title) { described_class.new(date: Time.now) }
-    let(:episode_withoul_date) { described_class.new(title: 'Title') }
+  it 'is not valid without date' do
+    subject.title = 'Title'
+    expect(subject).to_not be_valid
+  end
 
-    it { expect(episode_withoul_title).to be_invalid }
-
-    it { expect(episode_withoul_date).to be_invalid }
+  it 'is not valid without title' do
+    subject.date = Time.now
+    expect(subject).to_not be_valid
   end
 end
