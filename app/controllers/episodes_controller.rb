@@ -48,11 +48,9 @@ class EpisodesController < ApplicationController
   end
 
   def to_announcement
-    if @episode.announcement!
-      redirect_to episode_path(@episode)
-    else
-      redirect_to episode_path(@episode)
-    end
+    @episode.announcement!
+
+    redirect_to episode_path(@episode)
   end
 
   private
