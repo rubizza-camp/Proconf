@@ -11,7 +11,7 @@ class EpisodesController < ApplicationController
   def edit; end
 
   def create
-    @episode = Episode.new(episode_params)
+    @episode = Episode.new(params_for_episode)
     @episode.created_by = current_user
 
     if @episode.save
@@ -22,7 +22,7 @@ class EpisodesController < ApplicationController
   end
 
   def update
-    if @episode.update(episode_params)
+    if @episode.update(params_for_episode)
       redirect_to episode_path
     else
       redirect_to edit_episode_path
@@ -35,11 +35,15 @@ class EpisodesController < ApplicationController
     @episode = Episode.find(params[:id])
   end
 
-  def episode_params
-    params[:video] = params[:video].split('=').last
-    params[:date] = datetime
-
+  def permitted_params
     params.permit(:title, :video, :date, :description)
+  end
+
+  def params_for_episode(permit_params = permitted_params)
+    permit_params[:video] = permit_params[:video]
+                            .match(%r{(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)})[5]
+    permit_params[:date] = datetime
+    permit_params
   end
 
   def datetime
