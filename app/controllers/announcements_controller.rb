@@ -1,21 +1,19 @@
 class AnnouncementsController < ApplicationController
   before_action :set_announcement, only: %i[edit update show destroy]
+  before_action :set_episode, only: %i[index new create]
 
   load_and_authorize_resource
 
-  def index
-    @episode = Episode.find(params['episode_id'])
-  end
+  def index; end
 
   def show; end
 
   def new
-    @announcement = Announcement.new
+    @announcement = @episode.announcements.new
   end
 
   def create
-    announcement = Announcement.new(announcement_params)
-    announcement.episode_id = params[:episode_id]
+    announcement = @episode.announcements.new(announcement_params)
 
     if announcement.save
       redirect_to episode_announcements_path
@@ -28,7 +26,7 @@ class AnnouncementsController < ApplicationController
 
   def update
     if @announcement.update(announcement_params)
-      redirect_to episode_announcement_path
+      redirect_to episode_announcement_path, notice: 'blablabla'
     else
       redirect_to edit_episode_announcement_path
     end
@@ -52,5 +50,9 @@ class AnnouncementsController < ApplicationController
 
   def set_announcement
     @announcement = Announcement.find(params[:id])
+  end
+
+  def set_episode
+    @episode = Episode.find(params['episode_id'])
   end
 end
