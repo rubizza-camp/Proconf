@@ -3,10 +3,36 @@
   .row
       .col-md-7
         a
-          iframe.youtube-video src = youtube_video_link(@episode.video) 
+          iframe.youtube-video src = youtube_video_link(@episode.video)
+          - if @episode.youtube_status
+            p = "Podcast youtube status - #{@episode.youtube_status}"
+          - if @episode.broadcast_begin
+            p = "Youtube broadcast started at #{@episode.broadcast_begin}"
+          - if @episode.broadcast_end
+            p = "Youtube broadcast finished at #{@episode.broadcast_end}"
+          - if can? :manage, Episode
+            = button_to 'Start podcast', add_start_finish_path(@episode), params: {started: true}
+            = button_to 'Finish podcast', add_start_finish_path(@episode), params: {started: false}
+          - if can? :manage, Episode
+            a.btn.btn-warning href = edit_episode_path(@episode) Edit
+            a.col-2
       .col-md-5
         p = @episode.description
         p = @episode.date
-        - if can? :manage, Episode
-          a.btn.btn-warning href = edit_episode_path(@episode) Edit
-          a.col-2
+        - if @episode.actual_start
+          .start-end-info
+            = "Podcast start: #{@episode.actual_start}"
+          .timecode-wrapper
+          - @timecodes.each do |timecode|
+            div
+              .timecode-info = timecode.title
+              .timecode-info = timecode.time
+          - if @episode.actual_finish
+            .start-end-info
+              = "Podcast finish: #{@episode.actual_finish}"
+
+br
+- if can? :manage, Episode
+    = link_to 'Edit', edit_episode_path(@episode)
+- if can? :manage, Announcement
+    p = link_to 'Announcements', episode_announcements_path(@episode)

@@ -1,14 +1,26 @@
 class EpisodesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_episode, only: %i[edit show update]
+  before_action :update_youtube_info, only: [:show]
+  before_action :set_episode, only: %i[edit show update to_announcement update_youtube_info add_start add_finish]
 
   def index
     @episodes = Episode.order(created_at: :desc).page params[:page]
   end
 
-  def show; end
+  def show
+    @timecodes = @episode.timecodes
+  end
 
   def edit; end
+
+  def update_youtube_info
+    YoutubeService.new(@episode).save_all
+  end
+
+  def add_start_or_finish
+    params[:started] == 'true' ? add_start : add_finish
+    redirect_to "/episodes/#{@episode.id}"
+  end
 
   def create
     @episode = Episode.create(episode_params.merge(created_by: current_user))
@@ -29,6 +41,16 @@ class EpisodesController < ApplicationController
   end
 
   private
+
+  def add_start
+    @episode.actual_start = Time.now
+    @episode.save!
+  end
+
+  def add_finish
+    @episode.actual_finish = Time.now
+    @episode.save!
+  end
 
   def set_episode
     @episode = Episode.find(params[:id])
