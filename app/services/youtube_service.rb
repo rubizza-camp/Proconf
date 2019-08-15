@@ -14,6 +14,7 @@ class YoutubeService
   end
 
   def youtube_status
+    return 'over' if @video.live_broadcast_content == 'none'
     @video.live_broadcast_content
   end
 
@@ -21,7 +22,6 @@ class YoutubeService
     @episode.broadcast_begin = broadcast_start_date
     @episode.broadcast_end = broadcast_end_date
     @episode.youtube_status = youtube_status
-    @episode.youtube_status = 'over' if youtube_status == 'none'
     @episode.save!
   end
 end
