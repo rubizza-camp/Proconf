@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   post '/admin/telegram', to: 'dashboard#telegram'
   get '*path', to: redirect('/')
 
-  post '/update_youtube/:id', to: 'episodes#update_youtube'
+  post '/update_youtube_info/:id', to: 'episodes#update_youtube_info'
 end

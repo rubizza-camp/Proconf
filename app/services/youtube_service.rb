@@ -14,9 +14,7 @@ class YoutubeService
   end
 
   def youtube_status
-    return 'over' if @video.live_broadcast_content == 'none'
-
-    @video.live_broadcast_content
+    @video.live_broadcast_content == 'none' ? 'over' : @video.live_broadcast_content
   end
 
   def save_all
