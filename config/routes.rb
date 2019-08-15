@@ -13,5 +13,4 @@ Rails.application.routes.draw do
   get '*path', to: redirect('/')
 
   post '/update_youtube/:id', to: 'episodes#update_youtube'
-
 end

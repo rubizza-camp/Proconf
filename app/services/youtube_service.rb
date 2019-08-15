@@ -2,27 +2,26 @@ class YoutubeService
   def initialize(episode)
     @episode = episode
     @video = Yt::Video.new id: episode.video
-    Yt.configuration.api_key =  ENV['TEST_CHANNELKEY']
+    Yt.configuration.api_key = ENV['TEST_CHANNELKEY']
   end
 
-  def get_start
+  def broadcast_start_date
     @video.actual_start_time
   end
 
-  def get_end
+  def broadcast_end_date
     @video.actual_end_time
   end
 
-  def get_status
+  def youtube_status
     @video.live_broadcast_content
   end
 
   def save_all
-    @episode.broadcast_begin = get_start
-    @episode.broadcast_end = get_end
-    @episode.youtube_status = get_status
-    @episode.youtube_status = 'over' if get_status == 'none'
+    @episode.broadcast_begin = broadcast_start_date
+    @episode.broadcast_end = broadcast_end_date
+    @episode.youtube_status = youtube_status
+    @episode.youtube_status = 'over' if youtube_status == 'none'
     @episode.save!
   end
-
 end
