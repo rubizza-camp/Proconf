@@ -2,7 +2,7 @@
   .py-3.text-center
     h1
       | Edit announcement
-  = form_for :announcement, url: "/episodes/#{@announcement.episode_id}/announcements/#{@announcement.id}", method: 'patch' do |f|
+  = form_for :announcement, url: episode_announcement_path(@announcement.episode, @announcement), method: 'patch' do |f|
     .form-group
       = f.label :title
       br

@@ -14,30 +14,26 @@ RSpec.describe AnnouncementsController, type: :controller do
       allow(controller).to receive(:current_user).and_return(@user)
     end
 
-    after do
-      @user.delete
-    end
-
-    it 'show announcements #index to autorized user' do
+    it 'show announcements #index' do
       get :index, params: { episode_id: episode.id }
       expect(response).to have_http_status :ok
       expect(response).to render_template(:index)
     end
 
-    it 'show announcements #show to autorized user' do
+    it 'show announcements #show' do
       get :show, params: { id: announcement.id, episode_id: episode.id }
       expect(response).to have_http_status :ok
       expect(response).to render_template(:show)
       expect(assigns(:announcement)).to eq(announcement)
     end
 
-    it 'show announcements #new to autorized user' do
+    it 'show announcements #new' do
       get :new, params: { id: announcement.id, episode_id: episode.id }
       expect(response).to have_http_status :ok
       expect(response).to render_template(:new)
     end
 
-    it 'show announcements #edit to autorized user' do
+    it 'show announcements #edit' do
       get :edit, params: { id: announcement.id, episode_id: episode.id }
       expect(response).to have_http_status :ok
       expect(response).to render_template(:edit)
