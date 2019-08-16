@@ -20,5 +20,4 @@ Rails.application.routes.draw do
   post '/update_youtube_info/:id', to: 'episodes#update_youtube_info'
 
   post '/add_start_finish/:id', to: 'episodes#add_start_or_finish'
-
 end

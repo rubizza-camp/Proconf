@@ -63,7 +63,7 @@ class EpisodesController < ApplicationController
   def online
     @episode = Episode.find(params[:id])
     @timecodes = @episode.timecodes
-    render :template => 'episodes/online'
+    render template: 'episodes/online'
   end
 
   def add_start_or_finish
@@ -83,5 +83,4 @@ class EpisodesController < ApplicationController
     episode.actual_finish = Time.now
     episode.save!
   end
-
 end
