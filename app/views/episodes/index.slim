@@ -3,6 +3,7 @@
   img src = youtube_image_link(episode.video)
   p = episode.date
   p = link_to "More...", episode_path(episode)
-  br
+  - if can? :manage, Episode
+    = link_to 'Edit', edit_episode_path(episode)
 
 = paginate @episodes
