@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get '/auth/trello/callback', to: 'trello_callbacks#trello'
   get '/webhooks/receive', to: 'webhooks#complete'
   post '/webhooks/receive', to: 'webhooks#receive'
-  get '/webhook/setup', to: 'create_webhooks#create_webhook'
+  get '/webhooks/create', to: 'webhooks#create'
 
   get '*path', to: redirect('/')
 end
