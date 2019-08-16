@@ -5,28 +5,40 @@ RSpec.describe AnnouncementsController, type: :controller do
   let(:announcement) { create(:announcement, episode: episode) }
 
   context 'with not authorized user' do
-    it 'redirect from announcements #index to root' do
-      get :index, params: { episode_id: episode.id }
-      expect(response).to have_http_status(302)
-      expect(response).to_not render_template(:index)
+    describe 'GET #index' do
+      before { get :index, params: { episode_id: episode.id } }
+
+      it 'redirects to root' do
+        expect(response).to have_http_status(302)
+        expect(response).to redirect_to :root
+      end
     end
 
-    it 'redirect from announcements #show to root' do
-      get :show, params: { id: announcement.id, episode_id: episode.id }
-      expect(response).to have_http_status(302)
-      expect(response).to_not render_template(:show)
+    describe 'GET #show' do
+      before { get :show, params: { id: announcement.id, episode_id: episode.id } }
+
+      it 'redirects to root' do
+        expect(response).to have_http_status(302)
+        expect(response).to redirect_to :root
+      end
     end
 
-    it 'redirect from announcements #new to root' do
-      get :new, params: { id: announcement.id, episode_id: episode.id }
-      expect(response).to have_http_status(302)
-      expect(response).to_not render_template(:new)
+    describe 'GET #new' do
+      before { get :new, params: { id: announcement.id, episode_id: episode.id } }
+
+      it 'redirects to root' do
+        expect(response).to have_http_status(302)
+        expect(response).to redirect_to :root
+      end
     end
 
-    it 'redirect from announcements #edit to root' do
-      get :edit, params: { id: announcement.id, episode_id: episode.id }
-      expect(response).to have_http_status(302)
-      expect(response).to_not render_template(:edit)
+    describe 'GET #edit' do
+      before { get :edit, params: { id: announcement.id, episode_id: episode.id } }
+      
+      it 'redirects to root' do
+        expect(response).to have_http_status(302)
+        expect(response).to redirect_to :root
+      end
     end
   end
 end
