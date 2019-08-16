@@ -13,12 +13,12 @@ class AnnouncementsController < ApplicationController
   end
 
   def create
-    announcement = @episode.announcements.new(announcement_params)
+    announcement = @episode.announcements.create(announcement_params)
 
-    if announcement.save
-      redirect_to episode_announcements_path
+    if announcement.valid?
+      redirect_to episode_announcements_path, notice: 'Announcement successfully created!'
     else
-      redirect_to new_episode_announcement_path
+      redirect_to new_episode_announcement_path(announcement), alert: 'Error while creation'
     end
   end
 
