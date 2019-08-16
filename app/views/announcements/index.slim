@@ -1,0 +1,25 @@
+div
+  h1
+    | Announcements
+  = link_to episode_path(@episode)
+    .btn.btn-light.my-2.my-sm-0
+      | Back to episode
+  = link_to new_episode_announcement_path
+    .btn.btn-light.my-2.my-sm-0
+      | New
+
+.container
+  ul
+  .list-group
+    - @episode.announcements.each do |announcement|
+      .list-group-item
+        .d-flex.w-100.justify-content-between
+          h5.mb-1
+            = link_to announcement.title, episode_announcement_path(@episode, announcement), class: "list-group-item-action"
+          small
+            = announcement.date
+        div
+          p.mb-1
+            | Here is description
+          small
+            | Sended

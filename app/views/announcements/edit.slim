@@ -1,0 +1,24 @@
+.container
+  .py-3.text-center
+    h1
+      | Edit announcement
+  = form_for :announcement, url: episode_announcement_path(@announcement.episode, @announcement), method: 'patch' do |f|
+    .form-group
+      = f.label :title
+      br
+      = f.text_field :title, class: 'form-control', placeholder: "title", required: true
+      br
+      = f.label :date
+      = f.datetime_field :date, class: 'form-control', placeholder: "date", required: true
+      br
+      = f.label :target_resource
+      = f.text_field :target_resource, class: 'form-control', placeholder: "target resource", required: true
+      br
+      = f.label :image
+      = f.text_field :image, class: 'form-control', placeholder: "image url"
+      br
+      = f.label :video
+      = f.text_field :video, class: 'form-control', placeholder: "stream url"
+      br
+      .py-3.text-center
+        = f.submit 'Update announcement', class: 'btn btn-success btn-light'
