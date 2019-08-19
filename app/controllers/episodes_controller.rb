@@ -1,7 +1,7 @@
 class EpisodesController < ApplicationController
   load_and_authorize_resource
   before_action :update_youtube_info, only: [:show]
-  before_action :set_episode, except: %i[index create episode_params, new]
+  before_action :set_episode, except: %i[index create episode_params new]
 
   def index
     @episodes = Episode.order(created_at: :desc).page params[:page]
@@ -12,7 +12,7 @@ class EpisodesController < ApplicationController
   def edit; end
 
   def update_youtube_info
-    # YoutubeService.new(@episode).update
+    YoutubeService.new(@episode).update
   end
 
   def create
