@@ -11,11 +11,10 @@ class WebhooksController < ApplicationController
     webhook_data = WebhookParser.new(request.body.read).execute
 
     if webhook_data[:action_type] == ADD_LABEL_TYPE
-      timecode = Episode.find_by(status: 'online').timecodes.new(
+      Episode.find_by(status: 'online').timecodes.create(
         title: webhook_data[:card_title],
         time: webhook_data[:action_date]
       )
-      timecode.save
     end
 
     head :ok
