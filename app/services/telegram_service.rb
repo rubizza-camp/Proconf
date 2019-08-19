@@ -20,8 +20,8 @@ class TelegramService
     end
   end
 
-  def send_notification(announsment)
-    @message = announsment.title
+  def send_notification(announcement)
+    @message = announcement.title
     telegram_valid?
   end
 
