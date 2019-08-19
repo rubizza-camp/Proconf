@@ -7,6 +7,7 @@ class Ability
     if user&.role&.name == 'admin'
       can :manage, Episode
       can :manage, Announcement
+      can :manage, Timecode
     else
       can :read, Episode
     end

@@ -1,0 +1,15 @@
+.container
+  .py-3.text-center
+    h1
+      | Edit timecode
+  = form_for :timecode, url: episode_timecode_path(@timecode.episode, @timecode), method: 'patch' do |f|
+    .form-group
+      = f.label :title
+      br
+      = f.text_field :title, class: 'form-control', placeholder: "title", required: true
+      br
+      = f.label :time
+      = f.datetime_field :time, class: 'form-control', placeholder: "time", required: true
+      br
+      .py-3.text-center
+        = f.submit 'Update timecode', class: 'btn btn-success btn-light'

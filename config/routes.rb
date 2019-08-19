@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     post  'add_finish', on: :member
     post 'update_youtube_data', on: :member
     resources :announcements
-    resources :timecodes, only: [:create]
+    resources :timecodes
   end
 
   get '/admin', to: 'dashboard#index'
