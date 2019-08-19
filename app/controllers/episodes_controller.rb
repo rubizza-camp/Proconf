@@ -12,11 +12,7 @@ class EpisodesController < ApplicationController
   def edit; end
 
   def update_youtube_info
-    # YoutubeService.new(@episode).update
-  end
-
-  def add_start_or_finish
-    params[:started] == 'true' ? add_start : add_finish
+    YoutubeService.new(@episode).update
   end
 
   def create
@@ -40,13 +36,13 @@ class EpisodesController < ApplicationController
   def add_start
     @episode.actual_start = Time.now
     @episode.save
-    redirect_to "/episodes/#{@episode.id}"
+    redirect_to episode_path(@episode)
   end
 
   def add_finish
     @episode.actual_finish = Time.now
     @episode.save
-    redirect_to "/episodes/#{@episode.id}"
+    redirect_to episode_path(@episode)
   end
 
   private
