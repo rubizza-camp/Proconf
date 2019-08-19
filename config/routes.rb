@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   resources :episodes do
     resources :announcements
     resources :timecodes, only: [:create]
-
   end
 
   get '/admin', to: 'dashboard#index'
