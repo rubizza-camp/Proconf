@@ -10,29 +10,28 @@
             p = "Youtube broadcast started at #{@episode.broadcast_begin}"
           - if @episode.broadcast_end
             p = "Youtube broadcast finished at #{@episode.broadcast_end}"
-          - if can? :manage, Episode
-            = button_to 'Start podcast', add_start_finish_path(@episode), params: {started: true}
-            = button_to 'Finish podcast', add_start_finish_path(@episode), params: {started: false}
+          -if @episode.youtube_status == 'live'
+            - if can? :manage, Episode
+              - unless @episode.actual_start
+                = button_to 'Start podcast', add_start_finish_path(@episode), params: {started: true}
+              - unless  @episode.actual_finish
+                = button_to 'Finish podcast', add_start_finish_path(@episode), params: {started: false}
           - if can? :manage, Episode
             a.btn.btn-warning href = edit_episode_path(@episode) Edit
             a.col-2
+          - if can? :manage, Announcement
+            a.btn.btn-warning href = episode_announcements_path(@episode) Announcements
       .col-md-5
         p = @episode.description
-        p = @episode.date
+        p = "Podcast was announced at: #{@episode.date}"
         - if @episode.actual_start
           .start-end-info
             = "Podcast start: #{@episode.actual_start}"
           .timecode-wrapper
-          - @timecodes.each do |timecode|
-            div
-              .timecode-info = timecode.title
-              .timecode-info = timecode.time
+            - @timecodes.each do |timecode|
+              div
+                .timecode-info = timecode.title
+                .timecode-info = timecode.time
           - if @episode.actual_finish
             .start-end-info
               = "Podcast finish: #{@episode.actual_finish}"
-
-br
-- if can? :manage, Episode
-    = link_to 'Edit', edit_episode_path(@episode)
-- if can? :manage, Announcement
-    p = link_to 'Announcements', episode_announcements_path(@episode)
