@@ -1,12 +1,20 @@
-- @episodes.each do |episode|
-  h1 = episode.title
-  img src = youtube_image_link(episode.video)
-  p = episode.date
-  p = link_to "More...", episode_path(episode)
-  - if can? :manage, Episode
-    = link_to 'Edit', edit_episode_path(episode)
-  - if can? :manage, Announcement
-    p = link_to 'Announcements', episode_announcements_path(episode)
-  br
+.container
+  h1.my-4 Podcasts
+  - @episodes.each do |episode|
+    .row
+      .col-md-7
+        a
+          img.img-fluid.rounded.mb-3.mb-md-0 src = youtube_image_link(episode.video)
+      .col-md-5
+        h3 = episode.title
+        p
+          span.glyphicon.glyphicon-pencil
+        p = episode.description
+        a.btn.btn-primary href = episode_path(episode) View Podcast
+        a.col-2
+        - if can? :manage, Episode
+          a.btn.btn-warning href = edit_episode_path(episode) Edit
+          a.col-2
+    hr
 
-= paginate @episodes
+  = paginate @episodes
