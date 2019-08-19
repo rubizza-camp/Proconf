@@ -17,7 +17,7 @@ class YoutubeService
     @video.live_broadcast_content == 'none' ? 'over' : @video.live_broadcast_content
   end
 
-  def save_all
+  def update
     @episode.broadcast_begin = broadcast_start_date
     @episode.broadcast_end = broadcast_end_date
     @episode.youtube_status = youtube_status

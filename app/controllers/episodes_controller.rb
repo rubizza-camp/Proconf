@@ -7,19 +7,16 @@ class EpisodesController < ApplicationController
     @episodes = Episode.order(created_at: :desc).page params[:page]
   end
 
-  def show
-    @timecodes = @episode.timecodes
-  end
+  def show; end
 
   def edit; end
 
   def update_youtube_info
-    YoutubeService.new(@episode).save_all
+    # YoutubeService.new(@episode).update
   end
 
   def add_start_or_finish
     params[:started] == 'true' ? add_start : add_finish
-    redirect_to "/episodes/#{@episode.id}"
   end
 
   def create
@@ -40,17 +37,19 @@ class EpisodesController < ApplicationController
     end
   end
 
-  private
-
   def add_start
     @episode.actual_start = Time.now
-    @episode.save!
+    @episode.save
+    redirect_to "/episodes/#{@episode.id}"
   end
 
   def add_finish
     @episode.actual_finish = Time.now
-    @episode.save!
+    @episode.save
+    redirect_to "/episodes/#{@episode.id}"
   end
+
+  private
 
   def set_episode
     @episode = Episode.find(params[:id])

@@ -11,7 +11,11 @@ module EpisodesHelper
     "https://www.youtube.com/watch?v=#{src}"
   end
 
-  def add_start_finish_path(episode)
-    "/add_start_finish/#{episode.id}"
+  def add_start_path(episode)
+    "/add_start/#{episode.id}"
+  end
+
+  def add_finish_path(episode)
+    "/add_finish/#{episode.id}"
   end
 end

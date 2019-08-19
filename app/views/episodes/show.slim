@@ -13,9 +13,9 @@
           -if @episode.youtube_status == 'live'
             - if can? :manage, Episode
               - unless @episode.actual_start
-                = button_to 'Start podcast', add_start_finish_path(@episode), params: {started: true}
+                = button_to 'Start podcast', add_start_path(@episode)
               - unless  @episode.actual_finish
-                = button_to 'Finish podcast', add_start_finish_path(@episode), params: {started: false}
+                = button_to 'Finish podcast', add_finish_path(@episode)
           - if can? :manage, Episode
             a.btn.btn-warning href = edit_episode_path(@episode) Edit
             a.col-2
@@ -28,7 +28,7 @@
           .start-end-info
             = "Podcast start: #{@episode.actual_start}"
           .timecode-wrapper
-            - @timecodes.each do |timecode|
+            - @episode.timecodes.each do |timecode|
               div
                 .timecode-info = timecode.title
                 .timecode-info = timecode.time
