@@ -19,5 +19,5 @@ Role.create(name: 'admin')
 User.create(
   email: 'superadmin@gmail.com',
   role: Role.first,
-  password: '123456'
+  password: ENV['ADMIN_PASSWORD']
 )

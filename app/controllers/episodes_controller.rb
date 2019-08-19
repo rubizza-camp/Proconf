@@ -59,28 +59,4 @@ class EpisodesController < ApplicationController
   def episode_params
     params.permit(:title, :video, :date, :description)
   end
-
-  def online
-    @episode = Episode.find(params[:id])
-    @timecodes = @episode.timecodes
-    render template: 'episodes/online'
-  end
-
-  def add_start_or_finish
-    episode = Episode.find(params[:id])
-    params[:started] == 'true' ? add_start(episode) : add_finish(episode)
-    redirect_to "/online_episode/#{episode.id}"
-  end
-
-  private
-
-  def add_start(episode)
-    episode.actual_start = Time.now
-    episode.save!
-  end
-
-  def add_finish(episode)
-    episode.actual_finish = Time.now
-    episode.save!
-  end
 end

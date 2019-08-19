@@ -10,4 +10,8 @@ module EpisodesHelper
   def yotube_watch_link(src)
     "https://www.youtube.com/watch?v=#{src}"
   end
+
+  def add_start_finish_path(episode)
+    "/add_start_finish/#{episode.id}"
+  end
 end
