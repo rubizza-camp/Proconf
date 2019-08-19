@@ -39,3 +39,7 @@
           - if @episode.actual_finish
             .start-end-info
               = "Podcast finish: #{@episode.actual_finish}"
+        p = @episode.date
+        - if can?(:manage, Timecode)
+          = link_to episode_timecodes_path(@episode)
+            .btn.btn-light.col-md-12.text-center Manage timecodes
