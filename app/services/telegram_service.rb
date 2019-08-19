@@ -22,11 +22,7 @@ class TelegramService
 
   def send_notification(announsment)
     @message = announsment.title
-    if telegram_valid?
-      true
-    else
-      false
-    end
+    telegram_valid?
   end
 
   private

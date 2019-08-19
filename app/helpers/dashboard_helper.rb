@@ -1,5 +1,5 @@
 module DashboardHelper
   def telegram_credentials
-    @credentials.find_by(service: 'telegram')&.data
+    current_user.credentials.find_by(service: 'telegram')&.data
   end
 end
