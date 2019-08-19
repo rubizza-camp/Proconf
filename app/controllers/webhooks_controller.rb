@@ -1,7 +1,7 @@
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[complete receive]
 
-  ACTION_TYPE = 'addLabelToCard'.freeze
+  ADD_LABEL_TYPE = 'addLabelToCard'.freeze
 
   def complete
     head :ok
@@ -10,13 +10,12 @@ class WebhooksController < ApplicationController
   def receive
     webhook_data = WebhookParser.new(request.body.read).execute
 
-    if webhook_data[:action_type] == ACTION_TYPE
-      time_code = Timecode.new(
-        episode_id: Episode.find_by(status: 'online').id,
+    if webhook_data[:action_type] == ADD_LABEL_TYPE
+      timecode = Episode.find_by(status: 'online').timecodes.new(
         title: webhook_data[:card_title],
         time: webhook_data[:action_date]
       )
-      time_code.save
+      timecode.save
     end
 
     head :ok
@@ -32,7 +31,7 @@ class WebhooksController < ApplicationController
 
     HTTParty.post(url, body: body)
 
-    redirect_to '/admin'
+    redirect_to admin_path
   end
 
   private

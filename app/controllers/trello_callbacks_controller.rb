@@ -8,6 +8,6 @@ class TrelloCallbacksController < ApplicationController
                 trello_oauth_token: request.env['omniauth.auth'].credentials.token,
                 trello_oauth_secret: request.env['omniauth.auth'].credentials.secret
               })
-    redirect_to '/admin'
+    redirect_to admin_path
   end
 end
