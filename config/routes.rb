@@ -14,9 +14,7 @@ Rails.application.routes.draw do
 
   get '*path', to: redirect('/')
 
-  post '/update_youtube_info/:id', to: 'episodes#update_youtube_info'
+  post '/add_start/episode/:id', to: 'episodes#add_start'
 
-  post '/add_start/:id', to: 'episodes#add_start'
-
-  post '/add_finish/:id', to: 'episodes#add_finish'
+  post '/add_finish/episode/:id', to: 'episodes#add_finish'
 end

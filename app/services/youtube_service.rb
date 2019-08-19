@@ -2,7 +2,6 @@ class YoutubeService
   def initialize(episode)
     @episode = episode
     @video = Yt::Video.new id: episode.video
-    Yt.configuration.api_key = ENV['TEST_CHANNELKEY']
   end
 
   def broadcast_start_date
@@ -21,6 +20,6 @@ class YoutubeService
     @episode.broadcast_begin = broadcast_start_date
     @episode.broadcast_end = broadcast_end_date
     @episode.youtube_status = youtube_status
-    @episode.save!
+    @episode.save
   end
 end
