@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   root 'episodes#index'
 
   resources :episodes do
+    post  'add_start'
+    post  'add_finish'
     resources :announcements
     resources :timecodes, only: [:create]
   end
@@ -13,8 +15,4 @@ Rails.application.routes.draw do
   post '/admin/telegram', to: 'dashboard#telegram'
 
   get '*path', to: redirect('/')
-
-  post '/add_start/episode/:id', to: 'episodes#add_start'
-
-  post '/add_finish/episode/:id', to: 'episodes#add_finish'
 end

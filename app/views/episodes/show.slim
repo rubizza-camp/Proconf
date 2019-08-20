@@ -13,9 +13,9 @@
           -if @episode.youtube_status == 'live'
             - if can? :manage, Episode
               - unless @episode.actual_start
-                = button_to 'Start podcast', add_start_path(@episode)
+                = button_to 'Start podcast', episode_add_start_path(@episode.id)
               - unless  @episode.actual_finish
-                = button_to 'Finish podcast', add_finish_path(@episode)
+                = button_to 'Finish podcast', episode_add_finish_path(@episode.id)
           - if can? :manage, Episode
             a.btn.btn-warning href = edit_episode_path(@episode) Edit
             a.col-2
