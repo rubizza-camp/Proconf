@@ -5,6 +5,13 @@ class Episode < ApplicationRecord
   has_many :timecodes
   has_and_belongs_to_many :authors
 
+  def update_youtube_info
+    @video = Yt::Video.new id: video
+    self.broadcast_begin = @video.actual_start_time
+    self.broadcast_end = @video.actual_end_time
+    self.youtube_status = check_youtube_status(video)
+  end
+
   VALID_YOUTUBE_LINK =
     %r{(http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?)}.freeze
   YOUTUBE_VIDEO_IDENTIFIER = %r{(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)}.freeze
@@ -27,5 +34,12 @@ class Episode < ApplicationRecord
       end
       args
     end
+  end
+
+  private
+
+  def check_youtube_status(video)
+    @video = Yt::Video.new id: video
+    @video.live_broadcast_content == 'none' ? 'over' : @video.live_broadcast_content
   end
 end
