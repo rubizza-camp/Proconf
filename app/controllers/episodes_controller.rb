@@ -1,6 +1,6 @@
 class EpisodesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_episode, except: %i[index create episode_params new add_start add_finish]
+  before_action :set_episode, except: %i[index create episode_params new]
 
   def index
     @episodes = Episode.order(created_at: :desc).page params[:page]
@@ -31,13 +31,11 @@ class EpisodesController < ApplicationController
   end
 
   def add_start
-    @episode = Episode.find(params[:episode_id])
     @episode.update(actual_start: Time.now)
     redirect_to episode_path(@episode)
   end
 
   def add_finish
-    @episode = Episode.find(params[:episode_id])
     @episode.update(actual_finish: Time.now)
     redirect_to episode_path(@episode)
   end
