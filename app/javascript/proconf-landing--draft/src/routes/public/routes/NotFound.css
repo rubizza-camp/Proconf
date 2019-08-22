@@ -1,0 +1,15 @@
+.not-found {
+  margin: 100px auto 0;
+  text-align: center;
+}
+
+.not-found__code {
+  font-size: 120px;
+  color: #fedc00;
+}
+
+.not-found__text {
+  font-size: 32px;
+  color: black;
+  margin-top: 32px;
+}

@@ -1,0 +1,32 @@
+.footer {
+  display: flex;
+  align-items: center;
+  background: black;
+  align-items: center;
+  color: white;
+  height: 150px;
+  margin-top: 100px;
+}
+
+.footer-details {
+  margin-left: auto;
+  font-size: 14px;
+}
+
+.footer-details__owners {
+  margin-bottom: 12px;
+}
+
+.footer .content {
+  padding: 0 24px 0 0;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footer .navbar {
+  --navbar-color: white;
+}
+
+.footer .logo {
+  filter: invert(100%);
+}

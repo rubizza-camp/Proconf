@@ -1,0 +1,252 @@
+/* home */
+.home-page {
+  display: flex;
+  padding: 100px 0 100px;
+}
+
+/* episode */
+.episode-list {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding-left: 120px;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.episode-list__uptitle {
+  font-size: 140px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 100%;
+  bottom: calc(100% - 90px);
+  color: #f6f6f6;
+  left: 60px;
+  z-index: -1;
+}
+
+.episode-list__title {
+  font-size: 48px;
+  font-weight: bold;
+  width: 200px;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+
+/* item */
+.episode-item {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+  position: relative;
+  color: black;
+}
+
+.episode-item__image {
+  min-width: 82px;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  margin: 0 24px;
+  background-size: cover;
+  background-color: #6c757d;
+  display: block;
+}
+
+.episode-item__icon {
+  font-size: 24px;
+}
+
+.episode-item__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.episode-item__number {
+  font-weight: bold;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.episode-item__title {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 4px 0 8px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-height: 100%;
+  position: relative;
+}
+
+.episode-item__descr {
+  color: #a0a0a0;
+  font-size: 12px;
+}
+
+.episode-item--active_true::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -40%;
+  top: 100%;
+  top: calc(100% + 12px);
+  height: 2px;
+  width: 100%;
+  background: #fedc00;
+}
+
+.episode-item--active_true .episode-item__icon, .episode-item--active_true .episode-item__number {
+  color: #c00;
+}
+
+.episode-item__progress {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -4px;
+  background: #fedc00;
+  z-index: -1;
+}
+
+/* preview */
+.episode-preview {
+  flex: 1;
+  position: relative;
+}
+
+.episode-preview__bg {
+  background: black;
+  height: 540px;
+  width: 630px;
+}
+
+.episode-preview__image {
+  position: absolute;
+  height: 500px;
+  width: 500px;
+  background-color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  top: -60px;
+  right: -10px;
+  filter: hue-rotate(70deg) opacity(.5);
+}
+
+.episode-preview__content {
+  position: absolute;
+  top: 48px;
+  width: 500px;
+  color: white;
+  padding-left: 80px;
+}
+
+.episode-preview__content::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 24px;
+  bottom: 100%;
+  width: 50%;
+  height: 2px;
+  background: #fedc00;
+}
+
+.episode-preview__number {
+  transform: rotate(-90deg);
+  font-size: 22px;
+  text-align: end;
+  position: absolute;
+  left: -20px;
+  top: 70px;
+}
+
+.episode-preview__title {
+  font-size: 84px;
+  font-weight: bold;
+  color: white;
+  line-height: 1.1;
+  margin-top: 14px;
+  /* text-shadow: 1px 1px 1px #6c757d; */
+}
+
+.episode-preview__title:hover {
+  color: #fedc00;
+}
+
+
+.episode-preview__sub {
+  font-size: 16px;
+  font-style: italic;
+  margin-top: 32px;
+  /* text-shadow: 1px 1px 1px #6c757d; */
+}
+
+.episode-preview__actions {
+  position: absolute;
+  top: 431px;
+  right: 0;
+}
+
+.episode-preview__actions .navbar__item:last-child {
+  --navbar-color: #fedc00;
+}
+
+.episode-list__others {
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #6c757d;
+  margin-top: 32px;
+  padding: 0 24px;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+}
+
+/* podcast timetable */
+.podcast-timetable__title {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.podcast-timetable__descr {
+  font-size: 18px;
+}
+
+.podcast-timetable__outline {
+  background: repeating-radial-gradient(circle at -140px,#e0c301,#ebcb00 20px,#fedc00 0,#fedc00 40px);
+}
+
+.podcast-timetable {
+  background: rgb(254, 220, 0);
+  padding: 32px 0;
+  position: relative;
+  background: radial-gradient(circle at -140px,rgba(254, 220, 0,.72),rgba(255, 255, 255,.99) 70%,white 100%);
+}
+
+.podcast-timetable .content {
+  flex-direction: row;
+}
+
+.podcast-timetable__content {
+  flex: 1;
+}
+
+.podcast-timetable__content:last-child .podcast-timetable__descr {
+  text-align: center;
+}
+.podcast-timetable__timeleft {
+  font-size: 92px;
+  text-align: center;
+}
+
+.podcast-timetable__link {
+  text-transform: uppercase;
+  font-size: 18px;
+  margin-top: 12px;
+  padding: 0 24px;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+}

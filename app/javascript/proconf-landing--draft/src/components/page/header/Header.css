@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: auto;
+  height: 130px;
+  padding: 0 24px 0 0;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.logo {
+  background-image: url('/231x130x2.png');
+  background-repeat: no-repeat;
+  height: 130px;
+  width: 231px;
+  display: block;
+  background-size: contain;
+}
