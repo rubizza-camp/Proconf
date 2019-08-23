@@ -21,6 +21,7 @@ gem 'slim', '~> 4.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 4.x'
 gem 'yt', '~> 0.32.0'
+gem 'youtube-dl.rb'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
