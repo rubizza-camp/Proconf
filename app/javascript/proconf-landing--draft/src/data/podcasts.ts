@@ -1,7 +1,6 @@
 import { speakers } from "./speakers";
 import { secondsToTime } from "../utils";
 
-export type Podcast = ReturnType<typeof getPodcast>;
 export type KeyNote = ReturnType<typeof getKeynote>;
 export type Topic = ReturnType<typeof getTopic>;
 
@@ -23,7 +22,7 @@ const topics = [
   "Завершение"
 ];
 
-const getKeynote = (x: number, n: number) => {
+export const getKeynote = (x: number, n: number) => {
   const time = secondsToTime((n + 1) * 3600);
   return {
     id: n + 1,
@@ -34,7 +33,7 @@ const getKeynote = (x: number, n: number) => {
   };
 };
 
-const getTopic = () => {
+export const getTopic = () => {
   return {
     url: "https://youtu.be/gIBH1MUUJPc?t=1004",
     name: topics[Math.floor(Math.random() * speakers.length)]
@@ -72,31 +71,3 @@ const titles = [
 ];
 
 const sponsors = ["Valentine Zavadski", "IKEA", "Малыш и Карлсон", "Wargaming"];
-
-const getPodcast = (x: number, n: number) => {
-  return {
-    id: n + 1,
-    date: Date.now(),
-    title: titles[Math.floor(Math.random() * titles.length)],
-    sponsor: sponsors[Math.floor(Math.random() * sponsors.length)],
-    keynotes: new Array(10).fill(0).map(getKeynote),
-    descr: descriptions[Math.floor(Math.random()*descriptions.length)],
-    img: images[Math.floor(Math.random() * images.length)],
-    conference: {
-      link: "https://tmt.knect365.com/iot-world/developer-conference",
-      topics: new Array(10).fill(0).map(getTopic)
-    },
-    links: [
-      {
-        source: "Youtube",
-        url: "https://www.youtube.com/watch?v=Ne9chW6nFNQ"
-      },
-      {
-        source: "SoundCloud",
-        url: "https://soundcloud.com/proconf/24-hiring-success-2019"
-      }
-    ]
-  };
-};
-
-export const podcasts = new Array(20).fill(0).map(getPodcast);
