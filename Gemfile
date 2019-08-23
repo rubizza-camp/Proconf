@@ -19,9 +19,9 @@ gem 'rails', '~> 5.2.3'
 gem 'sass-rails', '~> 5.0'
 gem 'slim', '~> 4.0.1'
 gem 'uglifier', '>= 1.3.0'
+gem 'viddl'
 gem 'webpacker', '~> 4.x'
 gem 'yt', '~> 0.32.0'
-gem 'youtube-dl.rb'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
