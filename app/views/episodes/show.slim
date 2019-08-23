@@ -44,10 +44,10 @@
           = link_to episode_timecodes_path(@episode)
             .btn.btn-light.col-md-12.text-center Manage timecodes
         - if can? :manage, Episode
-          a.btn.btn-warning href = edit_episode_path(@episode) Edit
+          = link_to 'Edit', edit_episode_path(@episode), class: 'btn btn-warning'
           a.col-2
         - if can? :manage, Announcement
-          a.btn.btn-warning href = episode_announcements_path(@episode) Announcements
+          = link_to 'Announcemets', episode_announcements_path(@episode), class: 'btn btn-warning'
           a.col-2
         - if can?(:manage, Announcement) && @episode.status == 'draft'
           = link_to "/episodes/#{@episode.id}/to_announcement", method: :post

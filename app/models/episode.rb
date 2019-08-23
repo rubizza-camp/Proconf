@@ -49,10 +49,10 @@ class Episode < ApplicationRecord
 
   aasm column: 'status', whiny_transitions: false do
     state :draft, initial: true
-    state :announcement, :online, :processing, :finished
+    state :announced, :online, :processing, :finished
 
     event :announcement do
-      transitions from: :draft, to: :announcement, guard: :valid_for_announcement?
+      transitions from: :draft, to: :announced, guard: :valid_for_announcement?
     end
 
     event :online do
@@ -69,6 +69,6 @@ class Episode < ApplicationRecord
   end
 
   def valid_for_announcement?
-    title && date && video && !description.empty?
+    title && date && video && description.present?
   end
 end

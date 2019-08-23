@@ -3,9 +3,11 @@ class EpisodesController < ApplicationController
   before_action :set_episode, except: %i[index create new]
 
   def index
-    @announcement_episodes = Episode.where(status: 'announcement').order(created_at: :desc).last(2)
-    @online_episodes = Episode.where(status: 'online').order(created_at: :desc)
-    @finished_episodes = Episode.where(status: 'finished').order(created_at: :desc).page params[:page]
+    @episodes = {
+      announcement: Episode.where(status: 'announced').order(created_at: :desc),
+      online: Episode.where(status: 'online').order(created_at: :desc),
+      finished: Episode.where(status: 'finished').order(created_at: :desc).page(params[:page])
+    }
   end
 
   def show; end
@@ -32,6 +34,7 @@ class EpisodesController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   def add_start
     @episode.update(actual_start: Time.now)
     redirect_to episode_path(@episode)
@@ -47,7 +50,7 @@ class EpisodesController < ApplicationController
     redirect_to episode_path(@episode.id)
   end
 
-  def to_announcement
+  def announce
     @episode.announcement!
 
     redirect_to episode_path(@episode)

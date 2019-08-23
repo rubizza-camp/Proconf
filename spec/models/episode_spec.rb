@@ -1,21 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Episode, type: :model do
-  subject { described_class.new }
-
-  it 'is valid with valid attributes' do
-    subject.title = 'Title'
-    subject.date = Time.now
-    expect(subject).to be_valid
+  describe 'validations' do
+    it { should validate_presence_of :title }
+    it { should validate_presence_of :date }
   end
 
-  it 'is not valid without date' do
-    subject.title = 'Title'
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid without title' do
-    subject.date = Time.now
-    expect(subject).to_not be_valid
+  describe 'associations' do
+    it { should have_many(:announcements) }
+    it { should have_many(:timecodes) }
+    it { should have_and_belong_to_many(:authors) }
   end
 end

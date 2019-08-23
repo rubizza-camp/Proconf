@@ -1,12 +1,12 @@
 .container
   h1.my-4 Podcasts
-  - [@announcement_episodes, @online_episodes, @finished_episodes].each do |episodes|
-    h1 = episodes.first&.status&.capitalize
+  - @episodes.each do |status, episodes|
+    h1 = status.to_s.capitalize
     - episodes.each do |episode|
       .row
         .col-md-7
           a
-            img.img-fluid.rounded.mb-3.mb-md-0 [src = youtube_image_link(episode.video) height = '100%' width = '100%' ]
+            img.img-fluid.rounded.mb-3.mb-md-0.youtube-image src = youtube_image_link(episode.video)
         .col-md-5
           h3 = episode.title
           p
