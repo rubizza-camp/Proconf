@@ -7,11 +7,9 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
-  - if current_page?(admin_path)
     body
       = yield
-  - else
-    body.container.body-container
+    / body.container.body-container
       = render 'partials/navbar'
       = yield
       = render 'partials/footer'
