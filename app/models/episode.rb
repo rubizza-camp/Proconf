@@ -4,14 +4,16 @@ class Episode < ApplicationRecord
   has_many :announcements
   has_many :timecodes
   has_and_belongs_to_many :authors
+  has_and_belongs_to_many :guests
+  belongs_to :sponsor, optional: true
 
   VALID_YOUTUBE_LINK =
     %r{(http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?)}.freeze
   YOUTUBE_VIDEO_IDENTIFIER = %r{(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)}.freeze
 
-  def self.create(args)
-    super(prepare_params(args).to_h)
-  end
+  # def self.create(args)
+  #   super(prepare_params(args).to_h)
+  # end
 
   def update(args)
     super(self.class.prepare_params(args).to_h)

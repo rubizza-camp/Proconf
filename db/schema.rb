@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_095458) do
+ActiveRecord::Schema.define(version: 2019_08_23_120137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "announcements", force: :cascade do |t|
     t.bigint "episode_id"
-    t.string "title"
-    t.datetime "date"
+    t.string "title", null: false
+    t.datetime "date", null: false
     t.string "image"
     t.string "video"
-    t.string "target_resource"
+    t.string "target_resource", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["episode_id"], name: "index_announcements_on_episode_id"
@@ -63,11 +63,30 @@ ActiveRecord::Schema.define(version: 2019_08_14_095458) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "created_by"
+    t.bigint "sponsor_id"
     t.index ["created_by"], name: "index_episodes_on_created_by"
+  end
+
+  create_table "episodes_guests", id: false, force: :cascade do |t|
+    t.bigint "guest_id", null: false
+    t.bigint "episode_id", null: false
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "name"
+    t.string "surname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "roles", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sponsors", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
