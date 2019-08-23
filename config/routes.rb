@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   end
 
   get '/admin', to: 'dashboard#index'
+  # match '*path', to: 'dashboard#index', via: :all
+  # post '/admin/telegram', to: 'dashboard#telegram'
 
   get '*path', to: redirect('/')
 end
