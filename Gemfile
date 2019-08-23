@@ -16,6 +16,7 @@ gem 'mini_racer', platforms: :ruby
 gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.3'
+gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'slim', '~> 4.0.1'
 gem 'uglifier', '>= 1.3.0'
