@@ -7,6 +7,9 @@ class Episode < ApplicationRecord
   has_and_belongs_to_many :guests
   has_and_belongs_to_many :sponsors
 
+  has_one_attached :backup_video
+  has_one_attached :backup_audio
+
   def update_youtube_info
     @video = Yt::Video.new id: video
     self.broadcast_begin = @video.actual_start_time
