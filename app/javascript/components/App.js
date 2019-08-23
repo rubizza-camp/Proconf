@@ -24,43 +24,34 @@ class App extends React.Component {
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1">
-              <Icon type="pie-chart" />
-              <span>Option 1</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="desktop" />
-              <span>Option 2</span>
-            </Menu.Item>
+            
             <SubMenu
-              key="sub1"
+              key="episodes"
               title={
                 <span>
-                  <Icon type="user" />
-                  <span>User</span>
+                  <Icon type="desktop" />
+                  <span>Episodes</span>
                 </span>
               }
             >
-              <Menu.Item key="3">Tom</Menu.Item>
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
+              <Menu.Item key="episode_list">List</Menu.Item>
+              <Menu.Item key="episode_search">Search</Menu.Item>
             </SubMenu>
+            
             <SubMenu
-              key="sub2"
+              key="social"
               title={
                 <span>
-                  <Icon type="team" />
-                  <span>Team</span>
+                  <Icon type="setting" />
+                  <span>Social settings</span>
                 </span>
               }
             >
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
+              <Menu.Item key="telegram">Telegram</Menu.Item>
+              <Menu.Item key="trello">Trello</Menu.Item>
+              <Menu.Item key="youtube">Youtube</Menu.Item>
             </SubMenu>
-            <Menu.Item key="9">
-              <Icon type="file" />
-              <span>File</span>
-            </Menu.Item>
+            
           </Menu>
         </Sider>
         <Layout>
@@ -78,8 +69,6 @@ class App extends React.Component {
     );
   }
 }
-
-ReactDOM.render(<App />, document.getElementById('container'));
 
 export default App
           
