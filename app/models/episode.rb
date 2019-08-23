@@ -47,8 +47,7 @@ class Episode < ApplicationRecord
   def video_exists?(video)
     @video = Yt::Video.new id: video
     @video.title
-  rescue Yt::Errors::NoItems => e
-    puts e.message
+  rescue Yt::Errors::NoItems
     false
   end
 end

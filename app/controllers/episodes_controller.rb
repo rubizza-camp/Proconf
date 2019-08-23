@@ -1,16 +1,16 @@
 class EpisodesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_episode, except: %i[index create episode_params new]
+  before_action :set_episode, except: %i[index create new]
 
   def index
     @episodes = Episode.order(created_at: :desc).page params[:page]
   end
 
-  def show
-    @episode.update_youtube_info
-  end
+  def show; end
 
   def edit; end
+
+  def new; end
 
   def create
     @episode = Episode.create(episode_params.merge(created_by: current_user))
@@ -44,6 +44,7 @@ class EpisodesController < ApplicationController
 
   def set_episode
     @episode = Episode.find(params[:id])
+    @episode.update_youtube_info
   end
 
   def episode_params
