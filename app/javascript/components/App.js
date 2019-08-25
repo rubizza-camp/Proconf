@@ -12,6 +12,7 @@ import Episode from './episodes/Episode'
 import EpisodeList from './episodes/EpisodeList'
 import EpisodeSearch from './episodes/Search'
 import HomePage from './Home'
+import NewEpisode from './episodes/NewEpisode';
 
 const { Header, Content, Footer } = Layout;
 
@@ -32,6 +33,7 @@ class App extends React.Component {
                 <Route exact path="/admin" component={HomePage} />
                 
                 <Route path="/admin/episode" component={Episode} />
+                <Route path="/admin/new_episode" component={NewEpisode} />
                 <Route path="/admin/episodes" component={EpisodeList} />
                 <Route path="/admin/episodes/search" component={EpisodeSearch} />
                 
