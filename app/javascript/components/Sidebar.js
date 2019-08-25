@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import './index.css';
 import { Layout, Menu, Icon } from 'antd';
@@ -30,8 +31,16 @@ class Sidebar extends React.Component {
               </span>
             }
           >
-            <Menu.Item key="episode_list"><a href="/admin/episodes">List</a></Menu.Item>
-            <Menu.Item key="episode_search"><a href="/admin/episodes/search">Search</a></Menu.Item>
+            <Menu.Item key="episode_list">
+              <Link to="/admin/episodes">
+                <span>List</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="episode_search">
+              <Link to="/admin/episodes/search">
+                <span>Search</span>
+              </Link>
+            </Menu.Item>
           </SubMenu>
           <SubMenu
             key="social"
@@ -42,9 +51,21 @@ class Sidebar extends React.Component {
               </span>
             }
           >
-            <Menu.Item key="telegram"><a href="/admin/set/telegram">Telegram</a></Menu.Item>
-            <Menu.Item key="trello"><a href="/admin/set/trello">Trello</a></Menu.Item>
-            <Menu.Item key="youtube"><a href="/admin/set/youtube">Youtube</a></Menu.Item>
+            <Menu.Item key="telegram">
+              <Link to="/admin/set/telegram">
+                <span>Telegram</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="trello">
+              <Link to="/admin/set/trello">
+                <span>Trello</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="youtube">
+              <Link to="/admin/set/youtube">
+                <span>Youtube</span>
+              </Link>
+            </Menu.Item>
           </SubMenu>
         </Menu>
       </Sider>

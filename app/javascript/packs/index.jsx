@@ -10,7 +10,7 @@ import App from '../components/App'
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <Router>
-      <Route path="/" component={App} />
+      <App />
     </Router>,
     document.getElementById('container')
   )
