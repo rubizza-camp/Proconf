@@ -8,6 +8,10 @@ class EpisodesController < ApplicationController
       online: Episode.where(status: 'online').order(created_at: :desc),
       finished: Episode.where(status: 'finished').order(created_at: :desc).page(params[:page])
     }
+    respond_to do |format|
+      format.html
+      format.json { render json: Episode.all }
+    end
   end
 
   def show; end
