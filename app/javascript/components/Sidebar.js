@@ -41,6 +41,11 @@ class Sidebar extends React.Component {
                 <span>Search</span>
               </Link>
             </Menu.Item>
+            <Menu.Item key="new_episode">
+              <Link to="/admin/new_episode">
+                <span>New Episode</span>
+              </Link>
+            </Menu.Item>
           </SubMenu>
           <SubMenu
             key="social"
