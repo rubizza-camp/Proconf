@@ -49,5 +49,5 @@
           = link_to "/episodes/#{@episode.id}/to_announcement", method: :post
             .btn.btn-warning Announce Podcast
         - if can? :manage, Episode
-          a.btn.btn-warning href = download_episode_path(@episode) Download
+          a.btn.btn-warning href = episode_download_path(@episode) Download
           a.col-2

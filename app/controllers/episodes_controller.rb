@@ -17,6 +17,7 @@ class EpisodesController < ApplicationController
   def new; end
 
   def download
+    @episode = Episode.find(params[:episode_id])
     @episode.backup_video.attach(io: File.open(DownloadService.new(@episode).download),
                                  filename: "#{@episode.title}.mp4")
     redirect_to episode_path

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :announcements
     post '/to_announcement', to: 'episodes#announce', on: :member
     resources :timecodes, only: [:create]
-    get '/download', to: 'episodes#download'
+    get '/download'
   end
 
   get '/admin', to: 'dashboard#index'

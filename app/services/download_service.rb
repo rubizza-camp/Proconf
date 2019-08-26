@@ -21,6 +21,6 @@ class DownloadService
   end
 
   def end_time
-    (episode.broadcast_end - episode.actual_finish).to_i
+    (episode.actual_finish - episode.broadcast_begin).to_i
   end
 end
