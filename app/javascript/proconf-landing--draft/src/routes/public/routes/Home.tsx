@@ -255,12 +255,49 @@ const Podcasts = ({ page }: { page?: string }) => {
 };
 
 const HomeContent = () => {
-  const [currentPodcast] = useState(podcasts[0]);
+  // const [currentPodcast] = useState(podcasts[0]);
+  const [item, setItem] = useState(podcasts[0]);
 
+  useEffect(() => {
+    axios.get('/episodes/1.json')
+    .then((response) => {
+      const item = response.data;
+      const episode =
+        {
+          id: item.id,
+          date: new Date(item.date).getTime(),
+          title: item.title,
+          sponsor: "Valentine Zavadsky",
+          keynotes: new Array(10).fill(0).map(getKeynote),
+          descr: item.description,
+          img: item.image ? item.image : `//img.youtube.com/vi/${item.video}/maxresdefault.jpg`,
+          conference: {
+            link: "https://tmt.knect365.com/iot-world/developer-conference",
+            topics: new Array(10).fill(0).map(getTopic)
+          },
+          links: [
+            {
+              source: "Youtube",
+              url: `https://www.youtube.com/watch?v=${item.video}`
+            },
+            {
+              source: "SoundCloud",
+              url: "https://soundcloud.com/proconf"
+            }
+          ]
+        };
+      setItem(episode);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }, []);
+
+  console.log(item);
+  console.log(123);
   return (
     <div className='home-page'>
-      {<EpisodePreview item={currentPodcast} />}
-      <EpisodeList item={currentPodcast} />
+      {<EpisodePreview item={item} />}
+      <EpisodeList item={item} />
     </div>
   );
 };
