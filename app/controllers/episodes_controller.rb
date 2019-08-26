@@ -16,6 +16,12 @@ class EpisodesController < ApplicationController
 
   def new; end
 
+  def download
+    @episode.backup_video.attach(io: File.open(DownloadService.new(@episode).download),
+                                 filename: "#{@episode.title}.mp4")
+    redirect_to episode_path
+  end
+
   def create
     @episode = Episode.create(episode_params.merge(created_by: current_user))
 
