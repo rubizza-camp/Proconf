@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 
+import { Podcast as PodcastType, podcasts } from "../../../data";
 import { getKeynote, getTopic } from "../../../data";
 import { pad, secondsToTime, scrollTop } from "../../../utils";
 import moment from "moment";
@@ -11,53 +12,11 @@ import { Page, Podcast } from "../../../components";
 import { ArrowRightOutline } from "@ant-design/icons";
 import AntdIcon from "@ant-design/icons-react";
 
-import axios from "axios";
+import axios from 'axios';
 
 AntdIcon.add(ArrowRightOutline);
 
-export type Podcast = ReturnType<typeof parseEpisode>;
-
-const parseEpisode = (item: any) => {
-  return ({
-    id: item.id,
-    date: Date.now(),
-    title: item.title,
-    sponsor: "Valentine Zavadsky",
-    keynotes: new Array(10).fill(0).map(getKeynote),
-    descr: item.description,
-    img: item.image != null ? item.image : "https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fs.inyourpocket.com%2Fgallery%2F107415.jpg&f=1",
-    conference: {
-      link: "https://tmt.knect365.com/iot-world/developer-conference",
-      topics: new Array(10).fill(0).map(getTopic)
-    },
-    links: [
-      {
-        source: "Youtube",
-        url: "https://www.youtube.com/watch?v=Ne9chW6nFNQ"
-      },
-      {
-        source: "SoundCloud",
-        url: "https://soundcloud.com/proconf/24-hiring-success-2019"
-      }
-    ]
-  })
-}
-
-const getEpisodes = () => {
-  var episodes = new Array();
-  axios
-    .get('/episodes.json')
-    .then(function(response){
-      episodes = response['data'].map(parseEpisode)
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-  console.log(episodes);
-  return episodes;
-};
-
-const EpisodePreview = ({ item }: { item: Podcast }) => {
+const EpisodePreview = ({ item }: { item: PodcastType }) => {
   return (
     <div className='episode-preview'>
       <div className='episode-preview__bg' />
@@ -100,7 +59,7 @@ const EpisodeItem = ({
 }: {
   isComming: boolean;
   isActive: boolean;
-  item: Podcast;
+  item: PodcastType;
 }) => {
   return (
     <Link
@@ -126,8 +85,9 @@ const EpisodeItem = ({
   );
 };
 
-const EpisodeList = ({ item }: { item: Podcast }) => {
-  const items = getEpisodes().slice(0, 3);
+const EpisodeList = ({ item }: { item: PodcastType }) => {
+  const items = podcasts.slice(0, 3);
+  console.log(items);
 
   return (
     <div className='episode-list'>
@@ -212,7 +172,43 @@ const PodcastTimetable = () => {
 };
 
 const Podcasts = ({ page }: { page?: string }) => {
-  const items = getEpisodes().slice(3, 13);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    axios.get('/episodes.json')
+    .then((response) => {
+      const episodes = response.data.map((item: any) => {
+        return {
+          id: item.id,
+          date: new Date(item.date).getTime(),
+          title: item.title,
+          sponsor: "Valentine Zavadsky",
+          keynotes: new Array(10).fill(0).map(getKeynote),
+          descr: item.description,
+          img: item.image ? item.image : `//img.youtube.com/vi/${item.video}/maxresdefault.jpg`,
+          conference: {
+            link: "https://tmt.knect365.com/iot-world/developer-conference",
+            topics: new Array(10).fill(0).map(getTopic)
+          },
+          links: [
+            {
+              source: "Youtube",
+              url: `https://www.youtube.com/watch?v=${item.video}`
+            },
+            {
+              source: "SoundCloud",
+              url: "https://soundcloud.com/proconf"
+            }
+          ]
+        }
+      })
+      setItems(episodes);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }, []);
+
+  console.log(items);
   return (
     <div className='podcast-small__list'>
       <div className='episode-list__title'>
@@ -226,11 +222,11 @@ const Podcasts = ({ page }: { page?: string }) => {
 };
 
 const HomeContent = () => {
-  const [currentPodcast] = useState(getEpisodes()[0]);
+  const [currentPodcast] = useState(podcasts[0]);
 
   return (
     <div className='home-page'>
-      <EpisodePreview item={currentPodcast} />
+      {<EpisodePreview item={currentPodcast} />}
       <EpisodeList item={currentPodcast} />
     </div>
   );

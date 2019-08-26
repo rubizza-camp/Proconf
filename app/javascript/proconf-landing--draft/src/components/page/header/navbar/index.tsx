@@ -1,7 +1,6 @@
 import React from "react";
 import './Navbar.css';
-import { withRouter, RouteComponentProps } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 
 const getPage = (path: string) => {
   return {
