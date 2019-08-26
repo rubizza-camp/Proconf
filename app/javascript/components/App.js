@@ -10,7 +10,8 @@ import Trello from './settings/Trello'
 import Youtube from './settings/Youtube'
 import Episode from './episodes/Episode'
 import Episodes from './episodes/Episodes'
-import EpisodeSearch from './episodes/Search'
+// import EpisodeSearch from './episodes/Search'
+import EditEpisode from './episodes/EditEpisode';
 import HomePage from './Home'
 import NewEpisode from './episodes/NewEpisode';
 
@@ -34,8 +35,9 @@ class App extends React.Component {
                 
                 <Route path="/admin/episode" component={Episode} />
                 <Route path="/admin/new_episode" component={NewEpisode} />
+                <Route path="/admin/edit_episode" component={EditEpisode} />
                 <Route path="/admin/episodes" component={Episodes} />
-                <Route path="/admin/episodes/search" component={EpisodeSearch} />
+                {/* <Route path="/admin/episodes/search" component={EpisodeSearch} /> */}
                 
                 <Route path="/admin/set/telegram" component={Telegram} />
                 <Route path="/admin/set/trello" component={Trello} />
