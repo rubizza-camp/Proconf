@@ -6,12 +6,11 @@ class Episode < ApplicationRecord
   has_and_belongs_to_many :authors
 
   def update_youtube_info
-    return unless video_exists?(video)
-
     @video = Yt::Video.new id: video
     self.broadcast_begin = @video.actual_start_time
     self.broadcast_end = @video.actual_end_time
     self.youtube_status = check_youtube_status(@video)
+    save
   end
 
   VALID_YOUTUBE_LINK =
@@ -42,12 +41,5 @@ class Episode < ApplicationRecord
 
   def check_youtube_status(video)
     video.live_broadcast_content == 'none' ? 'over' : video.live_broadcast_content
-  end
-
-  def video_exists?(video)
-    @video = Yt::Video.new id: video
-    @video.title
-  rescue Yt::Errors::NoItems
-    false
   end
 end

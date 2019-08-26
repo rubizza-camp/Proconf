@@ -40,11 +40,15 @@ class EpisodesController < ApplicationController
     redirect_to episode_path(@episode)
   end
 
+  def update_youtube_data
+    @episode.update_youtube_info
+    redirect_to episode_path(@episode.id)
+  end
+
   private
 
   def set_episode
     @episode = Episode.find(params[:id])
-    @episode.update_youtube_info
   end
 
   def episode_params

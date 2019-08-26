@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :episodes do
     post  'add_start', on: :member
     post  'add_finish', on: :member
+    post 'update_youtube_data', on: :member
     resources :announcements
     resources :timecodes, only: [:create]
   end

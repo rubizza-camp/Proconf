@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(version: 2019_08_16_070830) do
 
   create_table "announcements", force: :cascade do |t|
     t.bigint "episode_id"
-    t.string "title"
-    t.datetime "date"
+    t.string "title", null: false
+    t.datetime "date", null: false
     t.string "image"
     t.string "video"
-    t.string "target_resource"
+    t.string "target_resource", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["episode_id"], name: "index_announcements_on_episode_id"

@@ -17,16 +17,20 @@
               - unless  @episode.actual_finish
                 = button_to 'Finish podcast', episode_add_finish_path(@episode.id)
           - if can? :manage, Episode
+            p =button_to 'Update youtube info', update_youtube_data_episode_path(@episode.id)
             a.btn.btn-warning href = edit_episode_path(@episode) Edit
             a.col-2
           - if can? :manage, Announcement
             a.btn.btn-warning href = episode_announcements_path(@episode) Announcements
       .col-md-5
         p = @episode.description
+        - if @episode.youtube_status
+          .start-end-info
+            = "Podcast status: #{@episode.youtube_status}"
         p = "Podcast was announced at: #{@episode.date}"
         - if @episode.actual_start
           .start-end-info
-            = "Podcast start: #{@episode.actual_start}"
+            = "Podcast status: #{@episode.actual_start}"
           .timecode-wrapper
             - @episode.timecodes.each do |timecode|
               div
