@@ -3,8 +3,8 @@ class EpisodesController < ApplicationController
   before_action :set_episode, except: %i[index create new]
 
   def index
-    @episodes = Episode.order(created_at: :desc)#.page params[:page]
-    
+    @episodes = Episode.order(created_at: :desc).page params[:page]
+
     respond_to do |format|
       format.html
       format.json { render json: @episodes }

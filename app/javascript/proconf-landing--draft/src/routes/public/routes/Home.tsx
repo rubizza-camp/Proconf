@@ -86,8 +86,42 @@ const EpisodeItem = ({
 };
 
 const EpisodeList = ({ item }: { item: PodcastType }) => {
-  const items = podcasts.slice(0, 3);
-  console.log(items);
+  // const items = podcasts.slice(0, 3);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    axios.get('/episodes.json')
+    .then((response) => {
+      const episodes = response.data.map((item: any) => {
+        return {
+          id: item.id,
+          date: new Date(item.date).getTime(),
+          title: item.title,
+          sponsor: "Valentine Zavadsky",
+          keynotes: new Array(10).fill(0).map(getKeynote),
+          descr: item.description,
+          img: item.image ? item.image : `//img.youtube.com/vi/${item.video}/maxresdefault.jpg`,
+          conference: {
+            link: "https://tmt.knect365.com/iot-world/developer-conference",
+            topics: new Array(10).fill(0).map(getTopic)
+          },
+          links: [
+            {
+              source: "Youtube",
+              url: `https://www.youtube.com/watch?v=${item.video}`
+            },
+            {
+              source: "SoundCloud",
+              url: "https://soundcloud.com/proconf"
+            }
+          ]
+        }
+      })
+      setItems(episodes.slice(0, 3));
+    }).catch((error) => {
+      console.log(error);
+    });
+  }, []);
 
   return (
     <div className='episode-list'>
@@ -208,7 +242,6 @@ const Podcasts = ({ page }: { page?: string }) => {
     });
   }, []);
 
-  console.log(items);
   return (
     <div className='podcast-small__list'>
       <div className='episode-list__title'>
