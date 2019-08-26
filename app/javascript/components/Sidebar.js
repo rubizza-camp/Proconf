@@ -36,11 +36,11 @@ class Sidebar extends React.Component {
                 <span>List</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="episode_search">
+            {/* <Menu.Item key="episode_search">
               <Link to="/admin/episodes/search">
                 <span>Search</span>
               </Link>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item key="new_episode">
               <Link to="/admin/new_episode">
                 <span>New Episode</span>
