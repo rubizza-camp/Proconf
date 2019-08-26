@@ -9,7 +9,7 @@ import Telegram from './settings/Telegram'
 import Trello from './settings/Trello'
 import Youtube from './settings/Youtube'
 import Episode from './episodes/Episode'
-import EpisodeList from './episodes/EpisodeList'
+import Episodes from './episodes/Episodes'
 import EpisodeSearch from './episodes/Search'
 import HomePage from './Home'
 import NewEpisode from './episodes/NewEpisode';
@@ -22,19 +22,19 @@ class App extends React.Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Sidebar/>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
+          <Header style={{ background: '#002140', padding: 0 }} />
           
           <Content style={{ margin: '0 16px' }}>
-            {/* <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-            </Breadcrumb> */}
+            <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+            </Breadcrumb>
             
               <Switch>
                 <Route exact path="/admin" component={HomePage} />
                 
                 <Route path="/admin/episode" component={Episode} />
                 <Route path="/admin/new_episode" component={NewEpisode} />
-                <Route path="/admin/episodes" component={EpisodeList} />
+                <Route path="/admin/episodes" component={Episodes} />
                 <Route path="/admin/episodes/search" component={EpisodeSearch} />
                 
                 <Route path="/admin/set/telegram" component={Telegram} />
