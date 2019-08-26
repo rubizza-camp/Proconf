@@ -5,7 +5,7 @@ class NewEpisode extends React.Component {
         return (
             <div class="container">
                 <div class="py-3 text-center">
-                    <img alt="proConf logo" class="d-block mx-auto mb-4 logo" src="/proconf_logo.jpg" />
+                    {/* <img alt="proConf logo" class="d-block mx-auto mb-4 logo" src="/proconf_logo.jpg" /> */}
                     <h3>Let's create new podcast</h3>
                 </div>
                 <div class="row">
