@@ -3,10 +3,39 @@
   .row
       .col-md-7
         a
-          iframe.youtube-video src = youtube_video_link(@episode.video) 
+          iframe.youtube-video src = youtube_video_link(@episode.video)
+          - if @episode.youtube_status
+            p = "Podcast youtube status - #{@episode.youtube_status}"
+          - if @episode.broadcast_begin
+            p = "Youtube broadcast started at #{@episode.broadcast_begin}"
+          - if @episode.broadcast_end
+            p = "Youtube broadcast finished at #{@episode.broadcast_end}"
+          -if @episode.youtube_status == 'live'
+            - if can? :manage, Episode
+              - unless @episode.actual_start
+                = button_to 'Start podcast', episode_add_start_path(@episode.id)
+              - unless  @episode.actual_finish
+                = button_to 'Finish podcast', episode_add_finish_path(@episode.id)
+          - if can? :manage, Episode
+            p =button_to 'Update youtube info', update_youtube_data_episode_path(@episode.id)
+            a.btn.btn-warning href = edit_episode_path(@episode) Edit
+            a.col-2
+          - if can? :manage, Announcement
+            a.btn.btn-warning href = episode_announcements_path(@episode) Announcements
       .col-md-5
         p = @episode.description
-        p = @episode.date
-        - if can? :manage, Episode
-          a.btn.btn-warning href = edit_episode_path(@episode) Edit
-          a.col-2
+        - if @episode.youtube_status
+          .start-end-info
+            = "Podcast status: #{@episode.youtube_status}"
+        p = "Podcast was announced at: #{@episode.date}"
+        - if @episode.actual_start
+          .start-end-info
+            = "Podcast status: #{@episode.actual_start}"
+          .timecode-wrapper
+            - @episode.timecodes.each do |timecode|
+              div
+                .timecode-info = timecode.title
+                .timecode-info = timecode.time
+          - if @episode.actual_finish
+            .start-end-info
+              = "Podcast finish: #{@episode.actual_finish}"

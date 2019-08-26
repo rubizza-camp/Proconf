@@ -1,6 +1,6 @@
 class EpisodesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_episode, only: %i[edit show update]
+  before_action :set_episode, except: %i[index create new]
 
   def index
     @episodes = Episode.order(created_at: :desc).page params[:page]
@@ -9,6 +9,8 @@ class EpisodesController < ApplicationController
   def show; end
 
   def edit; end
+
+  def new; end
 
   def create
     @episode = Episode.create(episode_params.merge(created_by: current_user))
@@ -26,6 +28,21 @@ class EpisodesController < ApplicationController
     else
       redirect_to edit_episode_path
     end
+  end
+
+  def add_start
+    @episode.update(actual_start: Time.now)
+    redirect_to episode_path(@episode)
+  end
+
+  def add_finish
+    @episode.update(actual_finish: Time.now)
+    redirect_to episode_path(@episode)
+  end
+
+  def update_youtube_data
+    @episode.update_youtube_info
+    redirect_to episode_path(@episode.id)
   end
 
   private

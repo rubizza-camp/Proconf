@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_095458) do
+ActiveRecord::Schema.define(version: 2019_08_16_070830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "announcements", force: :cascade do |t|
     t.bigint "episode_id"
-    t.string "title"
-    t.datetime "date"
+    t.string "title", null: false
+    t.datetime "date", null: false
     t.string "image"
     t.string "video"
-    t.string "target_resource"
+    t.string "target_resource", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["episode_id"], name: "index_announcements_on_episode_id"
@@ -63,6 +63,11 @@ ActiveRecord::Schema.define(version: 2019_08_14_095458) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "created_by"
+    t.string "youtube_status"
+    t.datetime "broadcast_begin"
+    t.datetime "broadcast_end"
+    t.datetime "actual_start"
+    t.datetime "actual_finish"
     t.index ["created_by"], name: "index_episodes_on_created_by"
   end
 
