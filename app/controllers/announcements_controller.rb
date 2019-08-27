@@ -25,11 +25,14 @@ class AnnouncementsController < ApplicationController
   def edit; end
 
   def update
-    if @announcement.update(announcement_params)
-      redirect_to episode_announcement_path
-    else
-      redirect_to edit_episode_announcement_path
-    end
+    @announcement.update(announcement_params)
+    # if @announcement.update(announcement_params)
+    #   redirect_to episode_announcement_path
+    # else
+    #   redirect_to edit_episode_announcement_path
+    # end
+
+    redirect_back(fallback_location: edit_episode_announcement_path)
   end
 
   def destroy
