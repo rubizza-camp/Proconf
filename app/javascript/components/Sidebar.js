@@ -28,33 +28,6 @@ class Sidebar extends React.Component {
               <span>Episodes</span>
             </Link>
           </Menu.Item>
-          {/* <SubMenu
-            key="episodes"
-            title={
-              <span>
-                <Icon type="desktop" />
-                <Link to="/admin/episodes">
-                  <span>Episodes</span>
-                </Link>
-              </span>
-            }
-          >
-            <Menu.Item key="episode_list">
-              <Link to="/admin/episodes">
-                <span>List</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="episode_search">
-              <Link to="/admin/episodes/search">
-                <span>Search</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="new_episode">
-              <Link to="/admin/new_episode">
-                <span>New Episode</span>
-              </Link>
-            </Menu.Item>
-          </SubMenu> */}
           <SubMenu
             key="social"
             title={

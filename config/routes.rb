@@ -4,10 +4,6 @@ Rails.application.routes.draw do
   devise_for :users
   root 'episodes#index'
 
-  # namespace :api do
-  #   resources :episodes, only: %i[index create show update destroy]
-  # end
-
   resources :episodes do
     post  'add_start', on: :member
     post  'add_finish', on: :member

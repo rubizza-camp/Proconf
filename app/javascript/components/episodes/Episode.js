@@ -7,10 +7,7 @@ class Episode extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      episode: {
-        id: '12',
-        video: 'oIMsxYm3BXc'  
-      }
+      episode: {}
     };
   }
   
@@ -28,7 +25,6 @@ class Episode extends React.Component {
   
   render() {
     const { episode } = this.state
-    // const video_id = youtube_parser(episode.video)
     return (
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
         {(function() {
@@ -51,7 +47,6 @@ class Episode extends React.Component {
                 ? <YouTube videoId={episode.video} />
                 : null
               }
-            {/* <iframe class="youtube-video" src={episode.video}></iframe> */}
             </div>
             <div class="col-md-5">
               <p>{episode.description}</p>

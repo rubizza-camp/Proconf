@@ -24,26 +24,21 @@ class App extends React.Component {
         <Sidebar/>
         <Layout>
           <Header style={{ background: '#002140', padding: 0 }} />
-          
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
             </Breadcrumb>
-            
             <Switch>
               <Route exact path="/admin" render={() => <HomePage />} />
-              
-              <Route path="/admin/episode/:id" component={Episode} />
-              <Route path="/admin/new_episode" component={NewEpisode} />
+              <Route path="/admin/episode/:id"  component={Episode} />
+              <Route path="/admin/new_episode"  component={NewEpisode} />
               <Route path="/admin/edit_episode" component={EditEpisode} />
-              <Route path="/admin/episodes" component={Episodes} />
-              
+              <Route path="/admin/episodes"     component={Episodes} />
               <Route path="/admin/set/telegram" component={Telegram} />
-              <Route path="/admin/set/trello" component={Trello} />
-              <Route path="/admin/set/youtube" component={Youtube} />
+              <Route path="/admin/set/trello"   component={Trello} />
+              <Route path="/admin/set/youtube"  component={Youtube} />
             </Switch>
           </Content>
-          
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>
       </Layout>
@@ -52,4 +47,3 @@ class App extends React.Component {
 }
 
 export default App
-          

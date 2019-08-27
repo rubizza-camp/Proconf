@@ -25,7 +25,6 @@ class AnnouncementsController < ApplicationController
   def edit; end
 
   def update
-    @announcement.update(announcement_params)
     if @announcement.update(announcement_params)
       redirect_to episode_announcement_path
     else
