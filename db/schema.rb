@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_16_070830) do
+ActiveRecord::Schema.define(version: 2019_08_27_145628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,11 +68,35 @@ ActiveRecord::Schema.define(version: 2019_08_16_070830) do
     t.datetime "broadcast_end"
     t.datetime "actual_start"
     t.datetime "actual_finish"
+    t.string "conference_link"
     t.index ["created_by"], name: "index_episodes_on_created_by"
+  end
+
+  create_table "episodes_guests", id: false, force: :cascade do |t|
+    t.bigint "guest_id", null: false
+    t.bigint "episode_id", null: false
+  end
+
+  create_table "episodes_sponsors", id: false, force: :cascade do |t|
+    t.bigint "sponsor_id", null: false
+    t.bigint "episode_id", null: false
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "name"
+    t.string "surname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "roles", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sponsors", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
