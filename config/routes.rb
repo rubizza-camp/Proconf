@@ -4,6 +4,14 @@ Rails.application.routes.draw do
   devise_for :users
   root 'episodes#index'
 
+  namespace :api do
+    namespace :v1 do
+      resources :episodes do
+        resources :announcements
+      end
+    end
+  end
+
   resources :episodes do
     get 'download'
     post  'add_start', on: :member
