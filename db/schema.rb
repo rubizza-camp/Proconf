@@ -65,6 +65,11 @@ ActiveRecord::Schema.define(version: 2019_08_27_123927) do
     t.bigint "created_by"
     t.bigint "sponsor_id"
     t.string "conference_link"
+    t.string "youtube_status"
+    t.datetime "broadcast_begin"
+    t.datetime "broadcast_end"
+    t.datetime "actual_start"
+    t.datetime "actual_finish"
     t.index ["created_by"], name: "index_episodes_on_created_by"
   end
 
