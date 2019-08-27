@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import { Button } from 'antd';
 import moment from 'moment';
 
 class Episodes extends React.Component {
@@ -29,6 +30,9 @@ class Episodes extends React.Component {
     const { episodes } = this.state;
     return (
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+        <Link to="/admin/new_episode">
+          <Button type="primary">Add new episode</Button>
+        </Link>
         <table class='table'>
           <thead class="thead-light">
             <tr>
