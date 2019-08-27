@@ -5,6 +5,8 @@ import { Page, Podcast } from "../../../components";
 import { Podcast as PodcastType, podcasts } from "../../../data";
 import { getKeynote, getTopic } from "../../../data";
 import ReactPlayer from "react-player";
+import { speakers } from "../../../data/speakers";
+import { pad, secondsToTime, scrollTop } from "../../../utils";
 
 import axios from 'axios';
 
@@ -53,7 +55,17 @@ export const EpisodeDetails = (props: RouteComponentProps<{ id: string }>) => {
           date: new Date(item.date).getTime(),
           title: item.title,
           sponsor: "Valentine Zavadsky",
-          keynotes: new Array(10).fill(0).map(getKeynote),
+          keynotes: item.timecodes.map((timecode: any) => {
+            const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
+            const time = secondsToTime(timecode_time);
+            return {
+              id: timecode.id,
+              name: timecode.title,
+              time: `${time.h}:${time.m}:${time.s}`,
+              url: `https://youtu.be/${item.video}?t=${timecode_time}`,
+              speaker: speakers[Math.floor(Math.random() * speakers.length)]
+            }
+          }),
           descr: item.description,
           img: item.image ? item.image : `//img.youtube.com/vi/${item.video}/maxresdefault.jpg`,
           conference: {

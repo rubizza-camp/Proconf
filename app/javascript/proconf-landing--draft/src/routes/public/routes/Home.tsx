@@ -99,8 +99,8 @@ const EpisodeList = ({ item }: { item: PodcastType }) => {
           title: item.title,
           sponsor: "Valentine Zavadsky",
           keynotes: item.timecodes.map((timecode: any) => {
-            const time = secondsToTime(new Date(timecode.time).getTime() / 1000);
             const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
+            const time = secondsToTime(timecode_time);
             return {
               id: timecode.id,
               name: timecode.title,
@@ -228,8 +228,8 @@ const Podcasts = ({ page }: { page?: string }) => {
           title: item.title,
           sponsor: "Valentine Zavadsky",
           keynotes: item.timecodes.map((timecode: any) => {
-            const time = secondsToTime(new Date(timecode.time).getTime() / 1000);
             const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
+            const time = secondsToTime(timecode_time);
             return {
               id: timecode.id,
               name: timecode.title,
@@ -289,8 +289,8 @@ const HomeContent = () => {
           title: item.title,
           sponsor: "Valentine Zavadsky",
           keynotes: item.timecodes.map((timecode: any) => {
-            const time = secondsToTime(new Date(timecode.time).getTime() / 1000);
             const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
+            const time = secondsToTime(timecode_time);
             return {
               id: timecode.id,
               name: timecode.title,
