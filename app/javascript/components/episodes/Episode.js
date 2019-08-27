@@ -1,41 +1,48 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-
-const BUTTON_TYPE = 'button_type'
-
-function getEpisode() {
-  console.log('getEpisode()')
-  return {
-    type: BUTTON_TYPE
-  }
-}
+import axios from 'axios';
 
 class Episode extends React.Component {
-  render() {
+    state = {
+      episode: {
+        id: '12'
+      }
+    }
+    
+    componentDidMount () {
+      const { id } = this.props.match.params
 
-    const { episodes } = this.props;
-    const thisEpisodes = episodes.map((episode) => {
-      return <li>{episode.id} {episode.title}</li>
-    })
-
-    return (
-      <React.Fragment>
-        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-          Sample_text from props: {this.props.sample_text}
-          <button onClick={() => this.props.getEpisode()}>getEpisode</button>
-          <br/>
-          <ul>{ thisEpisodes }</ul>
-        </div>
-      </React.Fragment>
-    )
-  }
+      axios.get(`/episodes/${id}.json`)
+        .then(response => {
+          this.setState({ episode: response.data })
+        })
+        .catch(function (error) {
+          console.log(error);
+      });
+    }
+    
+    render() {
+        const { episode } = this.state
+        return (
+          <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+            {(function() {
+              switch(episode.status) {
+                case 'draft':
+                  return <div>Draft</div>;
+                case 'announcement':
+                  return <div>Announcement</div>;
+                case 'finished':
+                  return <div>Finished</div>;
+                default:
+                  return <div>I don't know "{episode.status}" status</div>;
+                }
+              })()}
+            <div>{episode.id}</div>
+            <div>{episode.date}</div>
+            <div>{episode.title}</div>
+            <div>{episode.description}</div>
+          </div>
+        )
+    }
 }
 
-const structuredSelector = createStructuredSelector({
-  episodes: state => state.episodes,
-});
-
-const matchDispatchToProps = { getEpisode };
-
-export default connect(structuredSelector, matchDispatchToProps)(Episode);
+export default Episode
