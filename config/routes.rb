@@ -6,8 +6,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :episodes do
-        resources :announcements
+      resources :episodes, only: %i[index show create update destroy update_youtube_info] do
+        post  'add_finish'
+        post  'add_start'
+        post 'update_youtube_data'
+        resources :announcements, only: %i[index show create update destroy]
+        resources :timecodes, only: %i[index show create update destroy]
       end
     end
   end
