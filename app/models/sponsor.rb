@@ -1,4 +1,5 @@
 class Sponsor < ApplicationRecord
-  has_many :episodes
   validates :name, presence: true
+
+  has_and_belongs_to_many :episodes
 end

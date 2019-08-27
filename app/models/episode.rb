@@ -5,7 +5,7 @@ class Episode < ApplicationRecord
   has_many :timecodes
   has_and_belongs_to_many :authors
   has_and_belongs_to_many :guests
-  belongs_to :sponsor, optional: true
+  has_and_belongs_to_many :sponsors
 
   def update_youtube_info
     @video = Yt::Video.new id: video
