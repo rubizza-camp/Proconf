@@ -23,12 +23,14 @@ TITLE = 0
 DATE = 1
 VIDEO = 2
 DESCRIPTION = 3
+CONFERENCE_LINK = 4
 
 CSV.foreach(File.realpath('db/data/episodes.csv')) do |row|
   Episode.find_or_create_by(title: row[TITLE],
                             date: row[DATE],
                             video: row[VIDEO],
-                            description: row[DESCRIPTION])
+                            description: row[DESCRIPTION],
+                            conference_link: row[CONFERENCE_LINK])
 end
 
 Episode.all.each { |episode| episode.authors << Author.all }

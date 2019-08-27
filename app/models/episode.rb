@@ -11,9 +11,9 @@ class Episode < ApplicationRecord
     %r{(http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?)}.freeze
   YOUTUBE_VIDEO_IDENTIFIER = %r{(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)}.freeze
 
-  # def self.create(args)
-  #   super(prepare_params(args).to_h)
-  # end
+  def self.create(args)
+    super(prepare_params(args).to_h)
+  end
 
   def update(args)
     super(self.class.prepare_params(args).to_h)
