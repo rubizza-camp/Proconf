@@ -52,8 +52,8 @@ end
 
 Episode.all.each do |episode|
   CSV.foreach(File.realpath('db/data/timecodes.csv')) do |row|
-    episode.timecodes.create(title: row[TITLE],
-                             date: row[DATE])
+    episode.timecodes.find_or_create_by(title: row[TITLE],
+                                        time: Time.parse(row[DATE]).utc)
   end
 end
 

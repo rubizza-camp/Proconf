@@ -4,6 +4,7 @@ import "./Home.css";
 
 import { Podcast as PodcastType, podcasts } from "../../../data";
 import { getKeynote, getTopic } from "../../../data";
+import { speakers } from "../../../data/speakers";
 import { pad, secondsToTime, scrollTop } from "../../../utils";
 import moment from "moment";
 import { RouteComponentProps } from "react-router";
@@ -86,7 +87,6 @@ const EpisodeItem = ({
 };
 
 const EpisodeList = ({ item }: { item: PodcastType }) => {
-  // const items = podcasts.slice(0, 3);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -98,7 +98,17 @@ const EpisodeList = ({ item }: { item: PodcastType }) => {
           date: new Date(item.date).getTime(),
           title: item.title,
           sponsor: "Valentine Zavadsky",
-          keynotes: new Array(10).fill(0).map(getKeynote),
+          keynotes: item.timecodes.map((timecode: any) => {
+            const time = secondsToTime(new Date(timecode.time).getTime() / 1000);
+            const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
+            return {
+              id: timecode.id,
+              name: timecode.title,
+              time: `${time.h}:${time.m}:${time.s}`,
+              url: `https://youtu.be/${item.video}?t=${timecode_time}`,
+              speaker: speakers[Math.floor(Math.random() * speakers.length)]
+            }
+          }),
           descr: item.description,
           img: item.image ? item.image : `//img.youtube.com/vi/${item.video}/maxresdefault.jpg`,
           conference: {
@@ -217,7 +227,17 @@ const Podcasts = ({ page }: { page?: string }) => {
           date: new Date(item.date).getTime(),
           title: item.title,
           sponsor: "Valentine Zavadsky",
-          keynotes: new Array(10).fill(0).map(getKeynote),
+          keynotes: item.timecodes.map((timecode: any) => {
+            const time = secondsToTime(new Date(timecode.time).getTime() / 1000);
+            const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
+            return {
+              id: timecode.id,
+              name: timecode.title,
+              time: `${time.h}:${time.m}:${time.s}`,
+              url: `https://youtu.be/${item.video}?t=${timecode_time}`,
+              speaker: speakers[Math.floor(Math.random() * speakers.length)]
+            }
+          }),
           descr: item.description,
           img: item.image ? item.image : `//img.youtube.com/vi/${item.video}/maxresdefault.jpg`,
           conference: {
@@ -255,20 +275,30 @@ const Podcasts = ({ page }: { page?: string }) => {
 };
 
 const HomeContent = () => {
-  // const [currentPodcast] = useState(podcasts[0]);
   const [item, setItem] = useState(podcasts[0]);
 
   useEffect(() => {
     axios.get('/episodes/1.json')
     .then((response) => {
       const item = response.data;
+      console.log(item);
       const episode =
         {
           id: item.id,
           date: new Date(item.date).getTime(),
           title: item.title,
           sponsor: "Valentine Zavadsky",
-          keynotes: new Array(10).fill(0).map(getKeynote),
+          keynotes: item.timecodes.map((timecode: any) => {
+            const time = secondsToTime(new Date(timecode.time).getTime() / 1000);
+            const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
+            return {
+              id: timecode.id,
+              name: timecode.title,
+              time: `${time.h}:${time.m}:${time.s}`,
+              url: `https://youtu.be/${item.video}?t=${timecode_time}`,
+              speaker: speakers[Math.floor(Math.random() * speakers.length)]
+            }
+          }),
           descr: item.description,
           img: item.image ? item.image : `//img.youtube.com/vi/${item.video}/maxresdefault.jpg`,
           conference: {

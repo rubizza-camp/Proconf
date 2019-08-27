@@ -14,7 +14,7 @@ class EpisodesController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render json: @episode }
+      format.json { render json: @episode, include: :timecodes }
     end
   end
 
