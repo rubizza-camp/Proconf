@@ -134,26 +134,12 @@ const PodcastSmall = ({
             >
               Таймкоды
             </Link>
-            <Link
-              to={`/episodes/${item.id}/list/topics`}
-              className={`navbar__item ${pageParams.isTopics &&
-                "navbar__item--active"}`}
-            >
-              Ссылки на доклады
-            </Link>
           </div>
         ) : null}
         {pageParams.isNotes && (
           <div className='podcast-small__keynotes'>
             {item.keynotes.map(e => {
               return <KeyNoteItem key={e.id} item={e} />;
-            })}
-          </div>
-        )}
-        {pageParams.isTopics && (
-          <div className='podcast-small__keynotes'>
-            {item.conference.topics.map((e, index) => {
-              return <TopicItem key={e.url} item={e} index={index} />;
             })}
           </div>
         )}
