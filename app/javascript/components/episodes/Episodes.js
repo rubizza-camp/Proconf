@@ -42,9 +42,11 @@ class Episodes extends React.Component {
           <tbody>
             {episodes.map((episode) => {
               return(
-                <tr>
+                <tr key={episode.id}>
                   <th scope="row" key={episode.id}>{episode.id}</th>
-                  <td key={episode.id}>{episode.title}</td>
+                  <td key={episode.id}>
+                    <Link to={{ pathname: `/admin/episode/${episode.id}` }} >{episode.title}</Link>
+                  </td>
                   <td key={episode.id}>{moment(episode.date).format('MMMM Do YYYY, h:mm:ss a')}</td>
                   <td key={episode.id}>{episode.status}</td>
                   <td key={episode.id}>
