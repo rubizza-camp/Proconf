@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  root 'episodes#index'
+  # root 'episodes#index'
 
   resources :episodes do
     post  'add_start', on: :member
@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     resources :timecodes, only: [:create]
   end
 
-  get '/admin', to: 'dashboard#index'
+  root 'admin/application#index'
+
+  get '/admin', to: 'admin/application#index'
   post '/admin/telegram', to: 'dashboard#telegram'
 
   get '*path', to: redirect('/')
