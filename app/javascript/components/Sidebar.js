@@ -22,12 +22,20 @@ class Sidebar extends React.Component {
       <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
         <div className="logo"><a href="/"/></div>
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-          <SubMenu
+          <Menu.Item key="episodes">
+            <Link to="/admin/episodes">
+              <Icon type="desktop" />
+              <span>Episodes</span>
+            </Link>
+          </Menu.Item>
+          {/* <SubMenu
             key="episodes"
             title={
               <span>
                 <Icon type="desktop" />
-                <span>Episodes</span>
+                <Link to="/admin/episodes">
+                  <span>Episodes</span>
+                </Link>
               </span>
             }
           >
@@ -36,17 +44,17 @@ class Sidebar extends React.Component {
                 <span>List</span>
               </Link>
             </Menu.Item>
-            {/* <Menu.Item key="episode_search">
+            <Menu.Item key="episode_search">
               <Link to="/admin/episodes/search">
                 <span>Search</span>
               </Link>
-            </Menu.Item> */}
+            </Menu.Item>
             <Menu.Item key="new_episode">
               <Link to="/admin/new_episode">
                 <span>New Episode</span>
               </Link>
             </Menu.Item>
-          </SubMenu>
+          </SubMenu> */}
           <SubMenu
             key="social"
             title={
