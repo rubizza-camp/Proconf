@@ -31,13 +31,20 @@ CSV.foreach(File.realpath('db/data/episodes.csv')) do |row|
                             video: row[VIDEO],
                             description: row[DESCRIPTION],
                             conference_link: row[CONFERENCE_LINK])
+                            broadcast_begin: Time.parse('12-12-2019 13:05').utc)
 end
 
 Episode.all.each { |episode| episode.authors << Author.all }
 Episode.all.each { |episode| episode.guests << Guest.all }
 Episode.all.each do |episode|
   episode.sponsor = Sponsor.all.sample
-  episode.save
+  episode.save              
+end
+
+Episode.all.each do |episode|
+  CSV.foreach(File.realpath('db/data/timecodes.csv')) do |row|
+    episode.timecodes.find_or_create_by(title: row[TITLE],
+                                        time: Time.parse(row[DATE]).utc)
 end
 
 Role.create(name: 'admin')
