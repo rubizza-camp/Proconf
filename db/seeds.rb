@@ -50,10 +50,17 @@ Episode.all.each do |episode|
   end
 end
 
+Episode.all.each do |episode|
+  CSV.foreach(File.realpath('db/data/timecodes.csv')) do |row|
+    episode.timecodes.create(title: row[TITLE],
+                             date: row[DATE])
+  end
+end
+
 Role.find_or_create_by(name: 'admin')
 
 User.create(
   email: 'superadmin@gmail.com',
-  role: Role.first,
+  role: Role.find_or_create_by(name: 'admin'),
   password: ENV['ADMIN_PASSWORD']
 )

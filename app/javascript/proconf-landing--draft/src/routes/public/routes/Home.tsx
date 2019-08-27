@@ -292,8 +292,6 @@ const HomeContent = () => {
     });
   }, []);
 
-  console.log(item);
-  console.log(123);
   return (
     <div className='home-page'>
       {<EpisodePreview item={item} />}
