@@ -34,7 +34,6 @@ class EpisodesController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
   def add_start
     @episode.update(actual_start: Time.now)
     redirect_to episode_path(@episode)

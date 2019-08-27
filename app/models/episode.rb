@@ -56,7 +56,7 @@ class Episode < ApplicationRecord
     end
 
     event :online do
-      transitions from: :announcement, to: :online
+      transitions from: :announced, to: :online
     end
 
     event :processing do
