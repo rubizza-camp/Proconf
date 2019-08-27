@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   root 'episodes#index'
 
   resources :episodes do
+    get 'download'
     post  'add_start', on: :member
     post  'add_finish', on: :member
     post 'update_youtube_data', on: :member
     resources :announcements
     post '/to_announcement', to: 'episodes#announce', on: :member
     resources :timecodes, only: [:create]
-    get '/download'
   end
 
   get '/admin', to: 'dashboard#index'

@@ -1,6 +1,6 @@
 class EpisodesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_episode, except: %i[index create new]
+  before_action :set_episode, except: %i[index create new download]
 
   def index
     @episodes = {
