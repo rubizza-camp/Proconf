@@ -5,7 +5,7 @@ module Api
 
       def index
         episodes = Episode.order(id: :asc)
-        render json: episodes
+        render json: episodes, each_serializer: EpisodesSerializer, root: 'data'
       end
 
       def show
@@ -16,9 +16,9 @@ module Api
         @episode = Episode.create(episode_params)
 
         if @episode.valid?
-          render json: 'Successfully created'
+          render json: @episode, serializer: EpisodesSerializer
         else
-          render json: 'Something wrong'
+          render json: { 'error': @episode.errors }
         end
       end
 

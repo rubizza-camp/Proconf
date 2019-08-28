@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 gem 'aasm', '~> 5.0', '>= 5.0.5'
+gem 'active_model_serializers', '~> 0.10.10'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3.1'
 gem 'cancancan', '~> 3.0.1'
@@ -45,6 +46,7 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
+  gem 'database_cleaner'
   gem 'factory_bot', '~> 5.0'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.4'
   gem 'selenium-webdriver'
