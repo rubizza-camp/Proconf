@@ -97,7 +97,7 @@ const EpisodeList = ({ item }: { item: PodcastType }) => {
           id: item.id,
           date: new Date(item.date).getTime(),
           title: item.title,
-          sponsor: "Valentine Zavadsky",
+          sponsor: item.sponsors[0].name,
           keynotes: item.timecodes.map((timecode: any) => {
             const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
             const time = secondsToTime(timecode_time);
@@ -105,14 +105,27 @@ const EpisodeList = ({ item }: { item: PodcastType }) => {
               id: timecode.id,
               name: timecode.title,
               time: `${time.h}:${time.m}:${time.s}`,
-              url: `https://youtu.be/${item.video}?t=${timecode_time}`,
-              speaker: speakers[Math.floor(Math.random() * speakers.length)]
+              url: `https://youtu.be/${item.video}?t=${timecode_time}`
+            }
+          }),
+          guests: item.guests.map((guest) => {
+            return {
+              id: guest.id,
+              name: `${guest.name} ${guest.surname}`,
+              img: guest.photo
+            }
+          }),
+          authors: item.authors.map((author) => {
+            return {
+              id: author.id,
+              name: `${author.name} ${author.surname}`,
+              img: author.photo
             }
           }),
           descr: item.description,
           img: item.image ? item.image : `//img.youtube.com/vi/${item.video}/maxresdefault.jpg`,
           conference: {
-            link: "https://tmt.knect365.com/iot-world/developer-conference",
+            link: item.conference_link,
             topics: new Array(10).fill(0).map(getTopic)
           },
           links: [
@@ -226,7 +239,7 @@ const Podcasts = ({ page }: { page?: string }) => {
           id: item.id,
           date: new Date(item.date).getTime(),
           title: item.title,
-          sponsor: "Valentine Zavadsky",
+          sponsor: item.sponsors[0].name,
           keynotes: item.timecodes.map((timecode: any) => {
             const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
             const time = secondsToTime(timecode_time);
@@ -234,14 +247,27 @@ const Podcasts = ({ page }: { page?: string }) => {
               id: timecode.id,
               name: timecode.title,
               time: `${time.h}:${time.m}:${time.s}`,
-              url: `https://youtu.be/${item.video}?t=${timecode_time}`,
-              speaker: speakers[Math.floor(Math.random() * speakers.length)]
+              url: `https://youtu.be/${item.video}?t=${timecode_time}`
+            }
+          }),
+          guests: item.guests.map((guest) => {
+            return {
+              id: guest.id,
+              name: `${guest.name} ${guest.surname}`,
+              img: guest.photo
+            }
+          }),
+          authors: item.authors.map((author) => {
+            return {
+              id: author.id,
+              name: `${author.name} ${author.surname}`,
+              img: author.photo
             }
           }),
           descr: item.description,
           img: item.image ? item.image : `//img.youtube.com/vi/${item.video}/maxresdefault.jpg`,
           conference: {
-            link: "https://tmt.knect365.com/iot-world/developer-conference",
+            link: item.conference_link,
             topics: new Array(10).fill(0).map(getTopic)
           },
           links: [
@@ -287,7 +313,7 @@ const HomeContent = () => {
           id: item.id,
           date: new Date(item.date).getTime(),
           title: item.title,
-          sponsor: "Valentine Zavadsky",
+          sponsor: item.sponsors[0].name,
           keynotes: item.timecodes.map((timecode: any) => {
             const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
             const time = secondsToTime(timecode_time);
@@ -295,14 +321,27 @@ const HomeContent = () => {
               id: timecode.id,
               name: timecode.title,
               time: `${time.h}:${time.m}:${time.s}`,
-              url: `https://youtu.be/${item.video}?t=${timecode_time}`,
-              speaker: speakers[Math.floor(Math.random() * speakers.length)]
+              url: `https://youtu.be/${item.video}?t=${timecode_time}`
+            }
+          }),
+          guests: item.guests.map((guest) => {
+            return {
+              id: guest.id,
+              name: `${guest.name} ${guest.surname}`,
+              img: guest.photo
+            }
+          }),
+          authors: item.authors.map((author) => {
+            return {
+              id: author.id,
+              name: `${author.name} ${author.surname}`,
+              img: author.photo
             }
           }),
           descr: item.description,
           img: item.image ? item.image : `//img.youtube.com/vi/${item.video}/maxresdefault.jpg`,
           conference: {
-            link: "https://tmt.knect365.com/iot-world/developer-conference",
+            link: item.conference_link,
             topics: new Array(10).fill(0).map(getTopic)
           },
           links: [

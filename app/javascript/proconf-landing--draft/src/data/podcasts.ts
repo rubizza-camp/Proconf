@@ -82,6 +82,8 @@ const getPodcast = (x: number, n: number) => {
     keynotes: new Array(10).fill(0).map(getKeynote),
     descr: descriptions[Math.floor(Math.random()*descriptions.length)],
     img: images[Math.floor(Math.random() * images.length)],
+    guests: [],
+    authors: [],
     conference: {
       link: "https://tmt.knect365.com/iot-world/developer-conference",
       topics: new Array(10).fill(0).map(getTopic)

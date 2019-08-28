@@ -118,9 +118,11 @@ const PodcastSmall = ({
 }) => {
   const path = window.location.pathname;
   const pageParams = getPageTab(path);
-  const people = uniq(item.keynotes.map(e => e.speaker));
-  const guests = people.filter(e => e.role === "guest");
-  const speakers = people.filter(e => e.role === "speaker");
+  // const people = uniq(item.keynotes.map(e => e.speaker));
+  // const guests = people.filter(e => e.role === "guest");
+  // const speakers = people.filter(e => e.role === "speaker");
+  const guests = item.guests;
+  const speakers = item.authors;
   return (
     <div className={`podcast-small podcast-small--is-full_${isFull}`}>
       <PodcastSmallTitle isFull={isFull} item={item} />

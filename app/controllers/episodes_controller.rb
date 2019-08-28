@@ -7,14 +7,14 @@ class EpisodesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @episodes, include: :timecodes }
+      format.json { render json: @episodes, include: [:timecodes, :sponsors, :authors, :guests] }
     end
   end
 
   def show
     respond_to do |format|
       format.html
-      format.json { render json: @episode, include: :timecodes }
+      format.json { render json: @episode, include: [:timecodes, :sponsors, :authors, :guests] }
     end
   end
 

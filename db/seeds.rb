@@ -4,15 +4,18 @@ require 'csv'
 
 NAME = 0
 SURNAME = 1
+IMAGE = 2
 
 CSV.foreach(File.realpath('db/data/authors.csv')) do |row|
   Author.find_or_create_by(name: row[NAME],
-                           surname: row[SURNAME])
+                           surname: row[SURNAME],
+                           photo: row[IMAGE])
 end
 
 CSV.foreach(File.realpath('db/data/guests.csv')) do |row|
   Guest.find_or_create_by(name: row[NAME],
-                          surname: row[SURNAME])
+                          surname: row[SURNAME],
+                          photo: row[IMAGE])
 end
 
 CSV.foreach(File.realpath('db/data/sponsors.csv')) do |row|
