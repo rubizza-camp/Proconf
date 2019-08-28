@@ -31,7 +31,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/admin" render={() => <HomePage />} />
               <Route path="/admin/episode/:id"  component={Episode} />
-              <Route path="/admin/new_episode"  component={NewEpisode} />
+              <Route path="/admin/new_episode"  component={() => <NewEpisode authenticity_token={this.props.authenticity_token}/>} />
               <Route path="/admin/edit_episode" component={EditEpisode} />
               <Route path="/admin/episodes"     component={Episodes} />
               <Route path="/admin/set/telegram" component={Telegram} />

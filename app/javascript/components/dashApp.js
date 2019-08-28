@@ -11,7 +11,7 @@ class dashApp extends React.Component {
     return (
       <Provider store = {store}>
         <Router>
-          <App />
+          <App authenticity_token={this.props.authenticity_token}/>
         </Router>
       </Provider>
     );
