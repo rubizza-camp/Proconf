@@ -1,11 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe WebhooksController, type: :controller do
-  describe "Create webhook" do
-    before { get :complete }
+  describe "Webhooks" do
+	  let(:trello_webhook)do
+	   {
+	  		'action':{
+	  			'data':{
+	  				'card':{
+	  					'name': 'ProConf_Card'
+	  				}
+	  			},
+	  			'type': 'addLabelToCard',
+	  			'date': '2013-07-31T16:58:51.949Z'
+		  	}
+	    }
+	  end
 
-    it 'returns 200 header to trello' do
+	  it 'returns 200 header to trello' do
+	    get :complete
       expect(response).to have_http_status(200)
+    end
+
+		it 'filters webhook request and save timecode' do
+      post :receive, body: trello_webhook.to_json
+      expect(Timecode.last.title).to eq(trello_webhook[:action][:data][:card][:name])
     end
   end
 end
