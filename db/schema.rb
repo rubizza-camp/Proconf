@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_145628) do
     t.datetime "date"
     t.string "soundcloud"
     t.text "description"
-    t.boolean "draft", default: true, null: false
+    t.string "status", default: "draft", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "created_by"

@@ -25,12 +25,15 @@ VIDEO = 2
 DESCRIPTION = 3
 CONFERENCE_LINK = 4
 
+FINISHED = 'finished'
+
 CSV.foreach(File.realpath('db/data/episodes.csv')) do |row|
   Episode.find_or_create_by(title: row[TITLE],
                             date: row[DATE],
                             video: row[VIDEO],
                             description: row[DESCRIPTION],
                             conference_link: row[CONFERENCE_LINK],
+                            status: FINISHED,
                             broadcast_begin: Time.parse('12-12-2019 13:05').utc)
 end
 
@@ -47,7 +50,7 @@ Episode.all.each do |episode|
   end
 end
 
-Role.create(name: 'admin')
+Role.find_or_create_by(name: 'admin')
 
 User.create(
   email: 'superadmin@gmail.com',

@@ -8,7 +8,7 @@ class CreateEpisodes < ActiveRecord::Migration[5.2]
       t.timestamp :date
       t.string :soundcloud
       t.text :description
-      t.boolean :draft, default: true, null: false
+      t.string :status, default: 'draft', null: false
 
       t.timestamps
     end

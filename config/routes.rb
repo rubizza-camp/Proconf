@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     post 'update_youtube_data', on: :member
     resources :announcements
     resources :timecodes
+    post '/to_announcement', to: 'episodes#announce', on: :member
   end
 
   get '/admin', to: 'dashboard#index'

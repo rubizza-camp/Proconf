@@ -1,18 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Episode, type: :model do
-  context 'with valid params' do
-    let(:valid_episode) { described_class.new(title: 'Name', date: Time.now) }
-
-    it { expect(valid_episode).to be_valid }
+  describe 'validations' do
+    it { should validate_presence_of :title }
+    it { should validate_presence_of :date }
   end
 
-  context 'with invalid params' do
-    let(:episode_withoul_title) { described_class.new(date: Time.now) }
-    let(:episode_withoul_date) { described_class.new(title: 'Title') }
-
-    it { expect(episode_withoul_title).to be_invalid }
-
-    it { expect(episode_withoul_date).to be_invalid }
+  describe 'associations' do
+    it { should have_many(:announcements) }
+    it { should have_many(:timecodes) }
+    it { should have_and_belong_to_many(:authors) }
   end
 end
