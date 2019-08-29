@@ -5,7 +5,6 @@ import { createStructuredSelector } from 'reselect';
 const BUTTON_TYPE = 'button_type'
 
 function getEpisode() {
-  console.log('getEpisode()')
   return {
     type: BUTTON_TYPE
   }
@@ -13,7 +12,6 @@ function getEpisode() {
 
 class Episode extends React.Component {
   render() {
-
     const { episodes } = this.props;
     const thisEpisodes = episodes.map((episode) => {
       return <li>{episode.id} {episode.title}</li>
