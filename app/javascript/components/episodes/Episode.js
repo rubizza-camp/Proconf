@@ -21,6 +21,18 @@ class Episode extends React.Component {
         console.log(error);
     });
   }
+
+  componentDidUpdate() {
+    const { id } = this.props.match.params
+
+    axios.get(`/episodes/${id}.json`)
+      .then(response => {
+        this.setState({ episode: response.data })
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
+  }
   
   render() {
     const { episode } = this.state

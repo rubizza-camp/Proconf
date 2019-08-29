@@ -15,7 +15,7 @@ class EditEpisode extends React.Component {
   componentDidMount () {
     const { id } = this.props.match.params
 
-    axios.get(`/episodes/${id}.json`)
+    axios.get(`/api/v1/episodes/${id}`)
       .then(response => {
         this.setState({ 
           id: response.data.id,
@@ -36,88 +36,60 @@ class EditEpisode extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    // this.props.form.validateFields((err, values) => {
-    //   if (!err) {
-    //     console.log('Received values of form: ', values);
-    //   }
-    // });
-
-    const data = new FormData(e.target);
-
-    const { id } = this.state
-
-    debugger
-    axios.patch(`/episodes/${id}`, data)
-
-
-    // fetch('//form-submit-url', {
-    //   method: 'PATCH',
-    //   body: data,
-    // });
+    const { id, title, date, video, description } = this.state
+    
+    const options = {
+      method: 'patch',
+      url: `/api/v1/episodes/${id}`,
+      data: {
+        title: title,
+        date: date,
+        video: video,
+        description: description
+      }
+    };
+    
+    axios(options)
+      .then(response => {
+        console.log(response);
+    })
+    this.props.history.push('/admin/episodes');
   };
 
   render() {
-    const { id, title, date, video, description } = this.state
+    const { title, date, video, description } = this.state
     return (
       <div class="container">
-        <div class="py-3 text-center">
-          <h3>Let's update podcast</h3>
-        </div>
         <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-8 order-md-1">
+          <div class="col-md-12 order-md-1">
+            <div class="py-3 text-center">
+              <h3>Let's update podcast</h3>
+            </div>
           
-          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={this.handleSubmit}>
-            <Form.Item label="Title" required={true}>
-              {(<Input name="title" type="text" value={title} onChange={this.handleChange} />)}
-            </Form.Item>
+            <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={this.handleSubmit}>
+              <Form.Item label="Title" required={true}>
+                {(<Input name="title" type="text" value={title} onChange={this.handleChange} />)}
+              </Form.Item>
 
-            <Form.Item label="Start datetime" required={true}>
-              {(<DatePicker showTime className="form-control" name="date" placeholder="Select Time" value={moment(date)} onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />)}
-            </Form.Item>
-            
-            <Form.Item label="Youtube url" required={true}>
-              {(<Input name="video" type="text" value={video} onChange={this.handleChange} />)}
-            </Form.Item>
+              <Form.Item label="Start datetime" required={true}>
+                {(<DatePicker showTime className="form-control" name="date" placeholder="Select Time" value={moment(date)} onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />)}
+              </Form.Item>
+              
+              <Form.Item label="Youtube url" required={true}>
+                {(<Input name="video" type="text" value={video} onChange={this.handleChange} />)}
+              </Form.Item>
 
-            <Form.Item label="Description">
-              {(<Input.TextArea name="description" type="text" value={description} autosize={true} onChange={this.handleChange} />)}
-            </Form.Item>
+              <Form.Item label="Description">
+                {(<Input.TextArea name="description" type="text" value={description} autosize={true} onChange={this.handleChange} />)}
+              </Form.Item>
 
-            <Form.Item wrapperCol={{ span: 12, offset: 5 }}>
-              <Button type="primary" htmlType="submit">
-                Post proConf podcast
-              </Button>
-            </Form.Item>
-          </Form>    
-            
-            
-            {/* <form action={"/episodes/" + id} method="post"> */}
-              {/* <div class="row">
-                <div class="col-md-12 mb-3">
-                  <label for="title">Title</label>
-                  <input class="form-control" name="title" type="text" value={title} onChange={this.handleChange}/>
-                </div>
-              </div> */}
-              {/* <div class="row"> */}
-                {/* <div class="col-md-12 mb-3"> */}
-                  {/* <label for="date">Start datetime</label> */}
-                  {/* <input class="form-control" name="date" required="" type="datetime" value={date} onChange={this.handleChange}/> */}
-                  {/* <DatePicker showTime className="form-control" size='large' name="date" placeholder="Select Time" value={moment(date)} onChange={this.handleChange} /> */}
-                {/* </div> */}
-              {/* </div> */}
-              {/* <div class="row"> */}
-                {/* <div class="col-md-12 mb-3"> */}
-                  {/* <label for="video">Youtube stream/video url</label> */}
-                  {/* <input class="form-control" name="video" required="" type="text" value={video} onChange={this.handleChange}/> */}
-                {/* </div> */}
-              {/* </div> */}
-              {/* <label for="description">Description</label> */}
-              {/* <textarea class="form-control z-depth-1" name="description" value={description} rows="5" onChange={this.handleChange}></textarea> */}
-              {/* <hr class="mb-3"></hr> */}
-              {/* <button class="btn btn-light btn-lg btn-block" type="submit">Post proConf podcast</button> */}
-              {/* <input name="_method" type="hidden" value="patch"/> */}
-            {/* </form> */}
+              <Form.Item wrapperCol={{ span: 12, offset: 5 }}>
+                <Button type="primary" htmlType="submit">
+                  Update episode
+                </Button>
+              </Form.Item>
+            </Form>    
+          
           </div>
         </div>
       </div>
