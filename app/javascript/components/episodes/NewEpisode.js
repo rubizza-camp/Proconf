@@ -34,7 +34,6 @@ class NewEpisode extends React.Component {
               <textarea class="form-control z-depth-1" name="description" placeholder="Write something here..." rows="5"></textarea>
               <hr class="mb-3"></hr>
               <button class="btn btn-light btn-lg btn-block" type="submit">Post proConf podcast</button>
-              <input type="hidden" name="authenticity_token" id="authenticity_token" value={this.props.authenticity_token}></input>
             </form>
           </div>
         </div>

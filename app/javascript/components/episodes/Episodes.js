@@ -28,9 +28,10 @@ class Episodes extends React.Component {
 
   render() {
     const { episodes } = this.state;
+    
     return (
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-        <Link to="/admin/new_episode">
+        <Link to="/admin/episodes/new">
           <Button type="primary">Add new episode</Button>
         </Link>
         <table class='table'>
@@ -49,12 +50,12 @@ class Episodes extends React.Component {
                 <tr key={episode.id}>
                   <th scope="row" key={episode.id}>{episode.id}</th>
                   <td key={episode.id}>
-                    <Link to={{ pathname: `/admin/episode/${episode.id}` }} >{episode.title}</Link>
+                    <Link to={{ pathname: `/admin/episodes/${episode.id}` }} >{episode.title}</Link>
                   </td>
                   <td key={episode.id}>{moment(episode.date).format('MMMM Do YYYY, h:mm:ss a')}</td>
                   <td key={episode.id}>{episode.status}</td>
                   <td key={episode.id}>
-                    <Link to={{ pathname: '/admin/edit_episode', state: {currentEpisode: episode} }}><span>Edit</span></Link>
+                    <Link to={{ pathname: `/admin/episodes/${episode.id}/edit` }}><span>Edit</span></Link>
                   </td>
                 </tr>
               )
