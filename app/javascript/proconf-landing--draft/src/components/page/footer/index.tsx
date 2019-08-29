@@ -23,4 +23,3 @@ Footer.Details = FooterDetails;
 export {
   Footer as default,
 }
-

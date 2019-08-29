@@ -100,7 +100,6 @@
   margin-left: auto;
 }
 
-/* keynote */
 .key-note {
   display: flex;
   font-size: 18px;
@@ -135,7 +134,6 @@
   min-width: 18px;
 }
 
-/* comments */
 .podcast__comments {
   width: 1px !important;
   min-width: 800px !important;
@@ -174,11 +172,8 @@
   left: 20%;
 }
 
-/* tabs */
 .podcast-full__tabs {
-  /* background-color: black; */
   border: 1px dotted #6c757d;
-  /* --navbar-color: white; */
   height: 64px;
   display: flex;
   align-items: center;
@@ -190,7 +185,6 @@
   margin-top: 0!important;
 }
 
-/* speakers */
 .podcast-full__speakers-wr {
   display: flex;
   justify-content: space-around;

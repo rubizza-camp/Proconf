@@ -19,4 +19,3 @@ Header.Social = Social;
 export {
   Header as default,
 }
-
