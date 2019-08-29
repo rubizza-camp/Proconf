@@ -1,6 +1,8 @@
 class EpisodesController < ApplicationController
   load_and_authorize_resource
   before_action :set_episode, except: %i[index create new]
+  # delete it after using api controller in react components
+  skip_before_action :verify_authenticity_token
 
   def index
     @episodes = {
@@ -10,7 +12,7 @@ class EpisodesController < ApplicationController
     }
     respond_to do |format|
       format.html
-      format.json { render json: Episode.all }
+      format.json { render json: Episode.all.order(id: :desc) }
     end
   end
 
