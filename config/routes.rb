@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get '/participants', to: 'participants#receive_all_participants'
       resources :episodes, only: %i[index show create update destroy update_youtube_info]
     end
   end
