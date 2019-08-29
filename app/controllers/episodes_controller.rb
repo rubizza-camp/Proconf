@@ -1,6 +1,6 @@
 class EpisodesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_episode, except: %i[index create new download]
+  before_action :set_episode, except: %i[index create new]
 
   def index
     @episodes = {
@@ -17,9 +17,8 @@ class EpisodesController < ApplicationController
   def new; end
 
   def download
-    @episode = Episode.find(params[:episode_id])
     VideoDownloadJob.perform_later(@episode)
-    redirect_to '/'
+    redirect_to episode_path(@episode)
   end
 
   def create
@@ -64,7 +63,7 @@ class EpisodesController < ApplicationController
   private
 
   def set_episode
-    @episode = Episode.find(params[:id])
+    @episode = Episode.find(params[:id] || params[:episode_id])
   end
 
   def episode_params

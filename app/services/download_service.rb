@@ -20,16 +20,19 @@ class DownloadService
   end
 
   def path_to_video
-    @path_to_video ||= download
+    clip.first.path.to_s
   end
 
   def path_to_audio
     @path_to_audio ||= convert
   end
 
-  def download
-    video = Viddl::Video.download(create_youtube_link)
-    video.create_clip(options).first.path.to_s
+  def clip
+    @clip ||= video.create_clip(options)
+  end
+
+  def video
+    @video ||= Viddl::Video.download(youtube_link)
   end
 
   def convert
@@ -37,7 +40,7 @@ class DownloadService
     "tmp/#{episode.id}.mp3"
   end
 
-  def create_youtube_link
+  def youtube_link
     "https://www.youtube.com/watch?v=#{episode.video}"
   end
 

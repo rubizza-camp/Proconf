@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     post 'update_youtube_data', on: :member
     resources :announcements
     post '/to_announcement', to: 'episodes#announce', on: :member
-    resources :timecodes, only: [:create]
+    resources :timecodes
   end
 
   get '/admin', to: 'dashboard#index'
