@@ -102,4 +102,3 @@ const getPodcast = (x: number, n: number) => {
 };
 
 export const podcasts = new Array(20).fill(0).map(getPodcast);
-// export const podcasts = getEpisodes().map(getPodcast);

@@ -19,7 +19,6 @@ export default () => {
       </Page.Header>
       <Switch>
         <Route path='/episodes/:id' component={EpisodeDetails} />
-        <Route path='/episodes/:id/list/:type' component={EpisodeDetails} />
         <Route path='/page/:page' component={Home} />
         <Route path='/about' component={About} />
         <Route path='/donate' component={Donate} />
