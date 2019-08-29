@@ -26,6 +26,10 @@ class Episodes extends React.Component {
     this.getEpisodes();
   }
 
+  componentDidUpdate() {
+    this.getEpisodes();
+  }
+
   render() {
     const { episodes } = this.state;
     

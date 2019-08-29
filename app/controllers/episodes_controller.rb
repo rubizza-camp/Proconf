@@ -1,8 +1,6 @@
 class EpisodesController < ApplicationController
   load_and_authorize_resource
   before_action :set_episode, except: %i[index create new]
-  # delete it after using api controller in react components
-  skip_before_action :verify_authenticity_token
 
   def index
     @episodes = {
@@ -10,18 +8,9 @@ class EpisodesController < ApplicationController
       online: Episode.where(status: 'online').order(created_at: :desc),
       finished: Episode.where(status: 'finished').order(created_at: :desc).page(params[:page])
     }
-    respond_to do |format|
-      format.html
-      format.json { render json: Episode.all.order(id: :desc) }
-    end
   end
 
-  def show
-    respond_to do |format|
-      format.html
-      format.json { render json: @episode }
-    end
-  end
+  def show; end
 
   def edit; end
 

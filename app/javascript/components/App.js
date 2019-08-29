@@ -32,8 +32,8 @@ class App extends React.Component {
               <Route exact path="/admin" render={() => <HomePage />} />
               
               <Route path="/admin/episodes/:id/edit" component={EditEpisode} />
-              <Route path="/admin/episodes/:id" component={Episode} />
               <Route path="/admin/episodes/new" component={NewEpisode} />
+              <Route path="/admin/episodes/:id" component={Episode} />
               <Route path="/admin/episodes" component={Episodes} />
               
               <Route path="/admin/set/telegram" component={Telegram} />
