@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 gem 'aasm', '~> 5.0', '>= 5.0.5'
+gem 'active_model_serializers', '~> 0.10.10'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3.1'
 gem 'cancancan', '~> 3.0.1'
@@ -19,7 +20,9 @@ gem 'rails', '~> 5.2.3'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'slim', '~> 4.0.1'
+gem 'streamio-ffmpeg'
 gem 'uglifier', '>= 1.3.0'
+gem 'viddl'
 gem 'webpacker', '~> 4.x'
 gem 'yt', '~> 0.32.0'
 

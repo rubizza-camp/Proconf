@@ -13,7 +13,7 @@ class Episodes extends React.Component {
   }
 
   getEpisodes() {
-    axios.get('/episodes.json')
+    axios.get('/api/v1/episodes')
       .then(response => {
         this.setState({ episodes: response.data })
       })

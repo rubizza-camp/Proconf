@@ -4,13 +4,20 @@ Rails.application.routes.draw do
   devise_for :users
   root 'episodes#index'
 
+  namespace :api do
+    namespace :v1 do
+      resources :episodes, only: %i[index show create update destroy update_youtube_info]
+    end
+  end
+
   resources :episodes do
+    get 'download'
     post  'add_start', on: :member
     post  'add_finish', on: :member
     post 'update_youtube_data', on: :member
     resources :announcements
-    resources :timecodes
     post '/to_announcement', to: 'episodes#announce', on: :member
+    resources :timecodes
   end
 
   get '/admin', to: 'dashboard#index'

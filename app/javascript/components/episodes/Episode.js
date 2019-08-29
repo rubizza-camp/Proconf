@@ -13,19 +13,7 @@ class Episode extends React.Component {
   componentDidMount () {
     const { id } = this.props.match.params
 
-    axios.get(`/episodes/${id}.json`)
-      .then(response => {
-        this.setState({ episode: response.data })
-      })
-      .catch(function (error) {
-        console.log(error);
-    });
-  }
-
-  componentDidUpdate() {
-    const { id } = this.props.match.params
-
-    axios.get(`/episodes/${id}.json`)
+    axios.get(`/api/v1/episodes/${id}`)
       .then(response => {
         this.setState({ episode: response.data })
       })

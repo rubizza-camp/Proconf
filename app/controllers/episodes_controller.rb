@@ -16,6 +16,11 @@ class EpisodesController < ApplicationController
 
   def new; end
 
+  def download
+    VideoDownloadJob.perform_later(@episode)
+    redirect_to episode_path(@episode)
+  end
+
   def create
     @episode = Episode.create(episode_params.merge(created_by: current_user))
 
@@ -58,7 +63,7 @@ class EpisodesController < ApplicationController
   private
 
   def set_episode
-    @episode = Episode.find(params[:id])
+    @episode = Episode.find(params[:id] || params[:episode_id])
   end
 
   def episode_params
