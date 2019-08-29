@@ -1,48 +1,37 @@
 module Api
   module V1
     class TimecodesController < ApiController
-      before_action :set_timecode, only: %i[edit update show destroy send_timecode]
-      before_action :set_episode, only: %i[index new create]
-
-      def index
-        render json: @episode.timecodes
-      end
-
-      def show
-        render json: @timecode
-      end
+      before_action :authenticate_user
+      before_action :set_timecode, only: %i[edit update destroy]
+      before_action :set_episode, only: :create
 
       def create
         timecode = @episode.timecodes.create(timecode_params)
 
         if timecode.valid?
-          render json: 'Timecode successfully created!'
+          render json: timecode, serializer: TimecodesSerializer
         else
-          render json: 'Error while creation'
+          render json: { 'errors': timecode.errors }
         end
       end
 
       def update
         if @timecode.update(timecode_params)
-          render json: 'Timecode successfully updated!'
+          render json: timecode, serializer: TimecodesSerializer
         else
-          render json: 'Error while update'
+          render json: { 'errors': timecode.errors }
         end
       end
 
       def destroy
-        @timecode.delete
+        @timecode.destroy
         render json: 'Succesfully'
       end
 
       private
 
-      def timecode_param_names
-        %i[title time]
-      end
-
       def timecode_params
-        params.permit(timecode_param_names)
+        params.permit(:title, :time)
       end
 
       def set_timecode

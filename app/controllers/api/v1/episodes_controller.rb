@@ -1,7 +1,8 @@
 module Api
   module V1
     class EpisodesController < ApiController
-      before_action :set_episode, except: %i[index create add_start add_finish update_youtube_data]
+      before_action :authenticate_user, except: %i[index show]
+      before_action :set_episode, except: %i[index create]
 
       def index
         episodes = Episode.order(id: :asc)
@@ -9,49 +10,58 @@ module Api
       end
 
       def show
-        render json: @episode
+        render json: @episode, serializer: EpisodesSerializer, root: 'data'
       end
 
       def create
-        @episode = Episode.create(episode_params)
+        episode = Episode.create(episode_params)
 
-        if @episode.valid?
+        ParticipantsService.execute(params, episode)
+
+        if episode.valid?
+          render json: episode, serializer: EpisodesSerializer
+        else
+          render json: { 'error': episode.errors }
+        end
+      end
+
+      def update
+        if @episode.update(episode_params)
           render json: @episode, serializer: EpisodesSerializer
         else
           render json: { 'error': @episode.errors }
         end
       end
 
-      def update
-        if @episode.update(episode_params)
-          render json: 'Successfuly updated'
-        else
-          render json: 'Something wrong'
-        end
-      end
-
       def destroy
-        @episode.timecodes.each(&:delete)
-        @episode.announcements.each(&:delete)
-        @episode.delete
+        @episode.destroy
       end
 
       def add_start
-        episode = Episode.find(params[:episode_id])
-        episode.update(actual_start: Time.now)
+        @episode.update(actual_start: Time.now)
         render json: 'OK'
       end
 
       def add_finish
-        episode = Episode.find(params[:episode_id])
-        episode.update(actual_finish: Time.now)
+        @episode.update(actual_finish: Time.now)
         render json: 'OK'
       end
 
       def update_youtube_data
-        episode = Episode.find(params[:episode_id])
-        episode.update_youtube_info
+        @episode.update_youtube_info
         render json: 'OK'
+      end
+
+      def to_announcement
+        @episode.to_announcement!
+      end
+
+      def to_online
+        @episode.to_online!
+      end
+
+      def to_finished
+        @episode.to_finished!
       end
 
       private

@@ -1,32 +1,25 @@
 module Api
   module V1
     class AnnouncementsController < ApiController
-      before_action :set_announcement, only: %i[edit update show destroy]
-      before_action :set_episode, only: %i[index create]
-
-      def index
-        render json: @episode.announcements
-      end
-
-      def show
-        render json: @announcement
-      end
+      before_action :authenticate_user
+      before_action :set_announcement, only: %i[edit update destroy]
+      before_action :set_episode, only: :create
 
       def create
         announcement = @episode.announcements.create(announcement_params)
 
         if announcement.valid?
-          render json: 'Announcement successfully created!'
+          render json: announcement, serializer: AnnouncementsSerializer
         else
-          render json: 'Error while creation'
+          render json: { 'errors': announcement.errors }
         end
       end
 
       def update
         if @announcement.update(announcement_params)
-          render json: 'Successfully'
+          render json: announcement, serializer: AnnouncementsSerializer
         else
-          render json: 'Uncomplete'
+          render json: { 'errors': announcement.errors }
         end
       end
 

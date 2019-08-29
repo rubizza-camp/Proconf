@@ -67,7 +67,7 @@ class Episode < ApplicationRecord
     end
 
     event :finished do
-      transitions from: :processing, to: :finished
+      transitions from: %i[processing online], to: :finished
     end
   end
 

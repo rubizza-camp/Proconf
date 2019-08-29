@@ -14,6 +14,7 @@ gem 'devise', '~> 4.6', '>= 4.6.2'
 gem 'httparty', '~> 0.17.0'
 gem 'jbuilder', '~> 2.5'
 gem 'kaminari'
+gem 'knock', '~> 2.1', '>= 2.1.1'
 gem 'mini_racer', platforms: :ruby
 gem 'omniauth-trello', '~> 0.0.4'
 gem 'pg'
