@@ -48,12 +48,11 @@ class EditEpisode extends React.Component {
         description: description
       }
     };
-    
     axios(options)
       .then(response => {
         console.log(response);
+        this.props.history.push('/admin/episodes');
     })
-    this.props.history.push('/admin/episodes');
   };
 
   render() {

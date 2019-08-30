@@ -34,8 +34,11 @@ class NewEpisode extends React.Component {
     axios(options)
       .then(response => {
         console.log(response);
-    })
-      .then(this.props.history.push('/admin/episodes'));
+        this.props.history.push('/admin/episodes')
+      })
+      .catch(function (error) {
+        console.log(error);
+      }); 
   };
 
   render() {
