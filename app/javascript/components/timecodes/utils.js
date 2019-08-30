@@ -4,7 +4,7 @@ function pad(num, size) {
   return s;
 };
 
-const secondsToTime = (secs) => {
+export const secondsToTime = (secs) => {
   let hours = Math.floor(secs / (60 * 60));
 
   let divisor_for_minutes = secs % (60 * 60);
@@ -21,4 +21,8 @@ const secondsToTime = (secs) => {
   return obj;
 }
 
-export default secondsToTime;
+export const timeToSeconds = (time) => {
+  const [hours, minutes, seconds] = time.split(":");
+
+  return hours * 3600 + minutes * 60 + seconds
+}

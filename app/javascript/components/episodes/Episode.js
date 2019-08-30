@@ -27,7 +27,6 @@ class Episode extends React.Component {
   
   render() {
     const { episode } = this.state
-    console.log(episode);
     return (
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
         {episode.status}
@@ -40,7 +39,7 @@ class Episode extends React.Component {
                 : null
               }
             </div>
-            <div class="col-md-5">
+            <div className="col-md-5">
               <p>{episode.description}</p>
               <p>{episode.date}</p>
               <Link to={`/admin/episodes/${episode.id}/announcements`}>
