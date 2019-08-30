@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  root 'episodes#index'
+  # root 'episodes#index'
 
   namespace :api do
     namespace :v1 do

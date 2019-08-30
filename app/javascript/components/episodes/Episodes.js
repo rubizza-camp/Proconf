@@ -1,16 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { Button, Popconfirm, message, Icon, Drawer } from 'antd';
+import NewEpisodeFormComponent from './NewEpisodeFormComponent';
+import EditEpisodeFormComponent from './EditEpisodeFormComponent';
+
 import axios from 'axios';
-import { Button, Popconfirm, message, Icon} from 'antd';
 import moment from 'moment';
 
 class Episodes extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { episodes: [] };
+    this.state = {
+      episodes: [],
+      showVisible: false,
+      editVisible: false
+    };
   
     this.handleDelete = this.handleDelete.bind(this);
   }
+
+  showNewDrawer = () => {
+    this.setState({
+      showVisible: true,
+    });
+  };
+
+  showEditDrawer = () => {
+    this.setState({
+      editVisible: true,
+    });
+  };
+
+  onClose = () => {
+    this.setState({
+      showVisible: false,
+      editVisible: false
+    });
+    this.getEpisodes();
+  };
 
   getEpisodes() {
     axios.get('/api/v1/episodes')
@@ -51,9 +78,30 @@ class Episodes extends React.Component {
 
     return (
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-        <Link to="/admin/episodes/new">
+        <Link onClick={this.showNewDrawer}>
           <Button type="primary">Add new episode</Button>
         </Link>
+        
+        <Drawer
+          title="Create a new episode"
+          width={720}
+          onClose={this.onClose}
+          visible={this.state.showVisible}
+          placement={"right"}
+        >
+          <NewEpisodeFormComponent handler = {this.onClose}/>
+        </Drawer>
+        
+        <Drawer
+          title="Edit episode"
+          width={720}
+          onClose={this.onClose}
+          visible={this.state.editVisible}
+          placement={"left"}
+        >
+          <EditEpisodeFormComponent id={85} handler = {this.onClose}/>
+        </Drawer>
+        
         <table class='table'>
           <thead class="thead-light">
             <tr>
@@ -76,9 +124,9 @@ class Episodes extends React.Component {
                   <td key={episode.id}>{episode.status}</td>
                   <td key={episode.id}>
                     <Button.Group>
-                      <Link to={`/admin/episodes/${episode.id}/edit`}>
-                        <Button icon="edit" shape="round">Edit</Button>
-                      </Link>
+                      {/* <Link to={`/admin/episodes/${episode.id}/edit`}> */}
+                        <Button icon="edit" shape="round" onClick={this.showEditDrawer}>Edit</Button>
+                      {/* </Link> */}
                       <Popconfirm
                         placement="left"
                         title={text}
