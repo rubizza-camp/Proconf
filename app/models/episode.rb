@@ -7,8 +7,8 @@ class Episode < ApplicationRecord
   has_and_belongs_to_many :guests
   has_and_belongs_to_many :sponsors
 
-  has_one_attached :backup_video
-  has_one_attached :backup_audio
+  has_one_attached :backup_video, dependent: :purge_later
+  has_one_attached :backup_audio, dependent: :purge_later
 
   def update_youtube_info
     @video = Yt::Video.new id: video
