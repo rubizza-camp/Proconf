@@ -1,8 +1,8 @@
 class Episode < ApplicationRecord
   validates :title, :date, presence: true
 
-  has_many :announcements
-  has_many :timecodes
+  has_many :announcements, dependent: :destroy
+  has_many :timecodes, dependent: :destroy
   has_and_belongs_to_many :authors
   has_and_belongs_to_many :guests
   has_and_belongs_to_many :sponsors
@@ -59,7 +59,7 @@ class Episode < ApplicationRecord
     end
 
     event :online do
-      transitions from: :announced, to: :online
+      transitions from: %i[draft announced], to: :online
     end
 
     event :processing do
@@ -67,7 +67,7 @@ class Episode < ApplicationRecord
     end
 
     event :finished do
-      transitions from: :processing, to: :finished
+      transitions from: %i[online processing], to: :finished
     end
   end
 
