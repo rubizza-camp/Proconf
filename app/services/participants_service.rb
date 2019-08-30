@@ -3,14 +3,16 @@ class ParticipantsService
     def execute(params, episode)
       @params = params
       @episode = episode
-      add_authors if params[:authors]
-      add_guests if params[:guests]
-      add_sponsors if params[:sponsors]
+      authors if params[:authors]
+      guests if params[:guests]
+      sponsors if params[:sponsors]
     end
 
     private
 
-    def add_authors
+    def authors
+      @episode.authors.each(&:destroy) if @episode.authors.count.positive?
+
       @params[:authors].each do |id|
         @episode.authors.create(
           name: Author.find(id).name,
@@ -19,7 +21,9 @@ class ParticipantsService
       end
     end
 
-    def add_guests
+    def guests
+      @episode.guests.each(&:destroy) if @episode.guests.count.positive?
+
       @params[:guests].each do |id|
         @episode.guests.create(
           name: Guest.find(id).name,
@@ -28,7 +32,9 @@ class ParticipantsService
       end
     end
 
-    def add_sponsors
+    def sponsors
+      @episode.sponsors.each(&:destroy) if @episode.sponsors.count.positive?
+
       @params[:sponsors].each do |id|
         @episode.sponsors.create(
           name: Sponsor.find(id).name

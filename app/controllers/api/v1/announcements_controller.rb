@@ -34,7 +34,7 @@ module Api
       def destroy
         @announcement.destroy
 
-        render json: 'Succesfully'
+        render json: 'ok'
       end
 
       private

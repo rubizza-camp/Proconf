@@ -33,7 +33,8 @@ module Api
 
       def destroy
         @timecode.destroy
-        render json: 'Succesfully'
+
+        render json: 'ok'
       end
 
       private

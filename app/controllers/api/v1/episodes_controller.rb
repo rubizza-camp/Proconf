@@ -16,9 +16,8 @@ module Api
       def create
         episode = Episode.create(episode_params)
 
-        ParticipantsService.execute(params, episode)
-
         if episode.valid?
+          ParticipantsService.execute(params, episode)
           render json: episode, serializer: EpisodesSerializer
         else
           render json: { 'error': episode.errors }
@@ -27,6 +26,7 @@ module Api
 
       def update
         if @episode.update(episode_params)
+          ParticipantsService.execute(params, @episode)
           render json: @episode, serializer: EpisodesSerializer
         else
           render json: { 'error': @episode.errors }
@@ -35,16 +35,17 @@ module Api
 
       def destroy
         @episode.destroy
+        render json: 'ok'
       end
 
       def add_start
         @episode.update(actual_start: Time.now)
-        render json: 'OK'
+        render json: { "id": @episode.id, "title": @episode.title, "actual_start": @episode.actual_start }
       end
 
       def add_finish
         @episode.update(actual_finish: Time.now)
-        render json: 'OK'
+        render json: { "id": @episode.id, "title": @episode.title, "actual_finish": @episode.actual_finish }
       end
 
       def update_youtube_data
