@@ -26,18 +26,7 @@ class Episode extends React.Component {
     const { episode } = this.state
     return (
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-        {(function() {
-          switch(episode.status) {
-            case 'draft':
-              return <div>Draft</div>;
-            case 'announcement':
-              return <div>Announcement</div>;
-            case 'finished':
-              return <div>Finished</div>;
-            default:
-              return <div>I don't know "{episode.status}" status</div>;
-            }
-          })()}
+        {episode.status}
         <div class="container">
           <h1 class="my-4">{episode.title}</h1>
           <div class="row">

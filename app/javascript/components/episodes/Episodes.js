@@ -13,7 +13,6 @@ class Episodes extends React.Component {
   }
 
   getEpisodes() {
-    console.log('getEpisodes')
     axios.get('/api/v1/episodes')
       .then(response => {
         this.setState({ episodes: response.data.reverse() })
@@ -34,7 +33,6 @@ class Episodes extends React.Component {
   deleteEpisode(id){
     axios.delete(`/api/v1/episodes/${id}`)
     .then(response => {
-      console.log(response);
       const newEpisodes = this.state.episodes .filter((episode) => episode.id !== id)
       this.setState({
         episodes: newEpisodes
