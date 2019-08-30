@@ -9,7 +9,7 @@ module Api
       end
 
       def show
-        render json: @episode
+        render json: @episode, serializer: EpisodesSerializer
       end
 
       def create
