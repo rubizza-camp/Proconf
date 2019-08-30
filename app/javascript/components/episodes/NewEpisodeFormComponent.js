@@ -57,7 +57,6 @@ class NewEpisodeFormComponent extends React.Component {
         }
         else if (response.data) {
           message.success(`New episode "${response.data.title}" successfully created!`);
-          // this.props.history.push('/admin/episodes')
           this.props.handler()
         }
       })

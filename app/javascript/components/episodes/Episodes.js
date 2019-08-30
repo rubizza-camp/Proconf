@@ -124,9 +124,7 @@ class Episodes extends React.Component {
                   <td key={episode.id}>{episode.status}</td>
                   <td key={episode.id}>
                     <Button.Group>
-                      {/* <Link to={`/admin/episodes/${episode.id}/edit`}> */}
-                        <Button icon="edit" shape="round" onClick={this.showEditDrawer}>Edit</Button>
-                      {/* </Link> */}
+                      <Button icon="edit" shape="round" onClick={this.showEditDrawer}>Edit</Button>
                       <Popconfirm
                         placement="left"
                         title={text}
