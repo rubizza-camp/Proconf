@@ -6,7 +6,7 @@ module Api
       before_action :set_episode, only: %i[index create]
 
       def index
-        render json: @episode.timecodes, serializer: TimecodesSerializer
+        render json: @episode.timecodes, each_serializer: TimecodesSerializer
       end
 
       def show
