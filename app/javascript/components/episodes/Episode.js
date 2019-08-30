@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import YouTube from 'react-youtube';
 import { Link } from 'react-router-dom'
-
 import { Button } from 'antd'
+import Timecodes from '../timecodes/Timecodes'
 
 class Episode extends React.Component {
   constructor(props) {
@@ -27,6 +27,7 @@ class Episode extends React.Component {
   
   render() {
     const { episode } = this.state
+    console.log(episode);
     return (
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
         {episode.status}
@@ -47,6 +48,7 @@ class Episode extends React.Component {
               </Link>
             </div>
           </div>
+          <Timecodes id={this.props.match.params}/>
         </div>
       </div>
     )
