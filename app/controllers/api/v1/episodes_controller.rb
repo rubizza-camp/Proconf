@@ -55,17 +55,17 @@ module Api
 
       def to_announcement
         @episode.announcement!
-        render json: 'OK'
+        render json: @episode, serializer: StatusesSerializer
       end
 
       def to_online
         @episode.online!
-        render json: 'OK'
+        render json: @episode, serializer: StatusesSerializer
       end
 
       def to_finished
         @episode.finished!
-        render json: 'OK'
+        render json: @episode, serializer: StatusesSerializer
       end
 
       private
