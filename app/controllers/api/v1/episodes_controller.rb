@@ -26,6 +26,7 @@ module Api
       end
 
       def update
+        binding.pry
         if @episode.update(episode_params)
           render json: @episode, serializer: EpisodesSerializer
         else
@@ -53,17 +54,17 @@ module Api
       end
 
       def to_announcement
-        @episode.to_announcement!
+        @episode.announcement!
         render json: 'OK'
       end
 
       def to_online
-        @episode.to_online!
+        @episode.online!
         render json: 'OK'
       end
 
       def to_finished
-        @episode.to_finished!
+        @episode.finished!
         render json: 'OK'
       end
 
