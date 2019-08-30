@@ -59,7 +59,7 @@ class Episode < ApplicationRecord
     end
 
     event :online do
-      transitions from: :announced, to: :online
+      transitions from: %i[draft announced], to: :online
     end
 
     event :processing do
@@ -67,7 +67,7 @@ class Episode < ApplicationRecord
     end
 
     event :finished do
-      transitions from: %i[processing online], to: :finished
+      transitions from: %i[online processing], to: :finished
     end
   end
 

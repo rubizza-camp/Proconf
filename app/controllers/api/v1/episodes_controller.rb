@@ -26,7 +26,6 @@ module Api
       end
 
       def update
-        binding.pry
         if @episode.update(episode_params)
           render json: @episode, serializer: EpisodesSerializer
         else
