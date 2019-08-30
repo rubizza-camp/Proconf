@@ -1,9 +1,17 @@
 module Api
   module V1
     class AnnouncementsController < ApiController
-      before_action :authenticate_user
-      before_action :set_announcement, only: %i[edit update destroy]
-      before_action :set_episode, only: :create
+      before_action :authenticate_user, except: %i[index show]
+      before_action :set_announcement, only: %i[show edit update destroy]
+      before_action :set_episode, only: %i[index create]
+
+      def index
+        render json: @episode.announcements, serializer: AnnouncementsSerializer
+      end
+
+      def show
+        render json: @announcement, serializer: AnnouncementsSerializer
+      end
 
       def create
         announcement = @episode.announcements.create(announcement_params)

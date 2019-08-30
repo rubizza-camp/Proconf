@@ -54,14 +54,17 @@ module Api
 
       def to_announcement
         @episode.to_announcement!
+        render json: 'OK'
       end
 
       def to_online
         @episode.to_online!
+        render json: 'OK'
       end
 
       def to_finished
         @episode.to_finished!
+        render json: 'OK'
       end
 
       private

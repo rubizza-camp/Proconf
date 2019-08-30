@@ -14,12 +14,13 @@ Rails.application.routes.draw do
         post 'to_announcement', on: :member
         post 'to_online', on: :member
         post 'to_finished', on: :member
-        resources :announcements, only: %i[create update destroy]
-        resources :timecodes, only: %i[create update destroy]
+        resources :announcements, only: %i[index show create update destroy]
+        resources :timecodes, only: %i[index show create update destroy]
       end
       get '/webhooks/receive', to: 'webhooks#complete'
       post '/webhooks/receive', to: 'webhooks#receive'
       post '/webhooks/create', to: 'webhooks#create'
+      get '/users_boards', to: 'webhooks#users_boards'
       get '/auth/trello/callback', to: 'trello_callbacks#trello'
     end
   end

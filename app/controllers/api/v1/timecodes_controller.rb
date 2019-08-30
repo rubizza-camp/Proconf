@@ -1,9 +1,17 @@
 module Api
   module V1
     class TimecodesController < ApiController
-      before_action :authenticate_user
-      before_action :set_timecode, only: %i[edit update destroy]
-      before_action :set_episode, only: :create
+      before_action :authenticate_user, except: %i[index show]
+      before_action :set_timecode, only: %i[show edit update destroy]
+      before_action :set_episode, only: %i[index create]
+
+      def index
+        render json: @episode.timecodes, serializer: TimecodesSerializer
+      end
+
+      def show
+        render json: @timecode, serializer: TimecodesSerializer
+      end
 
       def create
         timecode = @episode.timecodes.create(timecode_params)

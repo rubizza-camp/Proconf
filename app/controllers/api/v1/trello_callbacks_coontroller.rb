@@ -7,8 +7,8 @@ module Api
       def trello
         credentials.update(data: {
                              uid: request.env['omniauth.auth'].uid,
-                             trello_oauth_token: request.env['omniauth.auth'].credentials.token,
-                             trello_oauth_secret: request.env['omniauth.auth'].credentials.secret
+                             oauth_token: request.env['omniauth.auth'].credentials.token,
+                             oauth_secret: request.env['omniauth.auth'].credentials.secret
                            })
       end
       # rubocop:enable Metrics/AbcSize
