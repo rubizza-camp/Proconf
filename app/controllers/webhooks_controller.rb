@@ -1,4 +1,5 @@
 class WebhooksController < ApplicationController
+  include WebhooksHelper
   skip_before_action :verify_authenticity_token, only: %i[complete receive]
 
   ADD_LABEL_TYPE = 'addLabelToCard'.freeze
@@ -21,14 +22,13 @@ class WebhooksController < ApplicationController
   end
 
   def create
-    url = "https://api.trello.com/1/tokens/#{users_trello_token}/webhooks"
     body = {
       key: ENV['PROCONF_APIKEY'],
       callbackURL: [ENV['CALLBACK_URL'], '/webhooks/receive'].join,
       idModel: ENV['IDMODEL']
     }
 
-    HTTParty.post(url, body: body)
+    HTTParty.post(webhook_create_url(users_trello_token), body: body)
 
     redirect_to admin_path
   end
