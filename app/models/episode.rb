@@ -1,8 +1,8 @@
 class Episode < ApplicationRecord
   validates :title, :date, presence: true
 
-  has_many :announcements
-  has_many :timecodes
+  has_many :announcements, dependent: :destroy
+  has_many :timecodes, dependent: :destroy
   has_and_belongs_to_many :authors
   has_and_belongs_to_many :guests
   has_and_belongs_to_many :sponsors

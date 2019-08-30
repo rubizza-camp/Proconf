@@ -25,9 +25,9 @@ module Api
 
       def update
         if @timecode.update(timecode_params)
-          render json: timecode, serializer: TimecodesSerializer
+          render json: @timecode, serializer: TimecodesSerializer
         else
-          render json: { 'errors': timecode.errors }
+          render json: { 'errors': @timecode.errors }
         end
       end
 
