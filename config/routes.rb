@@ -27,10 +27,5 @@ Rails.application.routes.draw do
 
   get '/admin', to: 'dashboard#index'
 
-  get '/auth/trello/callback', to: 'trello_callbacks#trello'
-  get '/webhooks/receive', to: 'webhooks#complete'
-  post '/webhooks/receive', to: 'webhooks#receive'
-  get '/webhooks/create', to: 'webhooks#create'
-
   get '*path', to: redirect('/')
 end
