@@ -6,7 +6,7 @@ import moment from 'moment';
 class NewEpisode extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { id: '', title: '', date: '', video: '', description: '', authors: []};
+    this.state = { id: '', title: '', date: '', video: '', description: '', authors: [], guests: [], sponsors: []};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,7 +59,7 @@ class NewEpisode extends React.Component {
   };
 
   render() {
-    const { title, date, video, description, authors } = this.state
+    const { title, date, video, description, authors, guests, sponsors } = this.state
     return (
         <div class="container">
           <div class="row">
@@ -73,7 +73,7 @@ class NewEpisode extends React.Component {
                 </Form.Item>
 
                 <Form.Item label="Start datetime" required={true}>
-                  {(<DatePicker showTime className="form-control" name="date" placeholder="Select Time" value={moment(date)} onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />)}
+                  {(<DatePicker showTime className="form-control" name="date" placeholder="Select Date" onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />)}
                 </Form.Item>
 
                 <Form.Item label="Youtube url" required={true}>
@@ -89,13 +89,36 @@ class NewEpisode extends React.Component {
                       mode="multiple"
                       style={{ width: '100%' }}
                       placeholder="Please select"
-                      onChange={console.log('hey')}
                   >
                     {authors.map(function (author) {
                       return <Option key={author.id}>{author.name}</Option>
                     })}
                   </Select>}
                 </Form.Item>
+
+                <Form.Item label="Guests">
+                  {<Select
+                      mode="multiple"
+                      style={{ width: '100%' }}
+                      placeholder="Please select"
+                  >
+                      {guests.map(function (guest) {
+                      return <Option key={guest.id}>{guest.name}</Option>
+                    })}
+                  </Select>}
+              </Form.Item>
+
+              <Form.Item label="Sponsors">
+                  {<Select
+                      mode="multiple"
+                      style={{ width: '100%' }}
+                      placeholder="Please select"
+                  >
+                      {sponsors.map(function (sponsor) {
+                          return <Option key={sponsor.id}>{sponsor.name}</Option>
+                      })}
+                  </Select>}
+              </Form.Item>
 
                 <Form.Item wrapperCol={{ span: 12, offset: 5 }}>
                   <Button type="primary" htmlType="submit">
