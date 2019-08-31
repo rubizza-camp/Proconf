@@ -3,11 +3,22 @@ module Api
     class TelegramController < Api::V1::ApiController
       before_action :authenticate_user
 
+      # GET '/telegram'
+      def credentials
+        credentials = current_user.credentials.find_by(service: 'telegram')&.data
+        render json: {
+          telegram_chat_id: credentials['telegram_chat_id'] ||= '',
+          telegram_token: credentials['telegram_token'] ||= ''
+        }, status: :ok
+      end
+
+      # POST '/telegram'
       def telegram
-        if TelegramService.new(current_user, params).execute
-          render json: 'Telegram successfully created'
+        telegram = TelegramService.new(current_user, params)
+        if telegram.execute
+          render json: { message: 'Message sucessfully send!' }, status: :ok
         else
-          render json: 'Telegram not created'
+          render json: { error: telegram.error }, status: :ok
         end
       end
     end

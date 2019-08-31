@@ -1,4 +1,6 @@
 class TrelloController < ApplicationController
+  include Knock::Authenticable
+  undef_method :current_user
   before_action :authenticate_user
 
   # rubocop:disable Metrics/AbcSize

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       delete '/webhooks/delete', to: 'webhooks#delete'
       post '/webhooks/create', to: 'webhooks#create'
       get '/users_boards', to: 'webhooks#users_boards'
+      get '/telegram', to: 'telegram#credentials'
+      post '/telegram', to: 'telegram#telegram'
     end
   end
 
@@ -31,7 +33,6 @@ Rails.application.routes.draw do
   get '/admin', to: 'dashboard#index'
 
   match '/episodes/*path', to: 'episodes#index', via: :all
-  # post '/admin/telegram', to: 'dashboard#telegram'
 
   get '*path', to: redirect('/')
 end
