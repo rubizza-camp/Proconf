@@ -68,7 +68,7 @@ class EditableTable extends React.Component {
     event.preventDefault()
     const id = event.target.value
     axios
-      .delete("/api/v1/timecodes/" + id)
+      .delete(`/api/v1/episodes/${this.state.episode.id}/timecodes/${id}`)
       .then((response) => {
         response.status == 200
         ? this.setState({ timecodes: this.state.timecodes.filter((timecode) => {
@@ -98,8 +98,7 @@ class EditableTable extends React.Component {
             url: `https://youtu.be/${response.data.video}?t=${timecode_time}`
           }
         });
-        console.log(response)
-        this.setState({ timecodes: timecodes, episode: response.data })
+        this.setState({ timecodes: timecodes.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0)), episode: response.data })
       })
       .catch((error) => {
         console.log(error)
@@ -120,21 +119,58 @@ class EditableTable extends React.Component {
         return;
       }
 
-      const timecode_timestamp = new Date(new Date(this.state.episode.broadcast_begin).toISOString().getTime() + timeToSeconds(timecode.time) * 1000)
-      console.log(timecode_timestamp)
+      const timecode_timestamp = new Date(new Date(this.state.episode.broadcast_begin).getTime() + timeToSeconds(timecode.time) * 1000)
 
-      const options = {
+      const options_for_create = {
+        method: 'post',
+        url: `/api/v1/episodes/${this.state.episode.id}/timecodes`,
+        data: {
+          title: timecode.title,
+          time: timecode_timestamp
+        }
+      }
+
+      if (id == 0) {
+        axios(options_for_create)
+          .then((response) => {
+            console.log(response)
+            if (response.data.errors) { null } else {
+              const timecode_time = (new Date(response.data.time).getTime() - new Date(response.data.broadcast_begin).getTime()) / 1000;
+              const newTimecode = {
+                id: response.data.id,
+                title: response.data.title,
+                time: timecode.time,
+                url: `https://youtu.be/${this.state.episode.video}?t=${timecode_time}`
+              }
+
+              const timecodes = this.state.timecodes.filter((timecode) => {
+                return timecode.id != 0
+              });
+
+              timecodes.push(newTimecode)
+              timecodes.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
+
+              this.setState({ timecodes: timecodes });
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+        return;
+      }
+
+      const options_for_update = {
         method: 'patch',
-        url: `/api/v1/timecodes/${id}`,
+        url: `/api/v1/episodes/${this.state.episode.id}/timecodes/${id}`,
         data: {
           title: timecode.title,
           time: timecode_timestamp
         }
       };
 
-      axios(options)
+      axios(options_for_update)
         .then((response) => {
-          if(response.status == 200) {
+          if (response.data.errors) { null } else {
             const timecodes = this.state.timecodes.filter((timecode) => {
               return timecode.id != id
             });
@@ -146,7 +182,7 @@ class EditableTable extends React.Component {
               url: `https://youtu.be/${this.state.episode.video}?t=${timeToSeconds(timecode.time)}`
             });
 
-            this.setState({ timecodes: timecodes, editingId: 0 });
+            this.setState({ timecodes: timecodes.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0)), editingId: 0 });
           }
         })
         .catch((error) => {
@@ -156,7 +192,28 @@ class EditableTable extends React.Component {
   }
 
   cancel = () => {
-    this.setState({ editingId: 0 });
+    const timecodes = this.state.timecodes.filter((timecode) => {
+      return timecode.id != 0
+    });
+
+    this.setState({ timecodes: timecodes.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0)), editingId: 0 });
+  };
+
+  handleAdd = () => {
+    const timecodes = this.state.timecodes.filter((timecode) => {
+      return timecode.id != 0
+    });
+
+    const newTimecode = {
+      id: 0,
+      title: "Enter title",
+      time: "00:00:00",
+      url: `https://youtu.be/${this.state.episode.video}?t=${0}`
+    };
+
+    timecodes.push(newTimecode)
+
+    this.setState({ timecodes: timecodes.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0)) });
   };
 
   render() {
@@ -244,17 +301,22 @@ class EditableTable extends React.Component {
 
     return (
       <EditableContext.Provider value={this.props.form}>
-        <div className="row">
-          <Table
-            components={components}
-            rowKey={ timecode => timecode.id }
-            columns={columns}
-            dataSource={this.state.timecodes}
-            pagination={{
-              onChange: this.cancel,
-            }}
-          />
-        </div>
+          <div className="row">
+            <Table
+              components={components}
+              rowKey={ timecode => timecode.id }
+              columns={columns}
+              dataSource={this.state.timecodes}
+              pagination={{
+                onChange: this.cancel,
+              }}
+            />
+          </div>
+          <div className="row">
+            <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
+              Add a timecode
+            </Button>
+          </div>
       </EditableContext.Provider>
     )
   }

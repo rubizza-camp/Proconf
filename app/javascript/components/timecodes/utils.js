@@ -24,5 +24,5 @@ export const secondsToTime = (secs) => {
 export const timeToSeconds = (time) => {
   const [hours, minutes, seconds] = time.split(":");
 
-  return hours * 3600 + minutes * 60 + seconds
+  return hours * 3600 + minutes * 60 + seconds * 1
 }

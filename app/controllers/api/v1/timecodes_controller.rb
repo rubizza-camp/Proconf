@@ -1,7 +1,7 @@
 module Api
   module V1
     class TimecodesController < ApiController
-      before_action :authenticate_user, except: %i[index show]
+      # before_action :authenticate_user, except: %i[index show]
       before_action :set_timecode, only: %i[show edit update destroy]
       before_action :set_episode, only: %i[index create]
 
