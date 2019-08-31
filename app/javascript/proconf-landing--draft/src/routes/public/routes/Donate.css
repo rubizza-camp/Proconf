@@ -1,0 +1,35 @@
+.donate {
+  max-width: 800px;
+  margin: auto;
+}
+
+.donate__title {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 32px;
+  margin-top: 80px;
+}
+
+.donate__title:first-child {
+  margin-top: 32px;
+  font-size: 48px;
+}
+
+.donate__descr {
+  font-size: 18px;
+  line-height: 1.24;
+}
+
+.donate p {
+  margin-bottom: 24px;
+}
+
+.donate__patreon {
+  height: 240px;
+  width: 570px;
+  box-shadow: 0 0 0 4px white, 0 0 0 6px #fedc00;
+  display: block;
+  background-size: cover;
+  margin: 24px 0;
+}

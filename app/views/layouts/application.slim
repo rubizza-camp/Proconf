@@ -3,9 +3,50 @@ html
   head
     title
       | Proconf
+html lang="en" 
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    meta charset="utf-8" /
+    meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" /
+    meta content="#000000" name="theme-color" /
+    meta content="notranslate" name="google" /
+    meta content="yes" name="mobile-web-app-capable" /
+    meta content="yes" name="apple-mobile-web-app-capable" /
+    meta content="black" name="apple-mobile-web-app-status-bar-style" /
+    meta content="True" name="HandheldFriendly" /
+    meta content="470" name="MobileOptimized" /
+    meta content="telephone=no" name="format-detection" /
+    meta content="on" http-equiv="cleartype" /
+    title Podcast ProConf
+    /! Search Engine
+    meta content=("Подкаст про конференции") name="description" /
+    meta content="/256x256.png" name="image" /
+    /! Schema.org for Google
+    meta content=("Podcast ProConf") itemprop="name" /
+    meta content=("Подкаст про конференции") itemprop="description" /
+    meta content="/256x256.png" itemprop="image" /
+    /! Twitter
+    meta content="summary" name="twitter:card" /
+    meta content=("Podcast ProConf") name="twitter:title" /
+    meta content=("Подкаст про конференции") name="twitter:description" /
+    meta content="/256x256.png" name="twitter:image:src" /
+    /! Open Graph general (Facebook, Pinterest & Google+)
+    meta content=("Podcast ProConf") name="og:title" /
+    meta content=("Подкаст про конференции") name="og:description" /
+    meta content="/256x256.png" name="og:image" /
+    meta content="https://proconf.org" name="og:url" /
+    meta content="proconf.org" name="og:site_name" /
+    meta content="en_US" name="og:locale" /
+    meta content="website" name="og:type" /
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
   body
-    = yield      
+    link href="%PUBLIC_URL%/256x256.png" rel="apple-touch-icon" /
+    link href="%PUBLIC_URL%/256x256.png" rel="icon" type="image/png" /
+    link href="%PUBLIC_URL%/manifest.json" rel="manifest" /
+  body
+    noscript You need to enable JavaScript to run this app.
+    #root
+    = yield

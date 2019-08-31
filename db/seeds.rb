@@ -4,15 +4,18 @@ require 'csv'
 
 NAME = 0
 SURNAME = 1
+IMAGE = 2
 
 CSV.foreach(File.realpath('db/data/authors.csv')) do |row|
   Author.find_or_create_by(name: row[NAME],
-                           surname: row[SURNAME])
+                           surname: row[SURNAME],
+                           photo: row[IMAGE])
 end
 
 CSV.foreach(File.realpath('db/data/guests.csv')) do |row|
   Guest.find_or_create_by(name: row[NAME],
-                          surname: row[SURNAME])
+                          surname: row[SURNAME],
+                          photo: row[IMAGE])
 end
 
 CSV.foreach(File.realpath('db/data/sponsors.csv')) do |row|
@@ -50,10 +53,17 @@ Episode.all.each do |episode|
   end
 end
 
+Episode.all.each do |episode|
+  CSV.foreach(File.realpath('db/data/timecodes.csv')) do |row|
+    episode.timecodes.find_or_create_by(title: row[TITLE],
+                                        time: Time.parse(row[DATE]).utc)
+  end
+end
+
 Role.find_or_create_by(name: 'admin')
 
 User.create(
   email: 'superadmin@gmail.com',
-  role: Role.first,
+  role: Role.find_or_create_by(name: 'admin'),
   password: ENV['ADMIN_PASSWORD']
 )
