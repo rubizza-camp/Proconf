@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, Input, Icon } from 'antd'
 
 class Telegram extends React.Component {
   render() {
@@ -8,19 +9,22 @@ class Telegram extends React.Component {
         <form class="row" action="/admin/telegram" method="POST">
           <div class="col-md-8 mb-3">
             <label for="telegram-token">Bot Token</label>
-            <input class="form-control" type="text" id="telegram-token" name="telegram_token"/>
+            <Input.Password id="telegram-token" name="telegram_token"/>
             <small class="text-muted">Status</small>
           </div>  
           <div class="col-md-4 mb-3">
             <label for="telegram-chat-id">Chat ID</label>
-            <input class="form-control" type="text" id="telegram-chat-id" name="telegram_chat_id"/>
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="text"
+              id="telegram-chat-id"
+              name="telegram_chat_id"
+              />
             <small class="text-muted">Status</small>
           </div>  
           <div class="col-md-8"></div>  
           <div class="col-md-4 btn-group">
-            <button class="btn btn-primary">Check</button>
-            <input type="hidden" name="authenticity_token" id="authenticity_token"/>
-            <button class="btn btn-warning" type = "submit">Update</button>
+            <Button type = "primary">Update</Button>
           </div>  
         </form>  
       </div>
