@@ -40,30 +40,44 @@ class NewAnnouncement extends React.Component {
         }
         else if (response.data) {
           message.success(`New announcement "${response.data.title}" successfully created!`);
+          this.getAnnoucements();
         }
       })
       .catch(function (error) {
         message.error('Fill all required fields, please');
         console.log(error);
       });
-      this.props.getAnnoucements();
-      this.props.onClose();
+    this.props.onClose();
   };
 
+  getAnnoucements () {
+    const { id } = this.props.match.params
+
+    axios.get(`/api/v1/episodes/${id}/announcements`)
+      .then(response => {
+        console.log(response);
+        console.log(this.props.match.params);
+        this.props.updateData(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
+  }
+
   render() {
-    const { title, video, description } = this.state
+    const { title, date, target_resource } = this.state
     return (
       <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={this.handleSubmit}>
         <Form.Item label="Title" required={true}>
           <Input name="title" type="text" value={title} onChange={this.handleChange} />
         </Form.Item>
 
-        <Form.Item label="Start datetime" required={true}>
+        <Form.Item label="Date" required={true}>
           <DatePicker showTime className="form-control" name="date" placeholder="Select Time" onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />
         </Form.Item>
         
-        <Form.Item label="Youtube url" required={true}>
-          <Input name="target_resource" type="text" value={video} onChange={this.handleChange} />
+        <Form.Item label="Service" required={true}>
+          <Input name="target_resource" type="text" value={target_resource} onChange={this.handleChange} />
         </Form.Item>
 
         <Form.Item wrapperCol={{ span: 12, offset: 5 }}>

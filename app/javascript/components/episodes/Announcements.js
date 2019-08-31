@@ -73,6 +73,7 @@ class EditableTable extends React.Component {
         title: 'operation',
         dataIndex: 'operation',
         render: (text, record) => {
+          <Button>asasdasd</Button>
           const { editingKey } = this.state;
           const editable = this.isEditing(record);
           return editable ? (
@@ -92,9 +93,18 @@ class EditableTable extends React.Component {
               </Popconfirm>
             </span>
           ) : (
-            <a onClick={() => this.edit(record.id)}>
-              Edit
-            </a>
+            <Row>
+              <Col span={12}>
+                <a onClick={() => this.edit(record.id)}>
+                  Edit
+                </a>
+              </Col>
+              <Col span={12}>
+                <a onClick={() => this.delete(record.id)}>
+                  Delete
+                </a>
+              </Col>
+            </Row>
           );
         },
       },
@@ -106,6 +116,21 @@ class EditableTable extends React.Component {
   cancel = () => {
     this.setState({ editingKey: 0 });
   };
+
+  delete(id) {
+    const options = {
+        method: 'delete',
+        url: `/api/v1/episodes/${this.props.match.params}/announcements/${id}}`,
+      };
+
+      axios(options)
+      .then(response => {
+        this.getAnnoucements();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   componentDidMount () {
     this.getAnnoucements();
@@ -124,6 +149,11 @@ class EditableTable extends React.Component {
         console.log(error);
     });
   }
+
+  updateData = (value) => {
+    this.setState({ ann: value })
+  }
+
 
   save(form, id) {
     form.validateFields((error, announcement) => {
@@ -144,12 +174,11 @@ class EditableTable extends React.Component {
       .then(response => {
         console.log(response);
         console.log(this.props.match.params);
+        this.getAnnoucements();
       })
       .catch(function (error) {
         console.log(error);
-      });
-
-      this.getAnnoucements; 
+      }); 
 
       this.setState({ editingKey: 0})
     });
@@ -206,7 +235,7 @@ class EditableTable extends React.Component {
             onClose={this.onClose}
             visible={this.state.visible}
           >
-          <NewAnnouncement onClose = {this.onClose()} getAnnoucements={this.getAnnoucements()}/>
+          <NewAnnouncement onClose={this.onClose} updateData={this.updateData} />
             <div
               style={{
                 position: 'absolute',
