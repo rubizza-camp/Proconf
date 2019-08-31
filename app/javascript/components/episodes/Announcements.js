@@ -119,11 +119,11 @@ class EditableTable extends React.Component {
 
   delete(id) {
     const options = {
-        method: 'delete',
-        url: `/api/v1/episodes/${this.props.match.params}/announcements/${id}}`,
-      };
+      method: 'delete',
+      url: `/api/v1/episodes/${this.props.match.params}/announcements/${id}}`,
+    };
 
-      axios(options)
+    axios(options)
       .then(response => {
         this.getAnnoucements();
       })
@@ -147,7 +147,7 @@ class EditableTable extends React.Component {
       })
       .catch(function (error) {
         console.log(error);
-    });
+      });
   }
 
   updateData = (value) => {
@@ -172,8 +172,6 @@ class EditableTable extends React.Component {
 
       axios(options)
       .then(response => {
-        console.log(response);
-        console.log(this.props.match.params);
         this.getAnnoucements();
       })
       .catch(function (error) {
