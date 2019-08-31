@@ -14,6 +14,8 @@ import { Episode } from './episodes/Episode'
 import { Episodes } from './episodes/Episodes'
 import { EditEpisode } from  './episodes/EditEpisode';
 import { NewEpisode } from   './episodes/NewEpisode';
+import { Announcements } from './episodes/Announcements'
+import { Timecodes } from './timecodes/Timecodes';
 
 const { Header, Content, Footer } = Layout;
 
@@ -54,6 +56,8 @@ logout() {
               <Route path="/login" component={LoginPage} />
 
               <PrivateRoute path="/admin/episodes/:id/edit" component={EditEpisode} />
+              <PrivateRoute path="/admin/episodes/:id/announcements" component={Announcements} />
+              <PrivateRoute path="/admin/episodes/:id/timecodes" component={Timecodes} />
               <PrivateRoute path="/admin/episodes/new" component={NewEpisode} />
               <PrivateRoute path="/admin/episodes/:id" component={Episode} />
               
