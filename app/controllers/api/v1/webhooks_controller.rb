@@ -34,24 +34,11 @@ module Api
         render json: { "webhook": response }
       end
 
-      # rubocop:disable Metrics/MethodLength
       def users_boards
-        url = "https://api.trello.com/1/members/#{users_trello_creds[:uid]}"\
-        "/boards?key=#{ENV['PROCONF_APIKEY']}"\
-        "&token=#{users_trello_creds[:oauth_token]}"
+        lists = TrelloService.new(users_trello_creds[:uid], users_trello_creds[:oauth_token]).user_boards
 
-        response = HTTParty.get(url)
-
-        boards = response.map do |board|
-          {
-            board_name: board['name'],
-            idModel: board['id']
-          }
-        end
-
-        render json: boards
+        render json: lists
       end
-      # rubocop:enable Metrics/MethodLength
 
       private
 
