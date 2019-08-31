@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'user_token' => 'user_token#create'
+      get '/participants', to: 'participants#receive_all_participants'
       resources :episodes, only: %i[index show create update destroy] do
         post 'add_finish', on: :member
         post 'add_start', on: :member

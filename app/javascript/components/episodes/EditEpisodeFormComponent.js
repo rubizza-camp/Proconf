@@ -1,13 +1,16 @@
 import React from 'react';
 import axios from 'axios';
-import { Form, Input, DatePicker, Button, message } from 'antd';
+import { Form, Input, DatePicker, Button, message, Select } from 'antd';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 
 class EditEpisodeFormComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { id: this.props.id, title: '', date: '', video: '', description: '' };
+    this.state = {
+      id: this.props.id, title: '', date: '', video: '', description: '',
+      authors: [], guests: [], sponsors: [],
+      episode_authors: [], episode_guests: [], episode_sponsors: [] };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,6 +19,21 @@ class EditEpisodeFormComponent extends React.Component {
   componentDidMount () {
     const { id } = this.state
 
+    axios.get(`/api/v1/participants`)
+      .then(response => {
+        console.log(response)
+        this.setState({
+          authors: response.data.authors,
+          guests: response.data.guests,
+          sponsors: response.data.sponsors
+        })
+        console.log(this.state)
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     axios.get(`/api/v1/episodes/${id}`)
       .then(response => {
         this.setState({ 
@@ -23,7 +41,10 @@ class EditEpisodeFormComponent extends React.Component {
           title: response.data.title,
           date: response.data.date,
           video: `https://www.youtube.com/watch?v=${response.data.video}`,
-          description: response.data.description
+          description: response.data.description,
+          episode_guests: response.data.guests,
+          episode_authors: response.data.authors,
+          episode_sponsors: response.data.sponsors
          })
       })
       .catch(function (error) {
@@ -67,7 +88,8 @@ class EditEpisodeFormComponent extends React.Component {
     };
 
   render() {
-    const { title, date, video, description } = this.state
+    const { form: { getFieldDecorator } } = this.props
+    const { title, date, video, description, authors, guests, sponsors, episode_guests, episode_authors, episode_sponsors  } = this.state
     return (
       <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={this.handleSubmit}>
         <Form.Item label="Title" required={true}>
@@ -86,6 +108,52 @@ class EditEpisodeFormComponent extends React.Component {
           {(<Input.TextArea name="description" type="text" value={description} autosize={true} onChange={this.handleChange} />)}
         </Form.Item>
 
+        <Form.Item label="Authors">
+          {getFieldDecorator('episode_authors', {
+            initialValue: episode_authors.map(({ id }) => id.toString()),
+          })(
+            <Select
+                mode="multiple"
+                style={{ width: '100%' }}
+                placeholder="Please select"
+            >
+              {authors.map(function (author) {
+                return <Option key={author.id}>{author.name}</Option>
+              })}
+            </Select>
+          )}
+        </Form.Item>
+        <Form.Item label="Guests">
+          {getFieldDecorator('episode_guests', {
+            initialValue: episode_guests.map(({ id }) => id.toString()),
+          })(
+            <Select
+                mode="multiple"
+                style={{ width: '100%' }}
+                placeholder="Please select"
+            >
+              {guests.map(function (guest) {
+                return <Option key={guest.id}>{guest.name}</Option>
+              })}
+            </Select>
+          )}
+        </Form.Item>
+        <Form.Item label="Sponsors">
+          {getFieldDecorator('episode_sponsors', {
+            initialValue: episode_sponsors.map(({ id }) => id.toString()),
+          })(
+            <Select
+                mode="multiple"
+                style={{ width: '100%' }}
+                placeholder="Please select"
+            >
+              {sponsors.map(function (sponsor) {
+                return <Option key={sponsor.id}>{sponsor.name}</Option>
+              })}
+            </Select>
+          )}
+        </Form.Item>
+
         <Form.Item wrapperCol={{ span: 12, offset: 5 }}>
           <Button type="primary" htmlType="submit">
             Update episode
@@ -96,4 +164,6 @@ class EditEpisodeFormComponent extends React.Component {
   }
 }
 
-export default withRouter(EditEpisodeFormComponent)
+const EditEpisodeForm = Form.create({ name: 'edit_episode' })(EditEpisodeFormComponent)
+
+export default withRouter(EditEpisodeForm)
