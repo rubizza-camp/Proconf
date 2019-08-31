@@ -272,5 +272,5 @@ class EditableTable extends React.Component {
 
 const Announcements = Form.create()(EditableTable);
 
-export default Announcements
+export { Announcements }
 

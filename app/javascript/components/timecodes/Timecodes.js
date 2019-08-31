@@ -324,4 +324,4 @@ class EditableTable extends React.Component {
 
 const Timecodes = Form.create()(EditableTable);
 
-export default Timecodes
+export { Timecodes }

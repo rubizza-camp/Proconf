@@ -22,4 +22,4 @@ class NewEpisode extends React.Component {
   }
 }
 
-export default NewEpisode
+export {NewEpisode}
