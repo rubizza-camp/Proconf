@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { Button, Popconfirm, message, Icon, Drawer } from 'antd';
+import { Button, Popconfirm, message, Icon, Drawer, Table } from 'antd';
 import NewEpisodeFormComponent from './NewEpisodeFormComponent';
 
 import axios from 'axios';
@@ -66,7 +66,60 @@ class Episodes extends React.Component {
 
   render() {
     const { episodes } = this.state;
-    const text = 'Are you sure to delete this episode?';
+    const columns = [
+      {
+        title: '#',
+        dataIndex: 'id',
+        key: 'id',
+        width: '5%',
+        align: 'center'
+      },
+      {
+        title: 'Title',
+        dataIndex: 'title',
+        key: 'title',
+        width: '40%',
+        render: ( text, episode ) => <Link to={{ pathname: `/admin/episodes/${episode.id}` }} >{text}</Link>,
+      },
+      {
+        title: 'Date',
+        dataIndex: 'date',
+        key: 'date',
+        width: '20%',
+        align: 'center',
+        render: ( date ) => moment(date).format('MMMM Do YYYY, h:mm:ss a')
+      },
+      {
+        title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
+        width: '15%',
+        align: 'center'
+      },
+      {
+        title: 'Action',
+        key: 'action',
+        width: '20%',
+        align: 'center',
+        render: (text, episode) => (
+          <Button.Group>
+            <Link to={`/admin/episodes/${episode.id}/edit`}>
+              <Button icon="edit" shape="round">Edit</Button>
+            </Link>
+            <Popconfirm
+              placement="left"
+              title={'Are you sure to delete this episode?'}
+              okText="Yes"
+              cancelText="No"
+              icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
+              onConfirm={() => {this.handleDelete(episode.id)}}>
+              <Button icon="delete" type="danger" shape="round">Delete</Button>
+            </Popconfirm>
+          </Button.Group>
+        ),
+      },
+    ];
+    
 
     return (
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
@@ -84,47 +137,7 @@ class Episodes extends React.Component {
           <NewEpisodeFormComponent handler={this.onClose}/>
         </Drawer>
         
-        <table class='table'>
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Date</th>
-              <th scope="col">Status</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {episodes.map((episode) => {
-              return(
-                <tr key={episode.id}>
-                  <th scope="row" key={episode.id}>{episode.id}</th>
-                  <td key={episode.id}>
-                    <Link to={{ pathname: `/admin/episodes/${episode.id}` }} >{episode.title}</Link>
-                  </td>
-                  <td key={episode.id}>{moment(episode.date).format('MMMM Do YYYY, h:mm:ss a')}</td>
-                  <td key={episode.id}>{episode.status}</td>
-                  <td key={episode.id}>
-                    <Button.Group>
-                      <Link to={`/admin/episodes/${episode.id}/edit`}>
-                        <Button icon="edit" shape="round">Edit</Button>
-                      </Link>
-                      <Popconfirm
-                        placement="left"
-                        title={text}
-                        okText="Yes"
-                        cancelText="No"
-                        icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
-                        onConfirm={() => {this.handleDelete(episode.id)}}>
-                        <Button icon="delete" type="danger" shape="round">Delete</Button>
-                      </Popconfirm>
-                    </Button.Group>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+        <Table dataSource={episodes} columns={columns}/>
       </div>
     )
   }
