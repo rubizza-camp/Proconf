@@ -57,7 +57,7 @@ class NewEpisodeFormComponent extends React.Component {
         }
         else if (response.data) {
           message.success(`New episode "${response.data.title}" successfully created!`);
-          this.props.history.push('/admin/episodes')
+          this.props.handler()
         }
       })
       .catch(function (error) {
@@ -75,7 +75,7 @@ class NewEpisodeFormComponent extends React.Component {
         </Form.Item>
 
         <Form.Item label="Start datetime" required={true}>
-          {(<DatePicker showTime className="form-control" name="date" placeholder="Select Time" onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />)}
+          {(<DatePicker showTime name="date" placeholder="Select Time" onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />)}
         </Form.Item>
         
         <Form.Item label="Youtube url" required={true}>
