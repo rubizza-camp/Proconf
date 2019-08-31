@@ -90,7 +90,7 @@ const EpisodeList = ({ item }: { item: PodcastType }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios.get('/episodes.json')
+    axios.get('/api/v1/episodes')
     .then((response) => {
       const episodes = response.data.map((item: any) => {
         return {
@@ -111,14 +111,14 @@ const EpisodeList = ({ item }: { item: PodcastType }) => {
           guests: item.guests.map((guest) => {
             return {
               id: guest.id,
-              name: `${guest.name} ${guest.surname}`,
+              name: guest.full_name,
               img: guest.photo
             }
           }),
           authors: item.authors.map((author) => {
             return {
               id: author.id,
-              name: `${author.name} ${author.surname}`,
+              name: author.full_name,
               img: author.photo
             }
           }),
@@ -140,7 +140,7 @@ const EpisodeList = ({ item }: { item: PodcastType }) => {
           ]
         }
       })
-      setItems(episodes.slice(0, 3));
+      setItems(episodes.slice(episodes.length - 3, episodes.length).sort((a,b) => (a.date > b.date) ? -1 : ((b.date > a.date) ? 1 : 0)));
     }).catch((error) => {
       console.log(error);
     });
@@ -232,7 +232,7 @@ const Podcasts = ({ page }: { page?: string }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios.get('/episodes.json')
+    axios.get('/api/v1/episodes')
     .then((response) => {
       const episodes = response.data.map((item: any) => {
         return {
@@ -253,14 +253,14 @@ const Podcasts = ({ page }: { page?: string }) => {
           guests: item.guests.map((guest) => {
             return {
               id: guest.id,
-              name: `${guest.name} ${guest.surname}`,
+              name: guest.full_name,
               img: guest.photo
             }
           }),
           authors: item.authors.map((author) => {
             return {
               id: author.id,
-              name: `${author.name} ${author.surname}`,
+              name: author.full_name,
               img: author.photo
             }
           }),
@@ -282,7 +282,7 @@ const Podcasts = ({ page }: { page?: string }) => {
           ]
         }
       })
-      setItems(episodes);
+      setItems(episodes.sort((a,b) => (a.date > b.date) ? -1 : ((b.date > a.date) ? 1 : 0)));
     }).catch((error) => {
       console.log(error);
     });
@@ -304,10 +304,9 @@ const HomeContent = () => {
   const [item, setItem] = useState(podcasts[0]);
 
   useEffect(() => {
-    axios.get('/episodes/1.json')
+    axios.get('/api/v1/episodes')
     .then((response) => {
-      const item = response.data;
-      console.log(item);
+      const item = response.data[response.data.length - 1];
       const episode =
         {
           id: item.id,
@@ -327,14 +326,14 @@ const HomeContent = () => {
           guests: item.guests.map((guest) => {
             return {
               id: guest.id,
-              name: `${guest.name} ${guest.surname}`,
+              name: guest.full_name,
               img: guest.photo
             }
           }),
           authors: item.authors.map((author) => {
             return {
               id: author.id,
-              name: `${author.name} ${author.surname}`,
+              name: author.full_name,
               img: author.photo
             }
           }),

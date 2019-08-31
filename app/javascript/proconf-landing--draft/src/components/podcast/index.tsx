@@ -125,7 +125,7 @@ const PodcastSmall = ({
       <PodcastSmallTitle isFull={isFull} item={item} />
       <div className='podcast-small__content'>
         {isFull ? (
-          <div className='podcast-full__tabs navbar'>
+          <div className='podcast-full__tabs'>
             <Link
               to={`/episodes/${item.id}/list/notes`}
               className={`navbar__item ${pageParams.isNotes &&

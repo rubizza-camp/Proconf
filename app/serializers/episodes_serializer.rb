@@ -1,5 +1,5 @@
 class EpisodesSerializer < ActiveModel::Serializer
-  attributes :id, :title, :date, :description, :video, :status, :actual_start, :actual_finish
+  attributes :id, :title, :date, :description, :video, :status, :actual_start, :actual_finish, :broadcast_begin
   has_many :announcements, serializer: AnnouncementsSerializer, embed: :objects
   has_many :timecodes, serializer: TimecodesSerializer, embed: :objects
   has_many :authors, serializer: People::AuthorsSerializer, embed: :objects

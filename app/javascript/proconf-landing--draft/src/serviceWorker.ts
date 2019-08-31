@@ -9,6 +9,7 @@ const isLocalhost = Boolean(
 );
 
 function applyViewPort() {
+  // @ts-ignore
   var isCordovaApp = !!window.cordova;
   if (isCordovaApp && /Android/i.test(navigator.userAgent)) {
     const doc = document.documentElement;
@@ -75,6 +76,7 @@ export default function register() {
   }
 
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    // @ts-ignore
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {
       return;

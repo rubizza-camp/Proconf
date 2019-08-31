@@ -46,7 +46,7 @@ export const EpisodeDetails = (props: RouteComponentProps<{ id: string }>) => {
   const [item, setItem] = useState();
 
   useEffect(() => {
-    axios.get(`/episodes/${num}.json`)
+    axios.get(`/api/v1/episodes/${num}`)
     .then((response) => {
       const item = response.data;
       const episode =
@@ -68,14 +68,14 @@ export const EpisodeDetails = (props: RouteComponentProps<{ id: string }>) => {
           guests: item.guests.map((guest) => {
             return {
               id: guest.id,
-              name: `${guest.name} ${guest.surname}`,
+              name: guest.full_name,
               img: guest.photo
             }
           }),
           authors: item.authors.map((author) => {
             return {
               id: author.id,
-              name: `${author.name} ${author.surname}`,
+              name: author.full_name,
               img: author.photo
             }
           }),
