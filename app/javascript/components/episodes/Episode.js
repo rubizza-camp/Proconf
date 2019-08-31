@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import YouTube from 'react-youtube';
 import { Link } from 'react-router-dom'
-
 import { Button } from 'antd'
+import Timecodes from '../timecodes/Timecodes'
 
 class Episode extends React.Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class Episode extends React.Component {
                 : null
               }
             </div>
-            <div class="col-md-5">
+            <div className="col-md-5">
               <p>{episode.description}</p>
               <p>{episode.date}</p>
               <Link to={`/admin/episodes/${episode.id}/announcements`}>
@@ -47,6 +47,7 @@ class Episode extends React.Component {
               </Link>
             </div>
           </div>
+          <Timecodes id={this.props.match.params}/>
         </div>
       </div>
     )
