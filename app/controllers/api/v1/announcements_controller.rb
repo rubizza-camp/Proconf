@@ -25,9 +25,9 @@ module Api
 
       def update
         if @announcement.update(announcement_params)
-          render json: announcement, serializer: AnnouncementsSerializer
+          render json: @announcement, serializer: AnnouncementsSerializer
         else
-          render json: { 'errors': announcement.errors }
+          render json: { 'errors': @announcement.errors }
         end
       end
 

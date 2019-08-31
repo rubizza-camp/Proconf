@@ -77,8 +77,8 @@ class EditEpisodeFormComponent extends React.Component {
           message.error(`${errorField} ${response.data.error[errorField]}`);
         }
         else if (response.data) {
-          message.success(`Episode "${response.data.title}" successfully edited!`);
           this.props.history.push('/admin/episodes')
+          message.success(`Episode "${response.data.title}" successfully edited!`);
         }
       })
       .catch(function (error) {
@@ -97,7 +97,7 @@ class EditEpisodeFormComponent extends React.Component {
         </Form.Item>
 
         <Form.Item label="Start datetime" required={true}>
-          {(<DatePicker showTime className="form-control" name="date" placeholder="Select Time" value={moment(date)} onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />)}
+          {(<DatePicker showTime name="date" placeholder="Select Time" value={ moment(date) } onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />)}
         </Form.Item>
         
         <Form.Item label="Youtube url" required={true}>

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { Button, Popconfirm, message, Icon, Drawer } from 'antd';
 import NewEpisodeFormComponent from './NewEpisodeFormComponent';
-import EditEpisodeFormComponent from './EditEpisodeFormComponent';
 
 import axios from 'axios';
 import moment from 'moment';
@@ -12,8 +11,8 @@ class Episodes extends React.Component {
     super(props);
     this.state = {
       episodes: [],
-      showVisible: false,
-      editVisible: false
+      currentEpisodeID: '',
+      showVisible: false
     };
   
     this.handleDelete = this.handleDelete.bind(this);
@@ -21,20 +20,13 @@ class Episodes extends React.Component {
 
   showNewDrawer = () => {
     this.setState({
-      showVisible: true,
-    });
-  };
-
-  showEditDrawer = () => {
-    this.setState({
-      editVisible: true,
+      showVisible: true
     });
   };
 
   onClose = () => {
     this.setState({
       showVisible: false,
-      editVisible: false
     });
     this.getEpisodes();
   };
@@ -89,17 +81,7 @@ class Episodes extends React.Component {
           visible={this.state.showVisible}
           placement={"right"}
         >
-          <NewEpisodeFormComponent handler = {this.onClose}/>
-        </Drawer>
-        
-        <Drawer
-          title="Edit episode"
-          width={720}
-          onClose={this.onClose}
-          visible={this.state.editVisible}
-          placement={"left"}
-        >
-          <EditEpisodeFormComponent id={85} handler = {this.onClose}/>
+          <NewEpisodeFormComponent handler={this.onClose}/>
         </Drawer>
         
         <table class='table'>
@@ -124,7 +106,9 @@ class Episodes extends React.Component {
                   <td key={episode.id}>{episode.status}</td>
                   <td key={episode.id}>
                     <Button.Group>
-                      <Button icon="edit" shape="round" onClick={this.showEditDrawer}>Edit</Button>
+                      <Link to={`/admin/episodes/${episode.id}/edit`}>
+                        <Button icon="edit" shape="round">Edit</Button>
+                      </Link>
                       <Popconfirm
                         placement="left"
                         title={text}

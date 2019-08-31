@@ -1,7 +1,7 @@
 module Api
   module V1
     class EpisodesController < ApiController
-      # before_action :authenticate_user, except: %i[index show]
+      before_action :authenticate_user, except: %i[index show]
       before_action :set_episode, except: %i[index create]
 
       def index
