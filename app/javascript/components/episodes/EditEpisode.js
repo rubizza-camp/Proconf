@@ -22,4 +22,4 @@ class EditEpisode extends React.Component {
   }
 }
 
-export default EditEpisode
+export { EditEpisode }

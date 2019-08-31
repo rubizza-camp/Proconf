@@ -54,4 +54,4 @@ class Episode extends React.Component {
   }
 }
 
-export default Episode
+export { Episode }

@@ -28,4 +28,4 @@ class Telegram extends React.Component {
   }
 }
 
-export default Telegram
+export {Telegram}

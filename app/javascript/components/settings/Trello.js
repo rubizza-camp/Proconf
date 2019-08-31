@@ -8,4 +8,4 @@ class Trello extends React.Component {
   }
 }
 
-export default Trello
+export {Trello}

@@ -8,4 +8,4 @@ class Youtube extends React.Component {
   }
 }
 
-export default Youtube
+export {Youtube}

@@ -8,4 +8,4 @@ class EpisodeSearch extends React.Component {
   }
 }
 
-export default EpisodeSearch
+export { EpisodeSearch }

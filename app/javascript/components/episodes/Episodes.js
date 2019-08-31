@@ -143,4 +143,4 @@ class Episodes extends React.Component {
   }
 }
 
-export default Episodes
+export {Episodes}
