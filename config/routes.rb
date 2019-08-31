@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  # root 'episodes#index'
+  root 'episodes#index'
 
   namespace :api do
     namespace :v1 do
@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   match '/admin/*path', to: 'dashboard#index', via: :all
   get '/admin', to: 'dashboard#index'
+
+  match '/episodes/*path', to: 'episodes#index', via: :all
   # post '/admin/telegram', to: 'dashboard#telegram'
 
   get '*path', to: redirect('/')
