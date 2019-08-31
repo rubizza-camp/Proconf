@@ -14,6 +14,7 @@ import Episodes from './episodes/Episodes'
 import EditEpisode from './episodes/EditEpisode';
 import HomePage from './Home'
 import NewEpisode from './episodes/NewEpisode';
+import Announcements from './episodes/Announcements'
 
 const { Header, Content, Footer } = Layout;
 
@@ -30,7 +31,7 @@ class App extends React.Component {
             </Breadcrumb>
             <Switch>
               <Route exact path="/admin" render={() => <HomePage />} />
-              
+              <Route path="/admin/episodes/:id/announcements" component={Announcements} />
               <Route path="/admin/episodes/:id/edit" component={EditEpisode} />
               <Route path="/admin/episodes/new" component={NewEpisode} />
               <Route path="/admin/episodes/:id" component={Episode} />

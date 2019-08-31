@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import YouTube from 'react-youtube';
+import { Link } from 'react-router-dom'
+
+import { Button } from 'antd'
 
 class Episode extends React.Component {
   constructor(props) {
@@ -39,6 +42,9 @@ class Episode extends React.Component {
             <div class="col-md-5">
               <p>{episode.description}</p>
               <p>{episode.date}</p>
+              <Link to={`/admin/episodes/${episode.id}/announcements`}>
+                <Button icon="edit" shape="round">Announcements</Button>
+              </Link>
             </div>
           </div>
         </div>
