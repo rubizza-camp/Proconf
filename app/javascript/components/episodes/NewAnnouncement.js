@@ -71,7 +71,7 @@ class NewAnnouncement extends React.Component {
         </Form.Item>
 
         <Form.Item label="Date" required={true}>
-          <DatePicker showTime className="form-control" name="date" placeholder="Select Time" onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />
+          <DatePicker showTime name="date" placeholder="Select Time" onChange={(e) => { this.setState({ date: moment(e).toJSON() }) }} />
         </Form.Item>
         
         <Form.Item label="Service" required={true}>
