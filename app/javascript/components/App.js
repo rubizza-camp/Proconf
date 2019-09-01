@@ -2,7 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
 import { Layout, Breadcrumb } from 'antd';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Link} from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute';
 import { authenticationService } from './services';
 import { LoginPage } from './LoginPage';
@@ -45,12 +45,15 @@ logout() {
           <Header style={{ background: '#002140', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
               <Breadcrumb.Item>
-                {this.state.currentUser &&
-                   <a onClick={this.logout} className="nav-item nav-link">Logout</a>
-                }
+                <Link to="/admin">Dashboard</Link>
               </Breadcrumb.Item>
+              { this.state.currentUser
+                ? <Breadcrumb.Item>
+                    <Link to="/admin"><a onClick={this.logout} className="nav-item nav-link">Logout</a></Link>
+                  </Breadcrumb.Item>
+                : null
+              }
             </Breadcrumb>
             <Switch>
               <Route path="/login" component={LoginPage} />
