@@ -55,8 +55,6 @@ class NewAnnouncement extends React.Component {
 
     axios.get(`/api/v1/episodes/${id}/announcements`)
       .then(response => {
-        console.log(response);
-        console.log(this.props.match.params);
         this.props.updateData(response.data)
       })
       .catch(function (error) {

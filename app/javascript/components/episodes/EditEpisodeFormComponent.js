@@ -10,10 +10,15 @@ class EditEpisodeFormComponent extends React.Component {
     this.state = {
       id: this.props.id, title: '', date: '', video: '', description: '',
       authors: [], guests: [], sponsors: [],
-      episode_authors: [], episode_guests: [], episode_sponsors: [] };
+      episode_authors: [], episode_guests: [], episode_sponsors: [],
+      new_episode_authors: [], new_episode_guests: [], new_episode_sponsors: []
+     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeAuthors = this.handleChangeAuthors.bind(this);
+    this.handleChangeGuests = this.handleChangeGuests.bind(this);
+    this.handleChangeSponsors = this.handleChangeSponsors.bind(this);
   };
 
   componentDidMount () {
@@ -21,14 +26,11 @@ class EditEpisodeFormComponent extends React.Component {
 
     axios.get(`/api/v1/participants`)
       .then(response => {
-        console.log(response)
         this.setState({
           authors: response.data.authors,
           guests: response.data.guests,
           sponsors: response.data.sponsors
         })
-        console.log(this.state)
-
       })
       .catch(function (error) {
         console.log(error);
@@ -46,6 +48,9 @@ class EditEpisodeFormComponent extends React.Component {
           episode_authors: response.data.authors,
           episode_sponsors: response.data.sponsors
          })
+         this.state.episode_authors.map(({ id }) => this.state.new_episode_authors.push(id))
+         this.state.episode_guests.map(({ id }) => this.state.new_episode_guests.push(id))
+         this.state.episode_sponsors.map(({ id }) => this.state.new_episode_sponsors.push(id))
       })
       .catch(function (error) {
         console.log(error);
@@ -54,6 +59,18 @@ class EditEpisodeFormComponent extends React.Component {
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
+  };
+
+  handleChangeAuthors(value){
+    this.state.new_episode_authors = value;
+  };
+
+  handleChangeGuests(value){
+    this.state.new_episode_guests = value;
+  };
+
+  handleChangeSponsors(value){
+    this.state.new_episode_sponsors = value;
   };
 
   handleSubmit = e => {
@@ -67,9 +84,13 @@ class EditEpisodeFormComponent extends React.Component {
         title: title,
         date: date,
         video: video,
-        description: description
+        description: description,
+        authors: this.state.new_episode_authors,
+        guests: this.state.new_episode_guests,
+        sponsors: this.state.new_episode_sponsors
       }
     };
+
     axios(options)
       .then(response => {
         if (response.data.error) {
@@ -116,6 +137,7 @@ class EditEpisodeFormComponent extends React.Component {
               mode="multiple"
               style={{ width: '100%' }}
               placeholder="Please select"
+              onChange={this.handleChangeAuthors}
             >
               {authors.map(function (author) {
                 return <Option key={author.id}>{author.name}</Option>
@@ -132,6 +154,7 @@ class EditEpisodeFormComponent extends React.Component {
               mode="multiple"
               style={{ width: '100%' }}
               placeholder="Please select"
+              onChange={this.handleChangeGuests}
             >
               {guests.map(function (guest) {
                 return <Option key={guest.id}>{guest.name}</Option>
@@ -148,6 +171,7 @@ class EditEpisodeFormComponent extends React.Component {
               mode="multiple"
               style={{ width: '100%' }}
               placeholder="Please select"
+              onChange={this.handleChangeSponsors}
             >
               {sponsors.map(function (sponsor) {
                 return <Option key={sponsor.id}>{sponsor.name}</Option>
