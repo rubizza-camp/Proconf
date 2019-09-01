@@ -34,9 +34,9 @@ class NewAnnouncement extends React.Component {
 
     axios(options)
       .then(response => {
-        if (response.data.error) {
-          const errorField = Object.keys(response.data.error)[0]
-          message.error(`${errorField} ${response.data.error[errorField]}`);
+        if (response.data.errors) {
+          const errorField = Object.keys(response.data.errors)[0]
+          message.error(`${errorField} ${response.data.errors[errorField]}`);
         }
         else if (response.data) {
           message.success(`New announcement "${response.data.title}" successfully created!`);

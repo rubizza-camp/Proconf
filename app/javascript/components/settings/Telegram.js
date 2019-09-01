@@ -46,7 +46,6 @@ class Telegram extends React.Component {
 
     axios(options)
       .then(response => {
-        debugger
         const data = response.data
         if (data.error) {
           message.error(data.error);
