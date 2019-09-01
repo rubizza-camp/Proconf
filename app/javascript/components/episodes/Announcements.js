@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import { Table, Input, InputNumber, Popconfirm, Drawer, Form, Button, Col, Row, Select, DatePicker, Icon } from 'antd';
+import { Table, Input, InputNumber, Popconfirm, Drawer, Form, Button, Col, Row, Select, DatePicker, Icon, message } from 'antd';
 import NewAnnouncement from './NewAnnouncement'
 
 const EditableContext = React.createContext();
@@ -94,14 +94,19 @@ class EditableTable extends React.Component {
             </span>
           ) : (
             <Row>
-              <Col span={12}>
+              <Col span={8}>
                 <a onClick={() => this.edit(record.id)}>
                   Edit
                 </a>
               </Col>
-              <Col span={12}>
+              <Col span={8}>
                 <a onClick={() => this.delete(record.id)}>
                   Delete
+                </a>
+              </Col>
+              <Col>
+                <a onClick={() => this.send(record.id)}>
+                  Send
                 </a>
               </Col>
             </Row>
@@ -116,6 +121,23 @@ class EditableTable extends React.Component {
   cancel = () => {
     this.setState({ editingKey: 0 });
   };
+
+  send(key) {
+    const { id } = this.props.match.params
+
+    const options = {
+        method: 'post',
+        url: `/api/v1/episodes/${id}/announcements/${key}/send`,
+      };
+
+      axios(options)
+      .then(response => {
+        message.success(response.data.message)
+      })
+      .catch(function (error) {
+        console.log(error);
+      }); 
+  }
 
   delete(id) {
     const options = {
