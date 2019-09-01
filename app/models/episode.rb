@@ -36,7 +36,7 @@ class Episode < ApplicationRecord
         raise(ActiveRecord::RecordInvalid.new, 'Invalid video') unless args[:video].match VALID_YOUTUBE_LINK
 
         args[:video] = args[:video].match(YOUTUBE_VIDEO_IDENTIFIER)[5]
-        args[:date] = Time.parse(args[:date]).utc
+        args[:date] = Time.parse(args[:date]).utc if args[:date] != ''
       end
       args
     end
