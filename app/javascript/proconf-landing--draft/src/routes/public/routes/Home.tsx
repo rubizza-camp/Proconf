@@ -232,7 +232,7 @@ const Podcasts = ({ page }: { page?: string }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/v1/episodes')
+    axios.get("/api/v1/episodes/")
     .then((response) => {
       const episodes = response.data.map((item: any) => {
         return {
@@ -382,7 +382,6 @@ export const Home = ({ match }: RouteComponentProps<{ page?: string }>) => {
       )}
       <Page.Content>
         <Podcasts page={page} />
-        <Page.Paginator />
       </Page.Content>
     </>
   );
