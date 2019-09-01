@@ -13,7 +13,6 @@ if (localStorage.getItem('currentUser') != null){
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('currentUser')).token
 }
 
-
 class dashApp extends React.Component {
   render() {
     return (
