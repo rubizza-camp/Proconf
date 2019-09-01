@@ -86,41 +86,41 @@ class NewEpisodeFormComponent extends React.Component {
           {(<Input.TextArea name="description" type="text" value={description} autosize={true} onChange={this.handleChange} />)}
         </Form.Item>
 
-          <Form.Item label="Authors">
-              {<Select
-                  mode="multiple"
-                  style={{ width: '100%' }}
-                  placeholder="Please select"
-              >
-                  {authors.map(function (author) {
-                      return <Option key={author.id}>{author.name}</Option>
-                  })}
-              </Select>}
-          </Form.Item>
+        <Form.Item label="Authors">
+          {<Select
+            mode="multiple"
+            style={{ width: '100%' }}
+            placeholder="Please select"
+          >
+            {authors.map(function (author) {
+              return <Option key={author.id}>{author.name}</Option>
+            })}
+          </Select>}
+        </Form.Item>
 
-          <Form.Item label="Guests">
-              {<Select
-                  mode="multiple"
-                  style={{ width: '100%' }}
-                  placeholder="Please select"
-              >
-                  {guests.map(function (guest) {
-                      return <Option key={guest.id}>{guest.name}</Option>
-                  })}
-              </Select>}
-          </Form.Item>
+        <Form.Item label="Guests">
+          {<Select
+            mode="multiple"
+            style={{ width: '100%' }}
+            placeholder="Please select"
+          >
+            {guests.map(function (guest) {
+              return <Option key={guest.id}>{guest.name}</Option>
+            })}
+          </Select>}
+        </Form.Item>
 
-          <Form.Item label="Sponsors">
-              {<Select
-                  mode="multiple"
-                  style={{ width: '100%' }}
-                  placeholder="Please select"
-              >
-                  {sponsors.map(function (sponsor) {
-                      return <Option key={sponsor.id}>{sponsor.name}</Option>
-                  })}
-              </Select>}
-          </Form.Item>
+        <Form.Item label="Sponsors">
+          {<Select
+            mode="multiple"
+            style={{ width: '100%' }}
+            placeholder="Please select"
+          >
+            {sponsors.map(function (sponsor) {
+              return <Option key={sponsor.id}>{sponsor.name}</Option>
+            })}
+          </Select>}
+        </Form.Item>
 
         <Form.Item wrapperCol={{ span: 12, offset: 5 }}>
           <Button type="primary" htmlType="submit">

@@ -113,9 +113,9 @@ class EditEpisodeFormComponent extends React.Component {
             initialValue: episode_authors.map(({ id }) => id.toString()),
           })(
             <Select
-                mode="multiple"
-                style={{ width: '100%' }}
-                placeholder="Please select"
+              mode="multiple"
+              style={{ width: '100%' }}
+              placeholder="Please select"
             >
               {authors.map(function (author) {
                 return <Option key={author.id}>{author.name}</Option>
@@ -123,14 +123,15 @@ class EditEpisodeFormComponent extends React.Component {
             </Select>
           )}
         </Form.Item>
+        
         <Form.Item label="Guests">
           {getFieldDecorator('episode_guests', {
             initialValue: episode_guests.map(({ id }) => id.toString()),
           })(
             <Select
-                mode="multiple"
-                style={{ width: '100%' }}
-                placeholder="Please select"
+              mode="multiple"
+              style={{ width: '100%' }}
+              placeholder="Please select"
             >
               {guests.map(function (guest) {
                 return <Option key={guest.id}>{guest.name}</Option>
@@ -138,14 +139,15 @@ class EditEpisodeFormComponent extends React.Component {
             </Select>
           )}
         </Form.Item>
+        
         <Form.Item label="Sponsors">
           {getFieldDecorator('episode_sponsors', {
             initialValue: episode_sponsors.map(({ id }) => id.toString()),
           })(
             <Select
-                mode="multiple"
-                style={{ width: '100%' }}
-                placeholder="Please select"
+              mode="multiple"
+              style={{ width: '100%' }}
+              placeholder="Please select"
             >
               {sponsors.map(function (sponsor) {
                 return <Option key={sponsor.id}>{sponsor.name}</Option>

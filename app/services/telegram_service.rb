@@ -1,13 +1,15 @@
 class TelegramService
-  attr_reader :user, :params, :message
+  attr_reader :user, :params, :message, :error
   TELEGRAM_API_URL = 'https://api.telegram.org/bot'.freeze
   SEND_MESSAGE_PATH = '/sendMessage?chat_id='.freeze
-  MESSAGE_PATH = '&parse_mode=Markdown&text='.freeze
+  MESSAGE_PATH = '&text='.freeze
+  MESSAGE = "I'm trying to check telegram integration :D".freeze
 
   def initialize(user, params)
     @user = user
     @params = params
-    @message = 'auth'
+    @message = MESSAGE
+    @error = ''
   end
 
   def execute
@@ -28,14 +30,18 @@ class TelegramService
   private
 
   def telegram_valid?
-    telegram_token_valid? && telegram_send_valid?
+    @error = "Can't write in this chat" unless telegram_send_valid?
+    @error = 'Invalid token' unless telegram_token_valid?
+    @error.empty?
   end
 
   def telegram_send_valid?
+    puts create_link_for_send_message
     JSON.parse(Net::HTTP.get(URI.parse(create_link_for_send_message)))['ok']
   end
 
   def telegram_token_valid?
+    puts "#{TELEGRAM_API_URL}#{params[:telegram_token]}/getMe"
     JSON.parse(Net::HTTP.get(URI.parse("#{TELEGRAM_API_URL}#{params[:telegram_token]}/getMe")))['ok']
   end
 
