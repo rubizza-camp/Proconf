@@ -133,7 +133,6 @@ class EditableTable extends React.Component {
       if (id == 0) {
         axios(options_for_create)
           .then((response) => {
-            console.log(response)
             if (response.data.errors) { null } else {
               const timecode_time = (new Date(response.data.time).getTime() - new Date(response.data.broadcast_begin).getTime()) / 1000;
               const newTimecode = {
