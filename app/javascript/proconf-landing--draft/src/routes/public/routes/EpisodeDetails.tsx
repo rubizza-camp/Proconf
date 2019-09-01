@@ -35,7 +35,6 @@ const Episode = ({ item }: { item: PodcastType } & RouteComponentProps<{ id: str
     </div>
     <EpisodePlayer item={item} />
     <Podcast.Small isFull={true}  item={item} />
-    <Podcast.Comments />
   </Podcast>;
 };
 
@@ -54,7 +53,7 @@ export const EpisodeDetails = (props: RouteComponentProps<{ id: string }>) => {
           id: item.id,
           date: new Date(item.date).getTime(),
           title: item.title,
-          sponsor: item.sponsors[0].name,
+          sponsor: item.sponsors.length > 0 ? item.sponsors.map((sponsor) => {return sponsor.name}).join(', ') : '',
           keynotes: item.timecodes.map((timecode: any) => {
             const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
             const time = secondsToTime(timecode_time);
