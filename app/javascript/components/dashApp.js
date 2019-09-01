@@ -9,7 +9,10 @@ const store = configureStore();
 
 const csrfToken = document.querySelector('[name=csrf-token]').content
 axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('currentUser')).token
+if (localStorage.getItem('currentUser') != null){
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('currentUser')).token
+}
+
 
 class dashApp extends React.Component {
   render() {

@@ -29,6 +29,7 @@ function login(email, password) {
                  token: response.data.jwt
                }
                localStorage.setItem('currentUser', JSON.stringify(user))
+               axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('currentUser')).token
                currentUserSubject.next(user)
                return user
              })
