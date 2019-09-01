@@ -30,7 +30,6 @@ function login(email, password) {
                }
                localStorage.setItem('currentUser', JSON.stringify(user))
                currentUserSubject.next(user)
-               axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.token
                return user
              })
 }
