@@ -20,12 +20,13 @@ Rails.application.routes.draw do
       end
       get '/webhooks/receive', to: 'webhooks#complete'
       post '/webhooks/receive', to: 'webhooks#receive'
+      delete '/webhooks/delete', to: 'webhooks#delete'
       post '/webhooks/create', to: 'webhooks#create'
       get '/users_boards', to: 'webhooks#users_boards'
-      get '/auth/trello/callback', to: 'trello_callbacks#trello'
     end
   end
 
+  get '/auth/trello/callback', to: 'trello#trello'
   match '/admin/*path', to: 'dashboard#index', via: :all
   get '/admin', to: 'dashboard#index'
 

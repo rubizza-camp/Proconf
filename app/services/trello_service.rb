@@ -8,9 +8,9 @@ class TrelloService
   def user_boards
     responce.map do |board|
       {
-        board_name: board['name'],
-        idModel: board['id'],
-        lists: board_list(board['id'])
+        label: board['name'],
+        value: board['id'],
+        children: board_list(board['id'])
       }
     end
   end
@@ -20,8 +20,8 @@ class TrelloService
   def board_list(board_id)
     lists(board_id).map do |list|
       {
-        list_name: list['name'],
-        idModel: list['id']
+        label: list['name'],
+        value: list['id']
       }
     end
   end
