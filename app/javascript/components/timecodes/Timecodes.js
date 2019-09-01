@@ -89,7 +89,7 @@ class EditableTable extends React.Component {
       .get(`/api/v1/episodes/${id}`)
       .then((response) => {
         const timecodes = response.data.timecodes.map((timecode) => {
-          const timecode_time = (new Date(timecode.time).getTime() - new Date(response.data.broadcast_begin).getTime()) / 1000;
+          const timecode_time = Math.round(new Date(timecode.time).getTime() - new Date(response.data.broadcast_begin).getTime()) / 1000;
           const time = secondsToTime(timecode_time);
           return {
             id: timecode.id,
