@@ -5,12 +5,16 @@ module Api
       before_action :set_episode, except: %i[index create]
 
       def index
-        episodes = Episode.order(id: :asc)
+        episodes = current_user ? Episode.order(:id) : Episode.where.not(status: 'draft').order(:id)
         render json: episodes, each_serializer: EpisodesSerializer, root: 'data'
       end
 
       def show
-        render json: @episode, serializer: EpisodesSerializer, root: 'data'
+        if current_user.nil? && @episode.status == 'draft'
+          head :no_content
+        else
+          render json: @episode, serializer: EpisodesSerializer, root: 'data'
+        end
       end
 
       def create
