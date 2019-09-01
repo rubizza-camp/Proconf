@@ -1,7 +1,5 @@
 class TrelloController < ApplicationController
-  include Knock::Authenticable
-  undef_method :current_user
-  before_action :authenticate_user
+  before_action :authenticate_user!
 
   # rubocop:disable Metrics/AbcSize
   def trello
@@ -15,6 +13,6 @@ class TrelloController < ApplicationController
   # rubocop:enable Metrics/AbcSize
 
   def credentials
-    Credential.find_or_create_by(user: User.first, service: 'trello')
+    Credential.find_or_create_by(user: current_user, service: 'trello')
   end
 end
