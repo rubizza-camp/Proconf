@@ -40,7 +40,7 @@ class EditEpisodeFormComponent extends React.Component {
           id: response.data.id,
           title: response.data.title,
           date: response.data.date,
-          video: `https://www.youtube.com/watch?v=${response.data.video}`,
+          video: response.data.video ? `https://www.youtube.com/watch?v=${response.data.video}` : '',
           description: response.data.description,
           episode_guests: response.data.guests,
           episode_authors: response.data.authors,
@@ -82,7 +82,7 @@ class EditEpisodeFormComponent extends React.Component {
         }
       })
       .catch(function (error) {
-        message.error('Fill all required fields, please');
+        message.error('Error while editing');
         console.log(error);
       });
     };

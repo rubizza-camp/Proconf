@@ -61,7 +61,7 @@ class NewEpisodeFormComponent extends React.Component {
         }
       })
       .catch(function (error) {
-        message.error('Fill all required fields, please');
+        message.error('Error while creating');
         console.log(error);
       }); 
   };
