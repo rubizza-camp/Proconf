@@ -225,7 +225,7 @@ class EditableTable extends React.Component {
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
         <div>
           <Button type="primary" onClick={this.showDrawer}>
-            <Icon type="plus" /> New account
+            <Icon type="plus" /> New announcement
           </Button>
           <Drawer
             title="Create a new announcement"

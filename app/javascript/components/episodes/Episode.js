@@ -57,6 +57,10 @@ class Episode extends React.Component {
         return 0;
     }
   }
+
+  getPodcastDataFromYoutube () {
+
+  }
   
   changeEpisodeStatus(method_path, diff) {
     const { id } = this.props.match.params
@@ -73,6 +77,23 @@ class Episode extends React.Component {
         const expStatus = this.getStatus(this.state.current  + diff)
         
         if (newStatus != currStatus ) {
+          if ( newStatus == 'online' || newStatus == 'finished' ) {
+            const options = {
+              method: 'post',
+              url: `/api/v1/episodes/${id}/update_youtube_data`
+            };
+            axios(options)
+              .then(response => {
+              if (response.status == 200) {
+                if ( newStatus == 'online' ) {
+                  message.success(`Youtube podcast status and broadcast begin date updated`)
+                }
+                else {
+                  message.success(`Youtube podcast status, broadcast begin and end dates updated`)
+                }
+              }  
+            }) 
+          }
           message.success(`Status successfully changed from ${currStatus} for ${expStatus}`)
           this.setState({ current: this.state.current + diff });
         }
@@ -111,28 +132,6 @@ class Episode extends React.Component {
     }
   }
 
-  prevStatus() {
-    const current = this.state.current
-    const method = this.prevMethod(current)
-    if ( method != '' && current != 3 ) {
-      this.changeEpisodeStatus(method, -1)
-    }
-    else {
-      message.warning(`Can't go from ${this.getStatus(current)} to ${this.getStatus(current - 1)} status`)
-    }
-  }
-
-  prevMethod(status_id) {
-    switch(status_id) {
-      case 2:
-        return 'to_announcement';
-      case 3:
-        return 'to_online';
-      default:
-        return '';
-    }
-  }
-
   render() {
     const { episode, current } = this.state;
     
@@ -154,11 +153,6 @@ class Episode extends React.Component {
 
           <div className="row">
             <div className="my-4 steps-action">
-              {current > 0 && (
-                <Button style={{ marginLeft: 8 }} onClick={() => this.prevStatus()}>
-                  Previous status
-                </Button>
-              )}
               {current < 3 && (
                 <Button type="primary" onClick={() => this.nextStatus()}>
                   Next status
