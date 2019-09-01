@@ -95,7 +95,7 @@ class EditableTable extends React.Component {
             id: timecode.id,
             title: timecode.title,
             time: `${time.h}:${time.m}:${time.s}`,
-            url: `https://youtu.be/${response.data.video}?t=${timecode_time}`
+            url: `https://youtu.be/${response.data.video}?t=${Math.trunc(timecode_time)}`
           }
         });
         this.setState({ timecodes: timecodes.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0)), episode: response.data })
@@ -139,7 +139,7 @@ class EditableTable extends React.Component {
                 id: response.data.id,
                 title: response.data.title,
                 time: timecode.time,
-                url: `https://youtu.be/${this.state.episode.video}?t=${timecode_time}`
+                url: `https://youtu.be/${this.state.episode.video}?t=${Math.trunc(timecode_time)}`
               }
 
               const timecodes = this.state.timecodes.filter((timecode) => {
@@ -178,7 +178,7 @@ class EditableTable extends React.Component {
               id: id,
               title: timecode.title,
               time: timecode.time,
-              url: `https://youtu.be/${this.state.episode.video}?t=${timeToSeconds(timecode.time)}`
+              url: `https://youtu.be/${this.state.episode.video}?t=${Math.trunc(timeToSeconds(timecode.time))}`
             });
 
             this.setState({ timecodes: timecodes.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0)), editingId: 0 });

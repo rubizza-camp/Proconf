@@ -61,7 +61,7 @@ export const EpisodeDetails = (props: RouteComponentProps<{ id: string }>) => {
               id: timecode.id,
               name: timecode.title,
               time: `${time.h}:${time.m}:${time.s}`,
-              url: `https://youtu.be/${item.video}?t=${timecode_time}`
+              url: `https://youtu.be/${item.video}?t=${Math.trunc(timecode_time)}`
             }
           }),
           guests: item.guests.map((guest) => {

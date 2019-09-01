@@ -105,7 +105,7 @@ const EpisodeList = ({ item }: { item: PodcastType }) => {
               id: timecode.id,
               name: timecode.title,
               time: `${time.h}:${time.m}:${time.s}`,
-              url: `https://youtu.be/${item.video}?t=${timecode_time}`
+              url: `https://youtu.be/${item.video}?t=${Math.trunc(timecode_time)}`
             }
           }),
           guests: item.guests.map((guest) => {
@@ -247,7 +247,7 @@ const Podcasts = ({ page }: { page?: string }) => {
               id: timecode.id,
               name: timecode.title,
               time: `${time.h}:${time.m}:${time.s}`,
-              url: `https://youtu.be/${item.video}?t=${timecode_time}`
+              url: `https://youtu.be/${item.video}?t=${Math.trunc(timecode_time)}`
             }
           }),
           guests: item.guests.map((guest) => {
@@ -320,7 +320,7 @@ const HomeContent = () => {
               id: timecode.id,
               name: timecode.title,
               time: `${time.h}:${time.m}:${time.s}`,
-              url: `https://youtu.be/${item.video}?t=${timecode_time}`
+              url: `https://youtu.be/${item.video}?t=${Math.trunc(timecode_time)}`
             }
           }),
           guests: item.guests.map((guest) => {

@@ -1,6 +1,6 @@
 module Api
   module V1
-    class WebhooksController < Api::V1::ApiController
+    class WebhooksController < ApiController
       before_action :authenticate_user, only: %i[create users_boards]
       ADD_LABEL_TYPE = 'addLabelToCard'.freeze
 

@@ -1,6 +1,6 @@
 module Api
   module V1
-    class TelegramController < Api::V1::ApiController
+    class TelegramController < ApiController
       before_action :authenticate_user
 
       # GET '/telegram'
