@@ -2,10 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import YouTube from 'react-youtube';
 import { Link } from 'react-router-dom'
-import { Button, Steps, message } from 'antd'
+import { Button, Steps, message, Row, Col, Typography} from 'antd'
 import { Timecodes } from '../timecodes/Timecodes'
 
+import moment from 'moment';
+
 const { Step } = Steps;
+const { Title } = Typography;
+const { Text } = Typography;
 
 class Episode extends React.Component {
   constructor(props) {
@@ -137,54 +141,69 @@ class Episode extends React.Component {
     
     return (
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-        <div className="container">
-          <div className="row">
-            <div className="py-3 text-center">
-              <h3>Episode status</h3>
-            </div>
+          <Row >
+            <Title level={4} align="center">
+              Episode status
+            </Title>
             
-            <Steps current={this.state.current}>
+            <Steps current={this.state.current} >
               <Step title="Draft" />
               <Step title="Announcement"/>
               <Step title="Online"/>
               <Step title="Finished"/>
             </Steps>
-          </div>
+          </Row>
 
-          <div className="row">
-            <div className="my-4 steps-action">
+          <Row>
               {current < 3 && (
                 <Button type="primary" onClick={() => this.nextStatus()}>
                   Next status
                 </Button>
               )}
-            </div>
-          </div>
+          </Row>
+          <br />
+          <Row>
+            <Col span={4} offset={20}>
+              <Link to={`/admin/episodes/${episode.id}/announcements`}>
+                <Button icon="edit" shape="round">Announcements</Button>
+              </Link>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Title level={2} align="center">
+              {episode.title}
+            </Title>
+          </Row>
 
-          <Link to={`/admin/episodes/${episode.id}/announcements`}>
-            <Button icon="edit" shape="round">Announcements</Button>
-          </Link>
-            
-          <h1 className="my-4">{episode.title}</h1>
-
-          <div className="row">
-            <div className="col-md-7">
+          <Row>
+            <Col span={14}>
               { episode.video
-                ? <YouTube videoId={episode.video} />
+                ? <YouTube videoId={episode.video}/>
                 : null
               }
-            </div>
-        
-            <div className="col-md-5">
-              <h5>Date: {episode.date}</h5>
-              <h4>Descr: {episode.description}</h4>
-            </div>
-          </div>
-          
-          <div className="col-md-8 col-md-offset-2">
-            <Timecodes id={this.props.match.params}/>
-          </div>
-        </div>
+            </Col>
+            <Col span={10}>
+              <Row>
+                <Text >
+                  Descr: {episode.description}
+                </Text>
+              </Row>
+              <br />
+              <br />
+              <Row>
+                <Text>
+                  Date: {moment(episode.date).format('MMMM Do YYYY, h:mm:ss a')}
+                </Text>
+              </Row>
+            </Col>
+          </Row>
+          <br />
+          <Row align="center">
+            
+            <Timecodes id={this.props.match.params} align="center"/>
+            
+          </Row>
       </div>
     )
   }
