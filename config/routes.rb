@@ -15,7 +15,9 @@ Rails.application.routes.draw do
         post 'to_announcement', on: :member
         post 'to_online', on: :member
         post 'to_finished', on: :member
-        resources :announcements, only: %i[index show create update destroy]
+        resources :announcements, only: %i[index show create update destroy] do
+          post '/send', to: 'announcements#send_announcement'
+        end
         resources :timecodes, only: %i[index show create update destroy]
       end
       get '/webhooks/receive', to: 'webhooks#complete'

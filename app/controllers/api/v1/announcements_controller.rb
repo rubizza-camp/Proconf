@@ -2,7 +2,7 @@ module Api
   module V1
     class AnnouncementsController < ApiController
       before_action :authenticate_user, except: %i[index show]
-      before_action :set_announcement, only: %i[show edit update destroy]
+      before_action :set_announcement, only: %i[show edit update destroy send_announcement]
       before_action :set_episode, only: %i[index create]
 
       def index
@@ -37,6 +37,18 @@ module Api
         render json: 'ok'
       end
 
+      def send_announcement
+        if @announcement.target_resource == 'telegram'
+          if TelegramService.send_announcement(current_user, @announcement)
+            render json: { message: 'Announcement successfully sended' }, status: :ok
+          else
+            render json: { message: 'Telegram not configured' }, status: :ok
+          end
+        else
+          render json: { message: 'I can send only telegram announcements :(' }, status: :ok
+        end
+      end
+
       private
 
       def announcement_param_names
@@ -48,7 +60,7 @@ module Api
       end
 
       def set_announcement
-        @announcement = Announcement.find(params[:id])
+        @announcement = Announcement.find(params[:id] || params[:announcement_id])
       end
 
       def set_episode
