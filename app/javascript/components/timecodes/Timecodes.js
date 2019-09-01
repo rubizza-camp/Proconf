@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Table, Divider, Input, InputNumber, Popconfirm, Form, Button } from 'antd';
+import { Table, Divider, Input, InputNumber, Popconfirm, Form, Button, Row } from 'antd';
 import axios from 'axios';
 import { secondsToTime, timeToSeconds } from './utils';
 
@@ -221,6 +221,7 @@ class EditableTable extends React.Component {
         title: "Title",
         dataIndex: "title",
         key: "title",
+        width: '70%',
         editable: true,
         render: (title, timecode) => (
           <span>
@@ -232,6 +233,7 @@ class EditableTable extends React.Component {
         title: "Time",
         dataIndex: "time",
         key: "time",
+        width: '15%',
         editable: true,
         render: (time, timecode) => (
           <span>
@@ -300,22 +302,20 @@ class EditableTable extends React.Component {
 
     return (
       <EditableContext.Provider value={this.props.form}>
-          <div className="row">
-            <Table
-              components={components}
-              rowKey={ timecode => timecode.id }
-              columns={columns}
-              dataSource={this.state.timecodes}
-              pagination={{
-                onChange: this.cancel,
-              }}
-            />
-          </div>
-          <div className="row">
-            <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
+        <Row>
+          <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
               Add a timecode
-            </Button>
-          </div>
+          </Button>
+        </Row>
+        <Table
+          components={components}
+          rowKey={ timecode => timecode.id }
+          columns={columns}
+          dataSource={this.state.timecodes}
+          pagination={{
+            onChange: this.cancel,
+          }}
+        />
       </EditableContext.Provider>
     )
   }
