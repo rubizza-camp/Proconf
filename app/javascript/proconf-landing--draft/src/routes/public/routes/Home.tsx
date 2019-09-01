@@ -97,7 +97,7 @@ const EpisodeList = ({ item }: { item: PodcastType }) => {
           id: item.id,
           date: new Date(item.date).getTime(),
           title: item.title,
-          sponsor: item.sponsors[0].name,
+          sponsor: item.sponsors.length > 0 ? item.sponsors.map((sponsor) => {return sponsor.name}).join(', ') : '',
           keynotes: item.timecodes.map((timecode: any) => {
             const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
             const time = secondsToTime(timecode_time);
@@ -239,7 +239,7 @@ const Podcasts = ({ page }: { page?: string }) => {
           id: item.id,
           date: new Date(item.date).getTime(),
           title: item.title,
-          sponsor: item.sponsors[0].name,
+          sponsor: item.sponsors.length > 0 ? item.sponsors.map((sponsor) => {return sponsor.name}).join(', ') : '',
           keynotes: item.timecodes.map((timecode: any) => {
             const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
             const time = secondsToTime(timecode_time);
@@ -312,7 +312,7 @@ const HomeContent = () => {
           id: item.id,
           date: new Date(item.date).getTime(),
           title: item.title,
-          sponsor: item.sponsors[0].name,
+          sponsor: item.sponsors.length > 0 ? item.sponsors.map((sponsor) => {return sponsor.name}).join(', ') : '',
           keynotes: item.timecodes.map((timecode: any) => {
             const timecode_time = (new Date(timecode.time).getTime() - new Date(item.broadcast_begin).getTime()) / 1000;
             const time = secondsToTime(timecode_time);
