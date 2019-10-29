@@ -10,7 +10,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3.1'
 gem 'cancancan', '~> 3.0.1'
 gem 'coffee-rails', '~> 4.2'
-gem 'devise', '~> 4.6', '>= 4.6.2'
+gem 'devise', '~> 4.7'
 gem 'httparty', '~> 0.17.0'
 gem 'jbuilder', '~> 2.5'
 gem 'kaminari'
