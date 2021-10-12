@@ -18,7 +18,7 @@ gem 'knock', '~> 2.1', '>= 2.1.1'
 gem 'mini_racer', platforms: :ruby
 gem 'omniauth-trello', '~> 0.0.4'
 gem 'pg'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 gem 'rails', '~> 5.2.3'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
